@@ -1,5 +1,12 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Getting start
+
+1. Clone the project
+2. Duplicate file .env.sample and rename to .env
+3. Run command `npm install`
+4. Run command `npm start`
+
 ## Available Scripts
 
 In the project directory, you can run:
