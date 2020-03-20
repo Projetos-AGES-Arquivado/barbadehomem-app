@@ -1,26 +1,34 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { firestore } from './plugins/firebase';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      users: []
+    };
+    this.fetchUsers();
+  }
+
+  async fetchUsers() {
+    const snapshot = await firestore.collection('users').get();
+    this.setState({
+      users: snapshot.docs.map(doc => doc.data())
+    });
+  }
+
+  render() {
+    return (
+      <div className='App'>
+        <header className='App-header'>
+          <span>Usuários: </span>
+          <ul>
+            {this.state.users.map(user => (
+              <li key={user.name}>{user.name}</li>
+            ))}
+          </ul>
+        </header>
+      </div>
+    );
+  }
 }
-
-export default App;
