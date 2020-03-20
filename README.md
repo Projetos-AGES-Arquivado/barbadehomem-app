@@ -2,10 +2,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Getting start
 
-1. Clone the project
-2. Duplicate file .env.sample and rename to .env
-3. Run command `npm install`
-4. Run command `npm start`
+1. Clone the project using git;
+2. Duplicate file .env.sample and rename to .env;
+3. Run command `npm install`;
+4. Run command `npm start`;
 
 ## Available Scripts
 
