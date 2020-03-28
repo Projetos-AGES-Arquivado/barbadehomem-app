@@ -1,5 +1,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+Remember to use conventional commits: https://www.conventionalcommits.org/en/v1.0.0-beta.2/
+
 ## Getting start
 
 1. Clone the project using git;
