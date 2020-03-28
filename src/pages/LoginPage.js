@@ -1,6 +1,4 @@
-
-
-export default class PageLogin extends React.Component {
+export default class LoginPage extends React.Component {
     constructor() {
       super();
     }
@@ -9,7 +7,7 @@ export default class PageLogin extends React.Component {
       return (
         <div className='App'>
           <header className='App-header'>
-            Tele inicial
+            Tela inicial
           </header>
         </div>
       );
