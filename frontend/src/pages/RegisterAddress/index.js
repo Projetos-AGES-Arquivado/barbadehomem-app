@@ -1,7 +1,17 @@
-import React from 'react';
+import React from "react";
+import { useHistory } from "react-router-dom";
 
 export default function RegisterAddress() {
-  return(
-    <h1>Estou na tela de cadastro de endereço</h1>
+  const history = useHistory();
+
+  function handleGoBack() {
+    history.goBack();
+  }
+
+  return (
+    <div>
+      <h1>Estou na tela de cadastro de endereço</h1>
+      <button onClick={handleGoBack}>Voltar</button>
+    </div>
   );
 }
