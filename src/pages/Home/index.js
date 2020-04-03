@@ -1,5 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
+import '../../css/home-page.css';
 
 export default function Home() {
   const history = useHistory();
@@ -13,9 +14,9 @@ export default function Home() {
   }
 
   return (
-    <div>
-      <h1>Estou na tela home (principal)</h1>
-      <button onClick={handleGoBack}>Sair</button>
+    <div className="background">
+      <h1>Bem-Vindo, Usuário</h1>
+      <button onClick={handleGoBack}>Logout</button>
       <button onClick={handleProfile}>Ir para perfil</button>
     </div>
   );

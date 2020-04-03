@@ -1,0 +1,5 @@
+.background{
+    width: 100vw;
+    min-height: 100vh;
+    background: linear-gradient(45deg, orange, blue);
+}
