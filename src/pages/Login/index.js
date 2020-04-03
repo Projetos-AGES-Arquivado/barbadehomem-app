@@ -1,17 +1,16 @@
 import React from 'react';
 
-import '../css/login-page.css';
-import '../css/grid.css';
+import '../../css/login-page.css';
+import '../../css/grid.css';
 
-import Logo from '../img/logo.png';
-import email from '../img/mail.png';
-import pass from '../img/password.png';
-import facebook from '../img/facebook.png';
-import google from '../img/google.png';
+import Logo from '../../img/logo.png';
+import email from '../../img/mail.png';
+import pass from '../../img/password.png';
+import facebook from '../../img/facebook.png';
+import google from '../../img/google.png';
 
-import Button from '../components/Button';
-import Image from '../components/Image';
-
+import Button from '../../components/Button';
+import Image from '../../components/Image';
 
 export default class LoginPage extends React.Component {
   constructor(props) {
