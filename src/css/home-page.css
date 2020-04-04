@@ -1,6 +1,24 @@
 .background {
-  width: 100vw;
-  min-height: 100vh;
-  background: linear-gradient(180deg, #02025e 0%, rgba(255, 255, 255, 0) 100%),
-    #fe6600;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  
+  background: linear-gradient(180deg, #02025E -5.07%, #FE6600 100%);
+}
+
+.title {
+  color: white;
+  padding-right: 10%;
+  padding-top: 40%;
+}
+
+.div-buttons{
+  margin: 0 auto;
+  padding-left: 0%;
+  padding-top: 10%;
+  text-align: center;
+  width: 80%;
+  height: 80%;
 }
