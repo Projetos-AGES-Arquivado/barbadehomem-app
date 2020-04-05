@@ -1,10 +1,7 @@
 import React from 'react';
 import { useHistory, Link } from 'react-router-dom';
-import { firestore } from '../../plugins/firebase';
 
 export default function Logon() {
-  firestore.auth().onAuthStateChanged(user => {});
-
   const history = useHistory();
 
   async function handleLogon(e) {

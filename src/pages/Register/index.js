@@ -1,10 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { firestore } from '../../plugins/firebase';
-import * as state from '../../store/index';
-
-import * as authActions from '../../store/actions/user/userActions';
+import { registerUser } from '../../store/user/actions';
 
 export default function Register() {
   const history = useHistory();
@@ -26,30 +23,12 @@ export default function Register() {
   async function handleUserRegister(e) {
     e.preventDefault();
 
-    const response = await firestore
-      .auth()
-      .createUserWithEmailAndPassword(email, password);
-
-    const user = {
-      auth: {
-        id: response.user.uid,
-      },
-      profile: {
-        email,
-        name,
-        birthday,
-        phone,
-      },
-    };
-
-    await firestore
-      .firestore()
-      .collection('usuarios')
-      .doc(user.auth.id)
-      .set(user.profile);
-
-    dispatch({ type: 'USER_REGISTER', user });
-    console.log(test);
+    await dispatch(await registerUser({
+      email,
+      name,
+      birthday,
+      phone,
+    }));
   }
 
   return (
