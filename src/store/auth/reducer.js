@@ -2,10 +2,11 @@ import { RECEIVE_USER } from '../actionTypes';
 
 //ESTADO INICIAL DO COMPONENTE
 const INITIAL_STATE = {
+  loaded: false,
   user: null,
 };
 
-export default function userReducer(state = INITIAL_STATE, action) {
+export default function authReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
     case RECEIVE_USER:
       return {

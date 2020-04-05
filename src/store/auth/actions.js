@@ -8,6 +8,23 @@ export function receiveUser(payload) {
   };
 }
 
+export async function fetchUser(id) {
+  return async (dispatch) => {
+    const record = await firestore
+      .firestore()
+      .collection('users')
+      .doc(id)
+      .get();
+  
+    dispatch(
+      receiveUser({
+        id: record.id,
+        ...record.data(),
+      })
+    );
+  };
+}
+
 /**
  * @param {object} payload
  * @param {string} payload.email
@@ -27,13 +44,13 @@ export function registerUser(payload) {
     await firestore
       .firestore()
       .collection('users')
-      .doc(response.user.id)
+      .doc(response.user.uid)
       .set(publicData);
 
     dispatch(
       receiveUser({
-        id: response.user.id,
-        ...payload,
+        id: response.user.uid,
+        ...publicData,
       })
     );
   };

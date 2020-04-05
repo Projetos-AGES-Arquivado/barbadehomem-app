@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { registerUser } from '../../store/user/actions';
+import { registerUser } from '../../store/auth/actions';
 
 export default function Register() {
   const history = useHistory();
@@ -13,7 +13,7 @@ export default function Register() {
   const [birthday, setBirthday] = useState('');
   const [phone, setPhone] = useState('');
 
-  const test = useSelector(state => state.auth);
+  const user = useSelector(state => state.user);
   const dispatch = useDispatch();
 
   function handleGoBack() {
@@ -23,12 +23,20 @@ export default function Register() {
   async function handleUserRegister(e) {
     e.preventDefault();
 
-    await dispatch(await registerUser({
-      email,
-      name,
-      birthday,
-      phone,
-    }));
+    try {
+      await dispatch(registerUser({
+        email,
+        name,
+        birthday,
+        phone,
+        password,
+      }));
+    } catch (err) {
+      console.log(err)
+      alert(err.message)
+    }
+
+    console.log(user)
   }
 
   return (
@@ -75,7 +83,7 @@ export default function Register() {
               value={phone}
               onChange={e => setPhone(e.target.value)}
               placeholder="99999-9999"
-              pattern="[0-9]{5}-[0-9]{4}"
+             
               required
             />
           </li>
