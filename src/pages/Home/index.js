@@ -1,11 +1,11 @@
-import React from "react";
-import { useHistory } from "react-router-dom";
+import React from 'react';
+import { useHistory } from 'react-router-dom';
 
 export default function Home() {
   const history = useHistory();
 
   function handleProfile() {
-    history.push("/home/profile");
+    history.push('/home/profile');
   }
 
   function handleGoBack() {
