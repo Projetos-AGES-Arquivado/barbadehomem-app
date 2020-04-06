@@ -8,14 +8,14 @@ export function receiveUser(payload) {
   };
 }
 
-export async function fetchUser(id) {
-  return async (dispatch) => {
+/* export function fetchUser(id) {
+  return async dispatch => {
     const record = await firestore
       .firestore()
       .collection('users')
       .doc(id)
       .get();
-  
+
     dispatch(
       receiveUser({
         id: record.id,
@@ -23,7 +23,7 @@ export async function fetchUser(id) {
       })
     );
   };
-}
+} */
 
 /**
  * @param {object} payload
@@ -47,11 +47,36 @@ export function registerUser(payload) {
       .doc(response.user.uid)
       .set(publicData);
 
+    console.log(publicData);
+
     dispatch(
       receiveUser({
         id: response.user.uid,
         ...publicData,
       })
     );
+  };
+}
+
+/**
+ * @param {object} payload
+ * @param {string} payload.street
+ * @param {string} payload.num
+ * @param {string} payload.complement
+ * @param {string} payload.district
+ * @param {string} payload.city
+ * @param {string} payload.uf
+ */
+export function registerAddress(payload) {
+  return async dispatch => {
+    await firestore
+      .firestore()
+      .collection('users')
+      .doc(firestore.auth().currentUser.uid)
+      .collection('address')
+      .doc()
+      .set(payload);
+
+    dispatch(receiveUser({ payload }));
   };
 }

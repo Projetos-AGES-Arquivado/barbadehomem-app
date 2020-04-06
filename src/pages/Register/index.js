@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { registerUser } from '../../store/auth/actions';
 
 export default function Register() {
   const history = useHistory();
+  const dispatch = useDispatch();
 
   //DECLARAÇÕES DE ESTADO DOS DADOS DO USUÁRIO
   const [email, setEmail] = useState('');
@@ -12,9 +13,6 @@ export default function Register() {
   const [name, setName] = useState('');
   const [birthday, setBirthday] = useState('');
   const [phone, setPhone] = useState('');
-
-  const user = useSelector(state => state.user);
-  const dispatch = useDispatch();
 
   function handleGoBack() {
     history.push('/');
@@ -24,19 +22,10 @@ export default function Register() {
     e.preventDefault();
 
     try {
-      await dispatch(registerUser({
-        email,
-        name,
-        birthday,
-        phone,
-        password,
-      }));
+      await dispatch(registerUser({ email, name, birthday, phone, password }));
     } catch (err) {
-      console.log(err)
-      alert(err.message)
+      console.log(err);
     }
-
-    console.log(user)
   }
 
   return (
@@ -83,8 +72,6 @@ export default function Register() {
               value={phone}
               onChange={e => setPhone(e.target.value)}
               placeholder="99999-9999"
-             
-              required
             />
           </li>
           <button onClick={handleGoBack}>Voltar</button>

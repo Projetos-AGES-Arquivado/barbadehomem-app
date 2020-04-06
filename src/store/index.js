@@ -5,7 +5,6 @@ import { firestore } from '../plugins/firebase';
 import { fetchUser } from './auth/actions';
 
 firestore.auth().onAuthStateChanged(user => {
-  console.log('Session ', { user });
   // disparar ação para dizer que carregou
 });
 
@@ -21,5 +20,5 @@ firestore.auth().onAuthStateChanged(user => {
 });
 
 setInterval(() => {
-  console.log(store.getState())
+  console.log(store.getState());
 }, 1000);
