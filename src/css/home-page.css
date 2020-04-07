@@ -22,3 +22,7 @@
   width: 80%;
   height: 80%;
 }
+
+.silhueta {
+  background-image: url(/src/img/silhueta.png);
+}

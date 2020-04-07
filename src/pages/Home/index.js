@@ -1,37 +1,39 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
 import '../../css/home-page.css';
 import '../../css/button.css'
 
-export default function Home() {
-  const history = useHistory();
-
-  function handleProfile() {
-    history.push("/home/profile");
+export default class Home extends React.Component {
+  constructor(){
+    super()
+    this.handleProfile = this.handleProfile.bind(this);
+    this.handleLogout  = this.handleLogout.bind(this);
   }
 
-  function handleGoBack() {
-    history.goBack();
+  handleProfile() {
+    this.props.history.push('/home/profile');
   }
 
-  function handleLogout() {
-    handleGoBack();
+  handleGoBack() {
+    this.props.history.goBack();
   }
 
-  function handleNothing() {
-    ;
+  handleLogout() {
+    this.handleGoBack();
   }
-  return (
-      <div className="background">
-        <div className="title"> <h1>Bem-Vindo, Usuário</h1></div>
-        <div className="div-buttons">
-          <button className="button"
-            onClick={handleProfile}>Perfil
-          </button>
-          <button className="button"
-            onClick={handleLogout}>Logout
-          </button>          
+
+  render(){
+    return (
+        <div className="background" alt="">
+          <div className="title"> <h1>Bem-Vindo, Usuário</h1></div>
+          <div className="div-buttons">
+            <button className="button"
+              onClick={this.handleProfile}>Perfil
+            </button>
+            <button className="button"
+              onClick={this.handleLogout}>Logout
+            </button>          
+          </div>
         </div>
-      </div>
-  );
+    );
+  }
 }
