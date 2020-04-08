@@ -1,12 +1,16 @@
 import React from "react";
 import '../../css/home-page.css';
 import '../../css/button.css'
+import Image from '../../components/Image'
+import Logo from '../../img/logo.png';
 
 export default class Home extends React.Component {
   constructor(){
     super()
     this.handleProfile = this.handleProfile.bind(this);
     this.handleLogout  = this.handleLogout.bind(this);
+    this.handleCutEvaluate = this.handleCutEvaluate.bind(this);
+    this.handleCutRequest = this.handleCutRequest.bind(this);
   }
 
   handleProfile() {
@@ -21,18 +25,39 @@ export default class Home extends React.Component {
     this.handleGoBack();
   }
 
+  handleCutEvaluate(){
+    
+  }
+
+  handleCutRequest(){
+
+  }
+
   render(){
     return (
+
         <div className="background" alt="">
+          <div className="float">
+            <div className="logo">
+              <Image src={Logo} alt="Logo"></Image>
+            </div>
+          </div>
           <div className="title"> <h1>Bem-Vindo, Usuário</h1></div>
           <div className="div-buttons">
+            <button className="button"
+              onClick={this.handleCutRequest}>Solicitar Corte
+            </button> 
+            <button className="button"
+              onClick={this.handleCutEvaluate}>Avaliar Corte
+            </button>      
             <button className="button"
               onClick={this.handleProfile}>Perfil
             </button>
             <button className="button"
               onClick={this.handleLogout}>Logout
-            </button>          
+            </button>     
           </div>
+
         </div>
     );
   }

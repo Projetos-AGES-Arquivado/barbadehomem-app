@@ -1,20 +1,19 @@
 .background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  
-  background: linear-gradient(180deg, #02025E -5.07%, #FE6600 100%);
+  width: 100vw;
+  min-height: 100vh;
+  background: #02025e; /* Old browsers */
+  background: -moz-linear-gradient(top,  #02025e 30%, #fe6600 100%); 
+  background: -webkit-linear-gradient(top,  #02025e 30%, #fe6600 100%);
 }
 
 .title {
   color: white;
   padding-right: 10%;
-  padding-top: 40%;
+  padding-top: 70%;
 }
 
 .div-buttons{
+  position: unset;
   margin: 0 auto;
   padding-left: 0%;
   padding-top: 10%;
@@ -23,6 +22,29 @@
   height: 80%;
 }
 
-.silhueta {
-  background-image: url(/src/img/silhueta.png);
+.logo img{
+  position: absolute;
+  margin: 0 auto;
+  padding: 10% 25% 5%;
+  width: 50%;
+}
+
+.float{
+  margin-top: 5%;
+  display: flex;
+}
+
+@media (min-width: 500px) {
+  /* cel maior */
+
+}
+
+@media (min-width: 800px) {
+  /* Tablet */
+
+}
+
+@media (min-width: 1000px) {
+  /* Desktop */
+
 }
