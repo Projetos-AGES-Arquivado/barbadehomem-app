@@ -9,17 +9,24 @@
 .title {
   color: white;
   padding-right: 10%;
-  padding-top: 70%;
+  padding-top: 75%;
+}
+
+.profile-photo img{
+  position: absolute;
+  margin: 0 auto;
+  padding: 65% 70% 20%;
+  width: 25%;
 }
 
 .div-buttons{
-  position: unset;
+  position: center;
   margin: 0 auto;
   padding-left: 0%;
-  padding-top: 10%;
+  padding-top: 0%;
   text-align: center;
   width: 80%;
-  height: 80%;
+  height: 20%;
 }
 
 .logo img{
@@ -29,22 +36,96 @@
   width: 50%;
 }
 
-.float{
-  margin-top: 5%;
-  display: flex;
-}
-
 @media (min-width: 500px) {
-  /* cel maior */
+  /* Tablet */
+  .title {
+    color: white;
+    padding-left: 5%;
+    padding-top: 65%;
+  }
 
+  .div-buttons{
+    margin: 0 auto;
+    text-align: center;
+    width: 80%;
+    height: 100%;
+    padding-top: 7%;
+  }
+
+  .profile-photo img{
+    position: absolute;
+    margin: 0 auto;
+    padding: 58% 70% 20%;
+    width: 25%;
+  }
+
+  .logo img{
+    position: absolute;
+    margin: 0 auto;
+    padding: 10% 33% 50%;
+    width: 40%;
+  }
 }
 
 @media (min-width: 800px) {
   /* Tablet */
+  .title {
+    color: white;
+    padding-left: 20%;
+    padding-top: 43%;
+  }
 
+  .div-buttons{
+    margin: 0 auto;
+    text-align: center;
+    width: 80%;
+    height: 100%;
+    padding-top: 3%;
+  }
+  
+  .profile-photo img{
+    position: absolute;
+    margin: 0 auto;
+    padding: 38% 60% 20%;
+    width: 17%;
+  }
+
+  .logo img{
+    position: absolute;
+    margin: 0 auto;
+    padding: 5% 35% 50%;
+    width: 30%;
+  }
 }
 
 @media (min-width: 1000px) {
   /* Desktop */
 
+  .title {
+    color: white;
+    padding-left: 25%;
+    padding-top: 25%;
+  }
+
+  .div-buttons{
+    margin: 0 auto;
+    text-align: center;
+    width: 45%;
+    height: 100%;
+    padding-top: 1%;
+  }
+  
+  .profile-photo img{
+    position: absolute;
+    margin: 0 auto;
+    padding: 23% 57% 0%;
+    width: 8%;
+  }
+  
+  .logo img{
+    position: absolute;
+    margin: 0 auto;
+    padding: 5% 43% 50%;
+    width: 15%;
+  }
 }
