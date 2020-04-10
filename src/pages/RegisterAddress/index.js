@@ -1,12 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { registerAddress } from '../../store/auth/actions';
 
 export default function RegisterAddress() {
   const history = useHistory();
   const dispatch = useDispatch();
+  const res = useSelector(state => state.auth);
+
+  useEffect(() => {
+    console.log(res);
+  }, [res]);
 
   const [street, setStreet] = useState('');
   const [num, setNum] = useState('');
@@ -68,7 +73,7 @@ export default function RegisterAddress() {
           <li>
             <input
               type="text"
-              placeholder="Cidae"
+              placeholder="Cidade"
               value={city}
               onChange={e => setCity(e.target.value)}
             />

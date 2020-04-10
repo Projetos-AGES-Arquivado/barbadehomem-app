@@ -1,4 +1,8 @@
-import { RECEIVE_USER } from '../actionTypes';
+import {
+  RECEIVE_USER,
+  RECEIVE_ADDRESS,
+  IS_AUTHENTICATED,
+} from '../actionTypes';
 import { firestore } from '../../plugins/firebase';
 
 export function receiveUser(payload) {
@@ -8,13 +12,29 @@ export function receiveUser(payload) {
   };
 }
 
-/* export function fetchUser(id) {
+export function receiveAddress(payload) {
+  return {
+    type: RECEIVE_ADDRESS,
+    payload,
+  };
+}
+
+export function isAuthenticated(payload) {
+  return {
+    type: IS_AUTHENTICATED,
+    payload,
+  };
+}
+
+export function fetchUser(id) {
   return async dispatch => {
     const record = await firestore
       .firestore()
       .collection('users')
       .doc(id)
       .get();
+
+    console.log(record.data());
 
     dispatch(
       receiveUser({
@@ -23,7 +43,7 @@ export function receiveUser(payload) {
       })
     );
   };
-} */
+}
 
 /**
  * @param {object} payload
@@ -47,14 +67,14 @@ export function registerUser(payload) {
       .doc(response.user.uid)
       .set(publicData);
 
-    console.log(publicData);
-
     dispatch(
       receiveUser({
         id: response.user.uid,
         ...publicData,
       })
     );
+
+    dispatch(isAuthenticated(true));
   };
 }
 
@@ -74,9 +94,9 @@ export function registerAddress(payload) {
       .collection('users')
       .doc(firestore.auth().currentUser.uid)
       .collection('address')
-      .doc()
+      .doc(firestore.auth().currentUser.uid)
       .set(payload);
 
-    dispatch(receiveUser({ payload }));
+    dispatch(receiveAddress({ ...payload }));
   };
 }
