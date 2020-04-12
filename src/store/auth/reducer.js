@@ -18,7 +18,13 @@ export default function authReducer(state = INITIAL_STATE, action) {
         user: action.payload,
       };
     case RECEIVE_ADDRESS:
-      return { ...state, user: { ...state.user, ...action.payload } };
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          adresses: [...(state.user.address || []), action.payload],
+        },
+      };
     case IS_AUTHENTICATED:
       return {
         ...state,

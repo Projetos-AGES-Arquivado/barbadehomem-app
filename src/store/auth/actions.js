@@ -89,14 +89,13 @@ export function registerUser(payload) {
  */
 export function registerAddress(payload) {
   return async dispatch => {
-    await firestore
+    const docRef = await firestore
       .firestore()
       .collection('users')
       .doc(firestore.auth().currentUser.uid)
       .collection('address')
-      .doc(firestore.auth().currentUser.uid)
-      .set(payload);
+      .add(payload);
 
-    dispatch(receiveAddress({ ...payload }));
+    dispatch(receiveAddress({ id: docRef.id, ...payload }));
   };
 }
