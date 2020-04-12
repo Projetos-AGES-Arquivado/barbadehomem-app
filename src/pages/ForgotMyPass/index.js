@@ -14,8 +14,11 @@ export default function ForgotMyPass() {
       alert(
         'Email enviado. Caso esteja correto, você receberá um link com uma redefinição de senha.'
       );
+
+      handleGoBack();
     } catch (err) {
       console.log(err.message);
+    } finally {
     }
   }
 
