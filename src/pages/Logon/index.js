@@ -1,5 +1,5 @@
-import React from "react";
-import { useHistory, Link } from "react-router-dom";
+import React from 'react';
+import { useHistory, Link } from 'react-router-dom';
 
 export default function Logon() {
   const history = useHistory();
@@ -8,7 +8,7 @@ export default function Logon() {
     //Método para evitar que a página recarregue com o form
     e.preventDefault();
 
-    history.push("/home");
+    history.push('/home');
   }
 
   return (
