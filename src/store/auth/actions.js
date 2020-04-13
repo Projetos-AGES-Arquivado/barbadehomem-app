@@ -2,6 +2,7 @@ import {
   RECEIVE_USER,
   RECEIVE_ADDRESS,
   IS_AUTHENTICATED,
+  SIGN_IN,
 } from '../actionTypes';
 
 import { firestore } from '../../plugins/firebase';
@@ -29,20 +30,23 @@ export function isAuthenticated(payload) {
 
 export function fetchUser(id) {
   return async dispatch => {
-    const record = await firestore
+    const user = await firestore.firestore().collection('users').doc(id).get();
+
+    const address = await firestore
       .firestore()
       .collection('users')
       .doc(id)
+      .collection('address')
       .get();
-
-    console.log(record.data());
 
     dispatch(
       receiveUser({
-        id: record.id,
-        ...record.data(),
+        id: user.id,
+        ...user.data(),
       })
     );
+
+    dispatch(isAuthenticated(true));
   };
 }
 
@@ -115,4 +119,20 @@ export async function resetPassword(payload) {
   return await firestore
     .auth()
     .sendPasswordResetEmail(email, actionCodeSettings);
+}
+
+/**
+ * @param {object} payload
+ * @param {string} payload.email
+ * @param {string} payload.password
+ */
+export function authenticateUser(payload) {
+  const { email, password } = payload;
+
+  return async dispatch => {
+    const response = await firestore
+      .auth()
+      .signInWithEmailAndPassword(email, password);
+    dispatch(fetchUser(response.user.uid));
+  };
 }
