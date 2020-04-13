@@ -15,14 +15,13 @@ export default function ForgotMyPass() {
         'Email enviado. Caso esteja correto, você receberá um link com uma redefinição de senha.'
       );
 
-      handleGoBack();
+      handleGoHome();
     } catch (err) {
       console.log(err.message);
-    } finally {
     }
   }
 
-  function handleGoBack() {
+  function handleGoHome() {
     history.push('/');
   }
 
@@ -37,7 +36,7 @@ export default function ForgotMyPass() {
       />{' '}
       <button onClick={handleResetPassword}>Enviar</button>
       <br />
-      <button onClick={handleGoBack}>Voltar</button>
+      <button onClick={handleGoHome}>Voltar</button>
     </div>
   );
 }
