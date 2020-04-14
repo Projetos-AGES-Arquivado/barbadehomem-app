@@ -3,6 +3,7 @@ import {
   RECEIVE_ADDRESS,
   IS_AUTHENTICATED,
 } from '../actionTypes';
+
 import { firestore } from '../../plugins/firebase';
 
 export function receiveUser(payload) {
@@ -98,4 +99,20 @@ export function registerAddress(payload) {
 
     dispatch(receiveAddress({ id: docRef.id, ...payload }));
   };
+}
+
+/**
+ * @param {string} payload
+ */
+export function resetPassword(payload) {
+
+  //PÁGINA PARA QUAL O USUÁRIO SERÁ DIRECIONADO APÓS RESETAR A SENHA
+  const actionCodeSettings = {
+    url: window.origin,
+  };
+
+  return async () => {
+    await firestore.auth()
+    .sendPasswordResetEmail(payload, actionCodeSettings);
+  }
 }
