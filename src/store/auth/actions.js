@@ -2,7 +2,6 @@ import {
   RECEIVE_USER,
   RECEIVE_ADDRESS,
   IS_AUTHENTICATED,
-  SIGN_IN,
 } from '../actionTypes';
 
 import { firestore } from '../../plugins/firebase';
