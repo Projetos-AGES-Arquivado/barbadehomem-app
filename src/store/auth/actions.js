@@ -104,15 +104,15 @@ export function registerAddress(payload) {
 /**
  * @param {string} payload
  */
-export async function resetPassword(payload) {
-  const email = payload;
+export function resetPassword(payload) {
 
   //PÁGINA PARA QUAL O USUÁRIO SERÁ DIRECIONADO APÓS RESETAR A SENHA
   const actionCodeSettings = {
-    url: 'http://localhost:3000/',
+    url: window.origin,
   };
 
-  return await firestore
-    .auth()
-    .sendPasswordResetEmail(email, actionCodeSettings);
+  return async () => {
+    await firestore.auth()
+    .sendPasswordResetEmail(payload, actionCodeSettings);
+  }
 }

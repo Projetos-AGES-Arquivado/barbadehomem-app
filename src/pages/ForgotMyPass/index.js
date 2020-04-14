@@ -12,7 +12,7 @@ export default function ForgotMyPass() {
 
   function handleResetPassword() {
     try {
-      dispatch(resetPassword(email));
+      dispatch(resetPassword( email ));
 
       alert(
         'Email enviado. Caso esteja correto, você receberá um link com uma redefinição de senha.'
@@ -20,7 +20,7 @@ export default function ForgotMyPass() {
 
       handleGoHome();
     } catch (err) {
-      console.log(err.message);
+      console.log(err);
     }
   }
 
