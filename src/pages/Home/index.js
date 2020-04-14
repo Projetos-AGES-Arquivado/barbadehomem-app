@@ -24,7 +24,7 @@ export default class Home extends React.Component {
   }
 
   handleLogout() {
-    this.handleGoBack();
+    this.props.history.push('/')
   }
 
   handleCutEvaluate(){
