@@ -7,11 +7,6 @@ import { registerAddress } from '../../store/auth/actions';
 export default function RegisterAddress() {
   const history = useHistory();
   const dispatch = useDispatch();
-  const res = useSelector(state => state.auth);
-
-  useEffect(() => {
-    console.log(res);
-  }, [res]);
 
   const [street, setStreet] = useState('');
   const [num, setNum] = useState('');
@@ -31,6 +26,8 @@ export default function RegisterAddress() {
       await dispatch(
         registerAddress({ street, num, complement, district, city, uf })
       );
+
+      history.push('/home');
     } catch (err) {
       alert(err.message);
     }
