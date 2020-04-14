@@ -30,24 +30,40 @@ export function isAuthenticated(payload) {
 
 export function fetchUser(id) {
   return async dispatch => {
-    const user = await firestore.firestore().collection('users').doc(id).get();
+    const response = (await firestore.firestore().collection('users').doc(id).get()).data();
 
-    const address = await firestore
-      .firestore()
-      .collection('users')
-      .doc(id)
-      .collection('address')
-      .get();
+    const user = {
+      id,
+      name: response.name,
+      email: response.email,
+      birthday: response.birthday,
+      phone:response.phone,
+    }
 
-    dispatch(
-      receiveUser({
-        id: user.id,
-        ...user.data(),
+    const addresses = [];
+
+    await firestore.firestore().collection('users').doc(id).collection('address').get().then(snapshop => {
+      snapshop.docs.forEach(doc => {
+
+          const address = {
+            id: doc.id,
+            city: doc.data().city,
+            complement: doc.data().complement,
+            district: doc.data().district,
+            num: doc.data().num,
+            street: doc.data().street,
+            uf: doc.data().uf,
+           }
+
+           addresses.push(address);
       })
-    );
+    })
 
+    dispatch(receiveUser(user));
+    dispatch(receiveAddress(addresses));
     dispatch(isAuthenticated(true));
   };
+
 }
 
 /**

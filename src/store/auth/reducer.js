@@ -20,10 +20,7 @@ export default function authReducer(state = INITIAL_STATE, action) {
     case RECEIVE_ADDRESS:
       return {
         ...state,
-        user: {
-          ...state.user,
-          adresses: [...(state.user.address || []), action.payload],
-        },
+        user:{...state.user, address:action.payload}
       };
     case IS_AUTHENTICATED:
       return {

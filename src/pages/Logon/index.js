@@ -16,8 +16,8 @@ export default function Logon() {
     try {
       await dispatch(authenticateUser({ email, password }));
 
-      alert('logado com sucesso');
-
+      alert('Logado com sucesso!');
+      
       history.push('/home');
     } catch (err) {
       console.log(err.message);

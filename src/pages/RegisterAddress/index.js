@@ -32,7 +32,7 @@ export default function RegisterAddress() {
         registerAddress({ street, num, complement, district, city, uf })
       );
     } catch (err) {
-      alert(err.message);
+      console.log(err);
     }
   }
 
