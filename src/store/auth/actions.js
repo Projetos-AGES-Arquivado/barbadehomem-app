@@ -29,21 +29,29 @@ export function isAuthenticated(payload) {
 
 export function fetchUser(id) {
   return async dispatch => {
-    const response = (await firestore.firestore().collection('users').doc(id).get()).data();
+    const response = (
+      await firestore.firestore().collection('users').doc(id).get()
+    ).data();
 
     const user = {
       id,
       name: response.name,
       email: response.email,
       birthday: response.birthday,
-      phone:response.phone,
-    }
+      phone: response.phone,
+    };
 
-    const addresses = [];
+    dispatch(receiveUser(user));
+    dispatch(isAuthenticated(true));
 
-    await firestore.firestore().collection('users').doc(id).collection('address').get().then(snapshop => {
-      snapshop.docs.forEach(doc => {
-
+    await firestore
+      .firestore()
+      .collection('users')
+      .doc(id)
+      .collection('address')
+      .get()
+      .then(snapshop => {
+        snapshop.docs.forEach(doc => {
           const address = {
             id: doc.id,
             city: doc.data().city,
@@ -52,17 +60,12 @@ export function fetchUser(id) {
             num: doc.data().num,
             street: doc.data().street,
             uf: doc.data().uf,
-           }
+          };
 
-           addresses.push(address);
-      })
-    })
-
-    dispatch(receiveUser(user));
-    dispatch(receiveAddress(addresses));
-    dispatch(isAuthenticated(true));
+          dispatch(receiveAddress(address));
+        });
+      });
   };
-
 }
 
 /**
