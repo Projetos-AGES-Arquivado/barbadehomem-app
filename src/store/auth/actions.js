@@ -29,20 +29,42 @@ export function isAuthenticated(payload) {
 
 export function fetchUser(id) {
   return async dispatch => {
-    const record = await firestore
+    const response = (
+      await firestore.firestore().collection('users').doc(id).get()
+    ).data();
+
+    const user = {
+      id,
+      name: response.name,
+      email: response.email,
+      birthday: response.birthday,
+      phone: response.phone,
+    };
+
+    dispatch(receiveUser(user));
+
+    await firestore
       .firestore()
       .collection('users')
       .doc(id)
-      .get();
+      .collection('address')
+      .get()
+      .then(snapshop => {
+        snapshop.docs.forEach(doc => {
+          const address = {
+            id: doc.id,
+            city: doc.data().city,
+            complement: doc.data().complement,
+            district: doc.data().district,
+            num: doc.data().num,
+            street: doc.data().street,
+            uf: doc.data().uf,
+          };
 
-    console.log(record.data());
-
-    dispatch(
-      receiveUser({
-        id: record.id,
-        ...record.data(),
-      })
-    );
+          dispatch(receiveAddress(address));
+        });
+      });
+    dispatch(isAuthenticated(true));
   };
 }
 
@@ -115,4 +137,20 @@ export function resetPassword(payload) {
     await firestore.auth()
     .sendPasswordResetEmail(payload, actionCodeSettings);
   }
+}
+
+/**
+ * @param {object} payload
+ * @param {string} payload.email
+ * @param {string} payload.password
+ */
+export function authenticateUser(payload) {
+  const { email, password } = payload;
+
+  return async dispatch => {
+    const response = await firestore
+      .auth()
+      .signInWithEmailAndPassword(email, password);
+    dispatch(fetchUser(response.user.uid));
+  };
 }
