@@ -1,4 +1,4 @@
-import { RECEIVE_USER, RECEIVE_ADDRESS, SIGN_IN } from '../actionTypes';
+import { RECEIVE_USER, RECEIVE_ADDRESS } from '../actionTypes';
 import { firestore } from '../../plugins/firebase';
 
 export function receiveUser(payload) {
@@ -11,13 +11,6 @@ export function receiveUser(payload) {
 export function receiveAddress(payload) {
   return {
     type: RECEIVE_ADDRESS,
-    payload,
-  };
-}
-
-export function signIn(payload) {
-  return {
-    type: SIGN_IN,
     payload,
   };
 }

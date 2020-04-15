@@ -1,9 +1,4 @@
-import {
-  RECEIVE_USER,
-  RECEIVE_ADDRESS,
-  SIGN_IN,
-  SIGN_OUT,
-} from '../actionTypes';
+import { RECEIVE_USER, RECEIVE_ADDRESS } from '../actionTypes';
 
 //ESTADO INICIAL DO COMPONENTE
 const INITIAL_STATE = {
@@ -26,15 +21,6 @@ export default function authReducer(state = INITIAL_STATE, action) {
           adresses: [...(state.user.address || []), action.payload],
         },
       };
-    case SIGN_IN:
-      return {
-        ...state,
-        loaded: action.payload,
-      };
-    case SIGN_OUT:
-        return {
-          ...state,
-        };
     default:
       return state;
   }

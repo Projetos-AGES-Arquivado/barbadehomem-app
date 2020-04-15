@@ -22,15 +22,11 @@ export default function RegisterAddress() {
   async function handleRegister(e) {
     e.preventDefault();
 
-    try {
-      await dispatch(
-        registerAddress({ street, num, complement, district, city, uf })
-      );
+    await dispatch(
+      registerAddress({ street, num, complement, district, city, uf })
+    );
 
-      history.push('/home');
-    } catch (err) {
-      alert(err.message);
-    }
+    history.push('/home');
   }
 
   return (
