@@ -42,7 +42,6 @@ export function fetchUser(id) {
     };
 
     dispatch(receiveUser(user));
-    dispatch(isAuthenticated(true));
 
     await firestore
       .firestore()
@@ -65,6 +64,7 @@ export function fetchUser(id) {
           dispatch(receiveAddress(address));
         });
       });
+    dispatch(isAuthenticated(true));
   };
 }
 
