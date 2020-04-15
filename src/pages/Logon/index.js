@@ -1,5 +1,4 @@
-import { useSelector } from 'react-redux';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useHistory, Link } from 'react-router-dom';
 
 export default function Logon() {

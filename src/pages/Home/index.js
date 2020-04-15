@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { signOutUser } from '../../store/auth/actions';
+import { signOut } from '../../store/auth/actions';
 
 export default function Home() {
   const history = useHistory();
@@ -11,16 +11,12 @@ export default function Home() {
     history.push('/home/profile');
   }
 
-  function handleLogOut(e) {
+  async function handleLogOut(e) {
     e.preventDefault();
-    
-    try {
-      dispatch(signOutUser());
-      history.push('/');
-    } catch (err) {
-      console.log(err);
-    }
 
+    await dispatch(signOut());
+    alert('Deslogado com sucesso!');
+    history.push('/');
   }
 
   return (
