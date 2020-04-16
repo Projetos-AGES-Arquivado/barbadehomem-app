@@ -1,4 +1,5 @@
 import { RECEIVE_USER, RECEIVE_ADDRESS } from '../actionTypes';
+
 import { firestore } from '../../plugins/firebase';
 
 export function receiveUser(payload) {
@@ -17,18 +18,41 @@ export function receiveAddress(payload) {
 
 export function fetchUser(id) {
   return async dispatch => {
-    const record = await firestore
+    const response = (
+      await firestore.firestore().collection('users').doc(id).get()
+    ).data();
+
+    const user = {
+      id,
+      name: response.name,
+      email: response.email,
+      birthday: response.birthday,
+      phone: response.phone,
+    };
+
+    dispatch(receiveUser(user));
+
+    await firestore
       .firestore()
       .collection('users')
       .doc(id)
-      .get();
+      .collection('address')
+      .get()
+      .then(snapshop => {
+        snapshop.docs.forEach(doc => {
+          const address = {
+            id: doc.id,
+            city: doc.data().city,
+            complement: doc.data().complement,
+            district: doc.data().district,
+            num: doc.data().num,
+            street: doc.data().street,
+            uf: doc.data().uf,
+          };
 
-    dispatch(
-      receiveUser({
-        id: record.id,
-        ...record.data(),
-      })
-    );
+          dispatch(receiveAddress(address));
+        });
+      });
   };
 }
 
@@ -90,5 +114,35 @@ export function registerAddress(payload) {
       .add(payload);
 
     dispatch(receiveAddress({ id: docRef.id, ...payload }));
+  };
+}
+
+/**
+ * @param {string} payload
+ */
+export function resetPassword(payload) {
+  //PÁGINA PARA QUAL O USUÁRIO SERÁ DIRECIONADO APÓS RESETAR A SENHA
+  const actionCodeSettings = {
+    url: window.origin,
+  };
+
+  return async () => {
+    await firestore.auth().sendPasswordResetEmail(payload, actionCodeSettings);
+  };
+}
+
+/**
+ * @param {object} payload
+ * @param {string} payload.email
+ * @param {string} payload.password
+ */
+export function authenticateUser(payload) {
+  const { email, password } = payload;
+
+  return async dispatch => {
+    const response = await firestore
+      .auth()
+      .signInWithEmailAndPassword(email, password);
+    dispatch(fetchUser(response.user.uid));
   };
 }
