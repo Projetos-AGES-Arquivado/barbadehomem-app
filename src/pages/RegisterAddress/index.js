@@ -1,17 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { registerAddress } from '../../store/auth/actions';
 
 export default function RegisterAddress() {
   const history = useHistory();
   const dispatch = useDispatch();
-  const res = useSelector(state => state.auth);
-
-  useEffect(() => {
-    console.log(res);
-  }, [res]);
 
   const [street, setStreet] = useState('');
   const [num, setNum] = useState('');
@@ -27,13 +22,11 @@ export default function RegisterAddress() {
   async function handleRegister(e) {
     e.preventDefault();
 
-    try {
-      await dispatch(
-        registerAddress({ street, num, complement, district, city, uf })
-      );
-    } catch (err) {
-      console.log(err);
-    }
+    await dispatch(
+      registerAddress({ street, num, complement, district, city, uf })
+    );
+
+    history.push('/home');
   }
 
   return (

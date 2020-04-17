@@ -1,8 +1,4 @@
-import {
-  RECEIVE_USER,
-  RECEIVE_ADDRESS,
-  IS_AUTHENTICATED,
-} from '../actionTypes';
+import { RECEIVE_USER, RECEIVE_ADDRESS } from '../actionTypes';
 
 import { firestore } from '../../plugins/firebase';
 
@@ -16,13 +12,6 @@ export function receiveUser(payload) {
 export function receiveAddress(payload) {
   return {
     type: RECEIVE_ADDRESS,
-    payload,
-  };
-}
-
-export function isAuthenticated(payload) {
-  return {
-    type: IS_AUTHENTICATED,
     payload,
   };
 }
@@ -64,7 +53,14 @@ export function fetchUser(id) {
           dispatch(receiveAddress(address));
         });
       });
-    dispatch(isAuthenticated(true));
+  };
+}
+
+export function signOut() {
+  return async dispatch => {
+    await firestore.auth().signOut();
+
+    dispatch(receiveUser(null));
   };
 }
 
@@ -96,8 +92,6 @@ export function registerUser(payload) {
         ...publicData,
       })
     );
-
-    dispatch(isAuthenticated(true));
   };
 }
 
@@ -127,16 +121,14 @@ export function registerAddress(payload) {
  * @param {string} payload
  */
 export function resetPassword(payload) {
-
   //PÁGINA PARA QUAL O USUÁRIO SERÁ DIRECIONADO APÓS RESETAR A SENHA
   const actionCodeSettings = {
     url: window.origin,
   };
 
   return async () => {
-    await firestore.auth()
-    .sendPasswordResetEmail(payload, actionCodeSettings);
-  }
+    await firestore.auth().sendPasswordResetEmail(payload, actionCodeSettings);
+  };
 }
 
 /**

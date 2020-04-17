@@ -6,68 +6,63 @@ import Image from '../../components/Image'
 import Logo from '../../img/logo.png';
 import ProfilePhoto from '../../img/default_photo.png';
 
-export default class Home extends React.Component {
-  constructor(){
-    super()
-    this.handleProfile = this.handleProfile.bind(this);
-    this.handleLogout  = this.handleLogout.bind(this);
-    this.handleCutEvaluate = this.handleCutEvaluate.bind(this);
-    this.handleCutRequest = this.handleCutRequest.bind(this);
-  }
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { signOut } from '../../store/auth/actions';
 
-  handleProfile() {
-    this.props.history.push('/home/profile');
-  }
+export default function Home() {
+  const history = useHistory();
+  const dispatch = useDispatch();
 
-  handleGoBack() {
-    this.props.history.goBack();
-  }
-
-  handleLogout() {
-    this.props.history.push('/')
-  }
-
-  handleCutEvaluate(){
+  function handleCutRequest() {
     
   }
 
-  handleCutRequest(){
-
+  function handleCutEvaluate() {
+    
   }
 
-  render(){
-    return (
-
-        <div className="background" alt="">
-
-          <div className="logo">
-            <Image src={Logo} alt="Logo"></Image>
-          </div>
-
-          <div className="profile-photo">
-            <Image src={ProfilePhoto} alt="Profile photo"></Image>
-          </div>
-
-          <div className="title"> <h1> Bem-Vindo, Usuário </h1> 
-          
-          </div>
-
-          <div className="div-buttons">
-            <button className="button"
-              onClick={this.handleCutRequest}>Solicitar Corte
-            </button> 
-            <button className="button"
-              onClick={this.handleCutEvaluate}>Avaliar Corte
-            </button>      
-            <button className="button"
-              onClick={this.handleProfile}>Perfil
-            </button>
-            <button className="button"
-              onClick={this.handleLogout}>Logout
-            </button>     
-          </div>
-
-        </div>
-    );
+  async function handleLogout(event) {
+    event.preventDefault();
+    await dispatch(signOut());
+    alert('Deslogado com sucesso!');
+    history.push('/');
   }
+
+  function handleProfile() {
+    history.push('/home/profile');
+  }
+
+  return (
+    <div className="background" alt="">
+
+      <div className="logo">
+        <Image src={Logo} alt="Logo"></Image>
+      </div>
+
+      <div className="profile-photo">
+        <Image src={ProfilePhoto} alt="Profile photo"></Image>
+      </div>
+
+      <div className="title"> 
+        <h1> Bem-vindo, Usuário </h1> 
+      </div>
+
+      <div className="div-buttons">
+        <button className="button"
+          onClick={handleCutRequest}>Solicitar Corte
+        </button> 
+        <button className="button"
+          onClick={handleCutEvaluate}>Avaliar Corte
+        </button>      
+        <button className="button"
+          onClick={handleProfile}>Perfil
+        </button>
+        <button className="button"
+          onClick={handleLogout}>Logout
+        </button>     
+      </div>
+
+    </div>
+  );
 }

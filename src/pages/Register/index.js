@@ -21,12 +21,8 @@ export default function Register() {
   async function handleUserRegister(e) {
     e.preventDefault();
 
-    try {
-      await dispatch(registerUser({ email, name, birthday, phone, password }));
-      history.push('/register/address');
-    } catch (err) {
-      console.log(err);
-    }
+    await dispatch(registerUser({ email, name, birthday, phone, password }));
+    history.push('/register/address');
   }
 
   return (

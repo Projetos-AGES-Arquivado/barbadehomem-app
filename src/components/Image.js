@@ -1,7 +1,5 @@
 import React from 'react';
 
-import '../css/button.css';
-
 export default function Image(props) {
     return (
         <React.Fragment>
