@@ -1,0 +1,163 @@
+/* LOGIN PAGE */
+
+.page-background {
+  width: 100vw;
+  min-height: 100vh;
+  background: #02025e; /* Old browsers */
+  background: -moz-linear-gradient(top, #02025e 30%, #fe6600 100%);
+  background: -webkit-linear-gradient(top, #02025e 30%, #fe6600 100%);
+}
+
+.div-logo {
+  margin: 0 auto;
+  padding: 20% 0 5%;
+  width: 50%;
+}
+.div-logo img {
+  width: 100%;
+  height: 100%;
+}
+
+.div-login {
+  margin: 0 auto;
+  padding-left: 7%;
+  text-align: center;
+  width: 90%;
+  height: 80%;
+}
+
+.login-password-img {
+  width: 20px;
+  height: 20px;
+}
+.login-password-img img {
+  width: 100%;
+  height: 100%;
+}
+
+.div-input {
+  margin-left: 5%;
+  width: 80%;
+}
+.page-background input {
+  background: transparent;
+  color: white;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid white;
+  width: 100%;
+}
+.float {
+  margin-top: 5%;
+  display: flex;
+}
+
+.div-cadastros {
+  margin: 0 auto;
+  text-align: center;
+  width: 80%;
+  height: 15%;
+}
+.forgot-password {
+  margin: 0 auto;
+  text-align: right;
+  width: 80%;
+  height: 5%;
+}
+.link {
+  margin-right: 1%;
+  text-decoration: none;
+  color: white;
+  font-size: 14px;
+}
+
+.register-img {
+  padding-top: 10%;
+  width: 80px;
+  height: 20px;
+  margin: 0 auto;
+}
+.register-img img {
+  width: 50%;
+  height: 100%;
+}
+.cadastrar {
+  margin: 10% auto;
+  width: 100%;
+}
+.cadastrar a {
+  text-decoration: none;
+  color: white;
+  font-size: 14px;
+}
+
+@media (min-width: 500px) {
+  /* cel maior */
+
+  .div-logo {
+    padding: 10% 0 5%;
+    width: 30%;
+  }
+  .div-login {
+    padding-left: 5%;
+    width: 70%;
+    height: 60%;
+  }
+  .div-cadastros{
+    width: 60%;
+  }
+  .forgot-password {
+    width: 60%;
+    margin: 0 auto;
+  }
+  .link {
+    font-size: 10px;
+  }
+
+  .register-img {
+    width: 120px;
+    height: 40px;
+    margin: 0 auto;
+  }
+  .register-img img {
+    width: 50%;
+    height: 100%;
+  }
+}
+
+@media (min-width: 800px) {
+  /* Tablet */
+
+  .div-logo {
+    padding: 5% 0 0;
+  }
+  .div-login {
+    padding-left: 5%;
+    width: 50%;
+    height: 60%;
+  }
+  .div-cadastros {
+    width: 45%;
+  }
+  .forgot-password {
+    width: 45%;
+    margin: 0 auto;
+  }
+  .link {
+    font-size: 10px;
+  }
+}
+
+@media (min-width: 1000px) {
+  /* Desktop */
+  .div-logo {
+    width: 20%;
+  }
+
+  .div-logo {
+    padding: 5% 0 1%;
+  }
+  .div-login {
+    height: 70%;
+  }
+}

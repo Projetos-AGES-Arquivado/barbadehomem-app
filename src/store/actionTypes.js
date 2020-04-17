@@ -1,0 +1,5 @@
+export const RECEIVE_USER = 'RECEIVE_USER';
+export const RECEIVE_ADDRESS = 'RECEIVE_ADDRESS';
+export const IS_AUTHENTICATED = 'IS_AUTHENTICATED';
+export const RESET_PASSWORD = 'RESET_PASSWORD';
+export const SIGN_IN = 'SIGN_IN';
