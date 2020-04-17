@@ -1,0 +1,18 @@
+/* FORGOT MT PASSWORD PAGE */
+
+.div-forgotmypass {
+    margin: 40% auto;
+    width: 90%;
+    text-align: center;
+}
+
+h2, h3{
+    margin: 10% auto;
+    color: white;
+}
+
+.div-input-forgot {
+    margin: 10% auto;
+    margin-left: 5%;
+    width: 90%;
+}
