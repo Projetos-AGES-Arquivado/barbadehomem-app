@@ -1,0 +1,80 @@
+/* FORGOT MT PASSWORD PAGE */
+
+.page-background {
+    width: 100vw;
+    min-height: 100vh;
+    background: #02025e; /* Old browsers */
+    background: -moz-linear-gradient(top, #02025e 30%, #fe6600 100%);
+    background: -webkit-linear-gradient(top, #02025e 30%, #fe6600 100%);
+}
+.page-background input {
+    background: transparent;
+    color: white;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid white;
+    width: 100%;
+}
+.div-buttons {
+    margin: 10%;
+    width: 80%;
+  }
+
+.div-forgotmypass {
+    margin: 0 auto;
+    width: 90%;
+    text-align: center;
+}
+
+h2, h3{
+    margin: 10% auto;
+    color: white;
+}
+.div-Silhueta{
+    margin: 0 auto;
+    padding: 20% 0 5%;
+    width: 50%;
+    text-align: center;
+}
+.div-Silhueta img {
+  width: 75%;
+  height: 75%;
+}
+
+/* possível que isso concerte */
+
+@media (min-width: 500px) {
+  /* cel maior */
+
+  .div-Silhueta {
+    padding: 10% 0 5%;
+    width: 30%;
+  }
+  .div-forgotmypass {
+    width: 60%;
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 800px) {
+  /* Tablet */
+
+  .div-Silhueta {
+    padding: 3% 0 0;
+  }
+  .div-forgotmypass {
+    width: 45%;
+    height: 60%;
+  }
+}
+
+@media (min-width: 1000px) {
+  /* Desktop */
+  .div-Silhueta {
+    width: 20%;
+    padding: 3% 0 0;
+  }
+  .div-forgotmypass {
+    height: 70%;
+  }
+}
