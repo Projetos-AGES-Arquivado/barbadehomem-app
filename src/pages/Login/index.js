@@ -14,6 +14,7 @@ import google from '../../img/google.png';
 
 import Button from '../../components/Button';
 import Image from '../../components/Image';
+import Background from '../../components/Background';
 
 export default function LoginPage() {
   const history = useHistory();
@@ -37,7 +38,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="page-background">
+    <Background>
       <div className="div-logo">
         <Image src={Logo} alt="Logo Barba de Homem" />
       </div>
@@ -100,6 +101,6 @@ export default function LoginPage() {
           <Link to="/register">Cadastrar</Link>
         </div>
       </div>
-    </div>
+    </Background>
   );
 }

@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
+import Background from '../../components/Background';
+
 import { resetPassword } from '../../store/auth/actions';
 
 export default function ForgotMyPass() {
@@ -29,7 +31,7 @@ export default function ForgotMyPass() {
   }
 
   return (
-    <div>
+    <Background>
       <h2>Informe seu endereço de email:</h2>
       <br />
       <input
@@ -40,6 +42,6 @@ export default function ForgotMyPass() {
       <button onClick={handleResetPassword}>Enviar</button>
       <br />
       <button onClick={handleGoHome}>Voltar</button>
-    </div>
+    </Background>
   );
 }
