@@ -161,3 +161,7 @@
     height: 70%;
   }
 }
+
+.err-message {
+  color: red;
+}

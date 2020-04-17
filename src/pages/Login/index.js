@@ -20,21 +20,34 @@ export default function LoginPage() {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email = '', setEmail] = useState();
+  const [password = '', setPassword] = useState();
+  const [errMessage = '', setErrMessage] = useState();
+  const [loading = false, setLoading] = useState();
 
   async function handleLogin(e) {
     e.preventDefault();
-
+    if (loading) {
+      return;
+    }
+    setLoading(true);
+    setErrMessage('');
     try {
       await dispatch(authenticateUser({ email, password }));
-
-      alert('Logado com sucesso!');
-
       history.push('/home');
     } catch (err) {
-      alert(err);
+      if ([
+        'auth/user-not-found', 
+        'auth/wrong-password', 
+        'auth/invalid-email', 
+        'auth/argument-error',
+      ].includes(err.code)) {
+        setErrMessage('Email e/ou senha inválidos.');
+      } else {
+        setErrMessage('Erro interno, tente novamente mais tarde.')
+      }
     }
+    setLoading(false);
   }
 
   return (
@@ -44,6 +57,8 @@ export default function LoginPage() {
       </div>
 
       <div className="div-login">
+        {errMessage && <span className="err-message">{errMessage}</span>}
+
         <div className="float">
           <div className="login-password-img">
             <Image src={emailImg} alt="email" />
@@ -75,9 +90,7 @@ export default function LoginPage() {
 
       <div className="forgot-password">
         {/* Necessário trocar a tag "a" por link depois que tiver as rotas */}
-        <a className="link" href="#">
-          Esqueceu sua senha?
-        </a>
+        <Link className="link" to="/forgotmypass">Esqueceu sua senha?</Link>
       </div>
 
       <div className="div-cadastros">
@@ -94,7 +107,7 @@ export default function LoginPage() {
         </div>
 
         {/* Fazer evento para quando clicar fazer login */}
-        <Button classe="button" text="Logar" event={handleLogin} />
+        <Button classe="button" text={'Logar'} event={handleLogin} />
 
         <div className="cadastrar">
           {/* Necessário trocar a tag "a" por link depois que tiver as rotas */}
