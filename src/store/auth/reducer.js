@@ -2,7 +2,6 @@ import { RECEIVE_USER, RECEIVE_ADDRESS } from '../actionTypes';
 
 //ESTADO INICIAL DO COMPONENTE
 const INITIAL_STATE = {
-  loaded: false,
   user: null,
 };
 

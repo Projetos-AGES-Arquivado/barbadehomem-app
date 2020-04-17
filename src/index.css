@@ -11,3 +11,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.center-loader {
+  position: absolute; /* child */
+  top: 50%;
+  left: 50%;
+  margin-left: -2%;
+  margin-top: -10%;
+}
