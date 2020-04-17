@@ -6,13 +6,14 @@ import Image from '../../components/Image'
 import Logo from '../../img/logo.png';
 import ProfilePhoto from '../../img/default_photo.png';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { signOut } from '../../store/auth/actions';
 
 export default function Home() {
   const history = useHistory();
   const dispatch = useDispatch();
+  const user = useSelector(store => store.auth.user);
 
   function handleCutRequest() {
     
@@ -45,7 +46,7 @@ export default function Home() {
       </div>
 
       <div className="title"> 
-        <h1> Bem-vindo, Usuário </h1> 
+        <h1> Bem-vindo, {user.name} </h1> 
       </div>
 
       <div className="div-buttons">
