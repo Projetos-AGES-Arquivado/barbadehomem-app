@@ -16,6 +16,14 @@ code {
   position: absolute; /* child */
   top: 50%;
   left: 50%;
-  margin-left: -2%;
+  margin-left: -4%;
   margin-top: -10%;
+}
+
+.err-message {
+  color: red;
+}
+
+.success-message {
+  color: greenyellow;
 }
