@@ -15,20 +15,14 @@ export default function ForgotMyPass() {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState();
+  const [successMessage, setSuccessMessage] = useState();
 
-  function handleResetPassword() {
-    try {
-      dispatch(resetPassword(email));
-
-      alert(
-        'Email enviado. Caso esteja correto, você receberá um link com uma redefinição de senha.'
-      );
-
-      handleGoHome();
-    } catch (err) {
-      console.log(err);
-    }
+  async function handleResetPassword() {
+    setSuccessMessage('');
+    await dispatch(resetPassword(email));
+    setSuccessMessage('Email enviado. Caso esteja correto, você receberá um link com uma redefinição de senha.');
+    handleGoHome();
   }
 
   function handleGoHome() {
@@ -40,6 +34,7 @@ export default function ForgotMyPass() {
       <div className="div-Silhueta">
         <Image src={Silhueta} alt="Logo Barba de Homem" />
         <h2> Recuperar Senha</h2>
+        {successMessage && <span className="success-message">{successMessage}</span>}
       </div>
       <div className="div-forgotmypass">
         <h3>Informe seu endereço de email</h3>
