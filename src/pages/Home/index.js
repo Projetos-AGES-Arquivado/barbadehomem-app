@@ -1,4 +1,11 @@
-import React from 'react';
+import React from "react";
+import '../../css/home-page.css';
+import '../../css/button.css'
+import '../../css/grid.css';
+import Image from '../../components/Image'
+import Logo from '../../img/logo.png';
+import ProfilePhoto from '../../img/default_photo.png';
+
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { signOut } from '../../store/auth/actions';
@@ -7,23 +14,55 @@ export default function Home() {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  function handleProfile() {
-    history.push('/home/profile');
+  function handleCutRequest() {
+    
   }
 
-  async function handleLogOut(e) {
-    e.preventDefault();
+  function handleCutEvaluate() {
+    
+  }
 
+  async function handleLogout(event) {
+    event.preventDefault();
     await dispatch(signOut());
     alert('Deslogado com sucesso!');
     history.push('/');
   }
 
+  function handleProfile() {
+    history.push('/home/profile');
+  }
+
   return (
-    <div>
-      <h1>Estou na tela home (principal)</h1>
-      <button onClick={handleLogOut}>Logout</button>
-      <button onClick={handleProfile}>Ir para perfil</button>
+    <div className="background" alt="">
+
+      <div className="logo">
+        <Image src={Logo} alt="Logo"></Image>
+      </div>
+
+      <div className="profile-photo">
+        <Image src={ProfilePhoto} alt="Profile photo"></Image>
+      </div>
+
+      <div className="title"> 
+        <h1> Bem-vindo, Usuário </h1> 
+      </div>
+
+      <div className="div-buttons">
+        <button className="button"
+          onClick={handleCutRequest}>Solicitar Corte
+        </button> 
+        <button className="button"
+          onClick={handleCutEvaluate}>Avaliar Corte
+        </button>      
+        <button className="button"
+          onClick={handleProfile}>Perfil
+        </button>
+        <button className="button"
+          onClick={handleLogout}>Logout
+        </button>     
+      </div>
+
     </div>
   );
 }

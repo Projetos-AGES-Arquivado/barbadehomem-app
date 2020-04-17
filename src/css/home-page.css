@@ -1,0 +1,135 @@
+
+.background {
+  overflow: hidden;
+  position:fixed;
+  width: 100vw;
+  min-height: 100vh;
+  background: #02025e; /* Old browsers */
+  background: -moz-linear-gradient(top,  #02025e 30%, #fe6600 100%); 
+  background: -webkit-linear-gradient(top,  #02025e 30%, #fe6600 100%);
+}
+
+.title {
+  color: white;
+  padding-right: 10%;
+  padding-top: 73%;
+  font-size: 90%;
+}
+
+.profile-photo img{
+  position: absolute;
+  margin: 0 auto;
+  padding: 75% 77% 20%;
+  width: 18%;
+}
+
+.div-buttons{
+  position: center;
+  margin: 0 auto;
+  padding-left: 0%;
+  padding-top: 10%;
+  text-align: center;
+  width: 80%;
+}
+
+.logo img{
+  position: absolute;
+  margin: 0 auto;
+  padding: 10% 25% 5%;
+  width: 50%;
+}
+
+@media (min-width: 500px) {
+  /* Tablet */
+  .title {
+    color: white;
+    padding-left: 5%;
+    padding-top: 55%;
+    font-size: 115%;
+  }
+
+  .div-buttons{
+    margin: 0 auto;
+    text-align: center;
+    width: 80%;
+
+    padding-top: 12%;
+  }
+
+  .profile-photo img{
+    position: absolute;
+    margin: 0 auto;
+    padding: 55% 75% 20%;
+    width: 20%;
+  }
+
+  .logo img{
+    position: absolute;
+    margin: 0 auto;
+    padding: 10% 33% 50%;
+    width: 35%;
+  }
+}
+
+@media (min-width: 800px) {
+  /* Tablet */
+  .title {
+    color: white;
+    padding-left: 10%;
+    padding-top: 43%;
+  }
+
+  .div-buttons{
+    margin: 0 auto;
+    text-align: center;
+    width: 80%;
+
+    padding-top: 10%;
+  }
+  
+  .profile-photo img{
+    position: absolute;
+    margin: 0 auto;
+    padding: 43% 65% 20%;
+    width: 17%;
+  }
+
+  .logo img{
+    position: absolute;
+    margin: 0 auto;
+    padding: 5% 35% 50%;
+    width: 30%;
+  }
+}
+
+@media (min-width: 1000px) {
+  /* Desktop */
+
+  .title {
+    color: white;
+    padding-left: 25%;
+    padding-top: 25%;
+  }
+
+  .div-buttons{
+    margin: 0 auto;
+    text-align: center;
+    width: 45%;
+
+    padding-top: 1%;
+  }
+  
+  .profile-photo img{
+    position: absolute;
+    margin: 0 auto;
+    padding: 23% 59% 0%;
+    width: 8%;
+  }
+  
+  .logo img{
+    position: absolute;
+    margin: 0 auto;
+    padding: 5% 43% 50%;
+    width: 15%;
+  }
+}
