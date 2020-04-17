@@ -3,13 +3,13 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import '../../css/forgot-page.css';
-import '../../css/header.css';
 
+import Silhueta from '../../img/silhueta.png';
 import Background from '../../components/Background';
 
 import { resetPassword } from '../../store/auth/actions';
 import Button from '../../components/Button';
-import Header from '../../components/Header';
+import Image from '../../components/Image';
 
 export default function ForgotMyPass() {
   const history = useHistory();
@@ -37,21 +37,20 @@ export default function ForgotMyPass() {
 
   return (
     <Background>
-      <Header text="Recuperar senha"/>
-
+      <div className="div-Silhueta">
+        <Image src={Silhueta} alt="Logo Barba de Homem" />
+        <h2> Recuperar Senha</h2>
+      </div>
       <div className="div-forgotmypass">
-        <div className="div-input-forgot">
-          <h3>Informe seu endereço de email</h3>
-          <input
-            value={email}
-            type="email"
-            onChange={e => setEmail(e.currentTarget.value)}
-          />
-        </div>
+        <h3>Informe seu endereço de email</h3>
+        <input
+          value={email}
+          type="email"
+          onChange={e => setEmail(e.currentTarget.value)}
+        />
         <Button classe="button" text="Enviar" event={handleResetPassword} />
         <Button classe="button" text="Voltar" event={handleGoHome} />
       </div>
-
     </Background>
   );
 }

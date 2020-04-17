@@ -75,7 +75,7 @@ export default function LoginPage() {
 
       <div className="forgot-password">
         {/* Necessário trocar a tag "a" por link depois que tiver as rotas */}
-        <a className="link" href="#">
+        <a className="link" href="/forgotmypass">
           Esqueceu sua senha?
         </a>
       </div>
