@@ -53,7 +53,6 @@ export default function LoginPage() {
   }
 
   async function handleSignInWithFacebook() {
-    alert('entrei');
     await dispatch(signInWithFacebook());
   }
 
