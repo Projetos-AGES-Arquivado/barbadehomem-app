@@ -146,3 +146,20 @@ export function authenticateUser(payload) {
     dispatch(fetchUser(response.user.uid));
   };
 }
+
+export function signInWithFacebook() {
+  const provider = new firestore.auth.FacebookAuthProvider();
+
+  provider.addScope('email');
+  provider.addScope('user_birthday');
+  provider.addScope('user_location');
+  provider.addScope('public_profile');
+
+  provider.setCustomParameters({
+    display: 'popup',
+  });
+
+  return async dispatch => {
+    const result = await firestore.auth().signInWithPopup(provider);
+  };
+}
