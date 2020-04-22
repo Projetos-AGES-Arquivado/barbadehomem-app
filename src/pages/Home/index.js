@@ -4,7 +4,6 @@ import '../../css/button.css'
 import '../../css/grid.css';
 import Image from '../../components/Image'
 import Logo from '../../img/logo.png';
-import ProfilePhoto from '../../img/default_photo.png';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -39,10 +38,6 @@ export default function Home() {
 
       <div className="logo">
         <Image src={Logo} alt="Logo"></Image>
-      </div>
-
-      <div className="profile-photo">
-        <Image src={ProfilePhoto} alt="Profile photo"></Image>
       </div>
 
       <div className="title"> 
