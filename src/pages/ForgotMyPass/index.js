@@ -22,7 +22,6 @@ export default function ForgotMyPass() {
     setSuccessMessage('');
     await dispatch(resetPassword(email));
     setSuccessMessage('Email enviado. Caso esteja correto, você receberá um link com uma redefinição de senha.');
-    handleGoHome();
   }
 
   function handleGoHome() {
