@@ -4,7 +4,8 @@ import '../../css/button.css'
 import '../../css/grid.css';
 import Image from '../../components/Image'
 import Background from '../../components/Background';
-import Logo from '../../img/logo.png';
+import Button from '../../components/Button';
+import Silhueta from '../../img/silhueta.png';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -16,11 +17,9 @@ export default function Home() {
   const user = useSelector(store => store.auth.user);
 
   function handleCutRequest() {
-
   }
 
   function handleCutEvaluate() {
-
   }
 
   async function handleLogout(event) {
@@ -37,28 +36,19 @@ export default function Home() {
   return (
     <Background>
       <div className="logo">
-        <Image src={Logo} alt="Logo"></Image>
+        <Image src={Silhueta} alt="Silhueta"></Image>
       </div>
 
       <div className="title">
-        <h1> Bem-vindo, {user.name} </h1>
+        <h3> Bem-vindo, {user.name} </h3>
       </div>
 
       <div className="div-buttons">
-        <button className="button"
-          onClick={handleCutRequest}>Solicitar Corte
-        </button>
-        <button className="button"
-          onClick={handleCutEvaluate}>Avaliar Corte
-        </button>
-        <button className="button"
-          onClick={handleProfile}>Perfil
-        </button>
-        <button className="button"
-          onClick={handleLogout}>Logout
-        </button>
+        <Button classe="button" text={'Solicitar Corte'} event={handleCutRequest} />
+        <Button classe="button" text={'Avaliar Corte'} event={handleCutEvaluate} />
+        <Button classe="button" text={'Perfil'} event={handleProfile} />
+        <Button classe="button" text={'Logout'} event={handleLogout} />
       </div>
-
     </Background>
   );
 }
