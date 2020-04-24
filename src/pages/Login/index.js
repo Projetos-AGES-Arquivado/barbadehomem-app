@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory, Link } from 'react-router-dom';
-import { authenticateUser } from '../../store/auth/actions';
+import { authenticateUser, signinWithGoogle } from '../../store/auth/actions';
 
 import '../../css/login-page.css';
 import '../../css/grid.css';
@@ -48,6 +48,9 @@ export default function LoginPage() {
       }
     }
     setLoading(false);
+  }
+  async function handleSignInWithGoogle(){
+    await dispatch(signinWithGoogle());
   }
 
   return (
@@ -97,7 +100,7 @@ export default function LoginPage() {
         <div className="float register-img">
           <div>
             {/* Necessário trocar para link para fazer o redirecionamento pra api do google */}
-            <Image src={google} alt="google" />
+            <button onClick= {handleSignInWithGoogle}><Image src={google} alt="google"/></button>
           </div>
 
           <div>
