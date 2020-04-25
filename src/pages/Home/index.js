@@ -36,7 +36,7 @@ export default function Home() {
   return (
     <Background>
       <div className="logo">
-        <Image src={Silhueta} alt="Silhueta"></Image>
+        <Image src={Silhueta} alt="Logo Barba de Homem" />
       </div>
 
       <div className="title">
