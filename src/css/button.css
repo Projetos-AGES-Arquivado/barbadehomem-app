@@ -24,10 +24,26 @@
     color: #02025e;
 }
 
+@media (min-width: 500px) {
+    /* Tablet  e Desktop */
+    .button{
+        margin: 3% 0;
+    }
+}
+
+
 @media (min-width: 800px) {
     /* Tablet  e Desktop */
     .button{
         width: 70%;
-        margin: 5% 2px 0;
+        margin: 2% 0;
+    }
+}
+
+@media (min-width: 1000px) {
+    /* Tablet  e Desktop */
+    .button{
+        width: 70%;
+        margin: 3% 0;
     }
 }
