@@ -100,7 +100,7 @@ export default function LoginPage() {
         <div className="float register-img">
           <div>
             {/* Necessário trocar para link para fazer o redirecionamento pra api do google */}
-            <button onClick= {handleSignInWithGoogle}><Image src={google} alt="google"/></button>
+            <button className = "google-button" onClick= {handleSignInWithGoogle}><Image src={google} alt="google"/></button>
           </div>
 
           <div>
