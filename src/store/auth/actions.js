@@ -34,9 +34,8 @@ export function fetchUser(id) {
 
     await firestore
       .firestore()
-      .collection('users')
-      .doc(id)
-      .collection('address')
+      .collection('users_addresses')
+      .where('userId', '==', id)
       .get()
       .then(snapshop => {
         snapshop.docs.forEach(doc => {
@@ -108,10 +107,8 @@ export function registerAddress(payload) {
   return async dispatch => {
     const docRef = await firestore
       .firestore()
-      .collection('users')
-      .doc(firestore.auth().currentUser.uid)
-      .collection('address')
-      .add(payload);
+      .collection('users_addresses')
+      .add({ userId: firestore.auth().currentUser.uid, ...payload });
 
     dispatch(receiveAddress({ id: docRef.id, ...payload }));
   };
