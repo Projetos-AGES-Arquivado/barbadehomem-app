@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { registerUser } from '../../store/auth/actions';
+import './styles.css';
 
 export default function Register() {
   const history = useHistory();
@@ -13,6 +14,7 @@ export default function Register() {
   const [name, setName] = useState('');
   const [birthday, setBirthday] = useState('');
   const [phone, setPhone] = useState('');
+  const [emailExists, setEmailExists] = useState(false);
 
   function handleGoBack() {
     history.push('/');
@@ -21,16 +23,21 @@ export default function Register() {
   async function handleUserRegister(e) {
     e.preventDefault();
 
-    await dispatch(registerUser({ email, name, birthday, phone, password }));
-    history.push('/register/address');
+    try {
+      await dispatch(registerUser({ email, name, birthday, phone, password }));
+      history.push('/register/address');
+    } catch {
+      setEmailExists(true);
+    }
   }
 
   return (
-    <div>
+    <div className="container">
       <h1>Estou na tela de cadastro</h1>
       <form onSubmit={handleUserRegister}>
         <ul>
           <li>
+            {emailExists && <p>Email já cadastrado.</p>}
             E-mail
             <input
               type="email"
