@@ -148,6 +148,7 @@ export function authenticateUser(payload) {
 }
 
 export function signInWithFacebook() {
+  const users = 'users';
   const provider = new firestore.auth.FacebookAuthProvider();
 
   provider.addScope('user_birthday');
@@ -163,7 +164,7 @@ export function signInWithFacebook() {
     const profile = res.additionalUserInfo.profile;
     const uid = res.user.uid;
 
-    const user = await firestore.firestore().collection('users').doc(uid).get();
+    const user = await firestore.firestore().collection(users).doc(uid).get();
 
     if (user.exists) {
       await dispatch(fetchUser(uid));
@@ -179,7 +180,7 @@ export function signInWithFacebook() {
         birthday,
       };
 
-      await firestore.firestore().collection('users').doc(uid).set(publicData);
+      await firestore.firestore().collection(users).doc(uid).set(publicData);
     }
   };
 }
