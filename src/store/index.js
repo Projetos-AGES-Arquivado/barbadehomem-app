@@ -15,7 +15,7 @@ export const store = createStore(
   applyMiddleware(thunk)
 );
 
-auth.onAuthStateChanged(async (user) => {
+auth.onAuthStateChanged(async user => {
   await sleep(1500);
   if (user?.uid) {
     await store.dispatch(fetchUser(user?.uid));

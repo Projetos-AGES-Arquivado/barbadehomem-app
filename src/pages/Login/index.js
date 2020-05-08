@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory, Link } from 'react-router-dom';
-import { authenticateUser } from '../../store/auth/actions';
+import { authenticateUser, signInWithFacebook } from '../../store/auth/actions';
 
 import '../../css/login-page.css';
 import '../../css/grid.css';
@@ -36,18 +36,24 @@ export default function LoginPage() {
       await dispatch(authenticateUser({ email, password }));
       history.push('/home');
     } catch (err) {
-      if ([
-        'auth/user-not-found', 
-        'auth/wrong-password', 
-        'auth/invalid-email', 
-        'auth/argument-error',
-      ].includes(err.code)) {
+      if (
+        [
+          'auth/user-not-found',
+          'auth/wrong-password',
+          'auth/invalid-email',
+          'auth/argument-error',
+        ].includes(err.code)
+      ) {
         setErrMessage('Email e/ou senha inválidos.');
       } else {
-        setErrMessage('Erro interno, tente novamente mais tarde.')
+        setErrMessage('Erro interno, tente novamente mais tarde.');
       }
     }
     setLoading(false);
+  }
+
+  async function handleSignInWithFacebook() {
+    await dispatch(signInWithFacebook());
   }
 
   return (
@@ -90,7 +96,9 @@ export default function LoginPage() {
 
       <div className="forgot-password">
         {/* Necessário trocar a tag "a" por link depois que tiver as rotas */}
-        <Link className="link" to="/forgotmypass">Esqueceu sua senha?</Link>
+        <Link className="link" to="/forgotmypass">
+          Esqueceu sua senha?
+        </Link>
       </div>
 
       <div className="div-cadastros">
@@ -102,7 +110,11 @@ export default function LoginPage() {
 
           <div>
             {/* Necessário trocar para link para fazer o redirecionamento pra api do facebook */}
-            <Image src={facebook} alt="facebook" />
+            <Image
+              src={facebook}
+              alt="facebook"
+              onClick={handleSignInWithFacebook}
+            />
           </div>
         </div>
 
