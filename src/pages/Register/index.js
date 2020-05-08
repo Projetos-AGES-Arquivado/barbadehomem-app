@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { registerUser } from '../../store/auth/actions';
+import './styles.css';
 
 export default function Register() {
   const history = useHistory();
@@ -13,6 +14,7 @@ export default function Register() {
   const [name, setName] = useState('');
   const [birthday, setBirthday] = useState('');
   const [phone, setPhone] = useState('');
+  const [errMessage, setErrMessage] = useState('');
 
   function handleGoBack() {
     history.push('/');
@@ -21,15 +23,30 @@ export default function Register() {
   async function handleUserRegister(e) {
     e.preventDefault();
 
-    await dispatch(registerUser({ email, name, birthday, phone, password }));
-    history.push('/register/address');
+    try {
+      await dispatch(registerUser({ email, name, birthday, phone, password }));
+      history.push('/register/address');
+    } catch (err) {
+      if (err.code === 'auth/email-already-in-use') {
+        setErrMessage('Email já cadastrado.');
+      } else if (err.code === 'auth/weak-password') {
+        setErrMessage('Senha com no mínimo 6 dígitos.');
+      } else {
+        setErrMessage('Erro interno, tente novamente mais tarde.');
+      }
+    }
   }
 
   return (
-    <div>
+    <div className="container">
       <h1>Estou na tela de cadastro</h1>
       <form onSubmit={handleUserRegister}>
         <ul>
+          {errMessage && (
+            <li>
+              <span className="err-message">{errMessage}</span>
+            </li>
+          )}
           <li>
             E-mail
             <input
