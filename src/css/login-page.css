@@ -75,7 +75,7 @@
 }
 
 .register-img {
-  padding-top: 10%;
+  padding-top: 8%;
   width: 80px;
   height: 20px;
   margin: 0 auto;
@@ -85,7 +85,7 @@
   height: 100%;
 }
 .cadastrar {
-  margin: 10% auto;
+  margin: 8% auto 3%;
   width: 100%;
 }
 .cadastrar a {
@@ -98,7 +98,7 @@
   /* cel maior */
 
   .div-logo {
-    padding: 10% 0 5%;
+    padding: 10% 0 0;
     width: 30%;
   }
   .div-login {
@@ -109,21 +109,25 @@
   .div-cadastros{
     width: 60%;
   }
+  .cadastrar {
+    margin: 6% auto;
+    width: 100%;
+  }
   .forgot-password {
     width: 60%;
     margin: 0 auto;
   }
   .link {
-    font-size: 10px;
+    font-size: 14px;
   }
-
   .register-img {
+    padding-top: 5%;
     width: 120px;
     height: 40px;
     margin: 0 auto;
   }
   .register-img img {
-    width: 50%;
+    width: 65%;
     height: 100%;
   }
 }
@@ -142,25 +146,21 @@
   .div-cadastros {
     width: 45%;
   }
+  .cadastrar {
+    margin: 3% auto;
+  }
+  .register-img {
+    padding-top: 3%;
+  }
   .forgot-password {
     width: 45%;
     margin: 0 auto;
   }
-  .link {
-    font-size: 10px;
-  }
 }
-
 @media (min-width: 1000px) {
   /* Desktop */
   .div-logo {
     width: 20%;
-  }
-
-  .div-logo {
     padding: 5% 0 1%;
-  }
-  .div-login {
-    height: 70%;
   }
 }
