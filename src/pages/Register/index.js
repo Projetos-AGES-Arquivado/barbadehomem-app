@@ -44,7 +44,7 @@ export default function Register() {
         <ul>
           {errMessage && (
             <li>
-              <span>{errMessage}</span>
+              <span className="err-message">{errMessage}</span>
             </li>
           )}
           <li>
