@@ -17,6 +17,9 @@
   width: 100%;
   height: 100%;
 }
+.google-button{
+  display: contents;
+}
 
 .div-login {
   margin: 0 auto;

@@ -144,6 +144,27 @@ export function authenticateUser(payload) {
   };
 }
 
+export function signinWithGoogle() {
+  const provider = new firestore.auth.GoogleAuthProvider();
+
+  return async dispatch => {
+    const res = await firestore.auth().signInWithPopup(provider);
+
+    const { displayName: name, email, uid } = res.user;
+
+    const user = await firestore.firestore().collection('users').doc(uid).get();
+    if (user.exists) {
+      await dispatch(fetchUser(uid));
+    } else {
+      const publicData = {
+        email,
+        name,
+      };
+      await firestore.firestore().collection('users').doc(uid).set(publicData);
+    }
+  };
+}
+
 export function signInWithFacebook() {
   const users = 'users';
   const provider = new firestore.auth.FacebookAuthProvider();
