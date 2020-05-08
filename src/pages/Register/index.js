@@ -14,7 +14,7 @@ export default function Register() {
   const [name, setName] = useState('');
   const [birthday, setBirthday] = useState('');
   const [phone, setPhone] = useState('');
-  const [emailExists, setEmailExists] = useState(false);
+  const [errMessage, setErrMessage] = useState('');
 
   function handleGoBack() {
     history.push('/');
@@ -26,8 +26,12 @@ export default function Register() {
     try {
       await dispatch(registerUser({ email, name, birthday, phone, password }));
       history.push('/register/address');
-    } catch {
-      setEmailExists(true);
+    } catch (err) {
+      if (err.code === 'auth/email-already-in-use') {
+        setErrMessage('Email já cadastrado.');
+      } else {
+        setErrMessage('Senha com no mínimo 6 dígitos.');
+      }
     }
   }
 
@@ -36,8 +40,12 @@ export default function Register() {
       <h1>Estou na tela de cadastro</h1>
       <form onSubmit={handleUserRegister}>
         <ul>
+          {errMessage && (
+            <li>
+              <span>{errMessage}</span>
+            </li>
+          )}
           <li>
-            {emailExists && <p>Email já cadastrado.</p>}
             E-mail
             <input
               type="email"
