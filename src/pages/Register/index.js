@@ -29,8 +29,10 @@ export default function Register() {
     } catch (err) {
       if (err.code === 'auth/email-already-in-use') {
         setErrMessage('Email já cadastrado.');
-      } else {
+      } else if (err.code === 'auth/weak-password') {
         setErrMessage('Senha com no mínimo 6 dígitos.');
+      } else {
+        setErrMessage('Erro interno, tente novamente mais tarde.');
       }
     }
   }
