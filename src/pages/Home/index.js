@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 import '../../css/home-page.css';
-import '../../css/button.css'
+import '../../css/button.css';
 import '../../css/grid.css';
 import Image from '../../components/Image'
 import Background from '../../components/Background';
@@ -25,7 +25,6 @@ export default function Home() {
   async function handleLogout(event) {
     event.preventDefault();
     await dispatch(signOut());
-    alert('Deslogado com sucesso!');
     history.push('/');
   }
 

@@ -143,3 +143,41 @@ export function authenticateUser(payload) {
     dispatch(fetchUser(response.user.uid));
   };
 }
+
+export function signInWithFacebook() {
+  const users = 'users';
+  const provider = new firestore.auth.FacebookAuthProvider();
+
+  provider.addScope('user_birthday');
+  provider.addScope('public_profile');
+
+  provider.setCustomParameters({
+    display: 'popup',
+  });
+
+  return async dispatch => {
+    const res = await firestore.auth().signInWithPopup(provider);
+
+    const profile = res.additionalUserInfo.profile;
+    const uid = res.user.uid;
+
+    const user = await firestore.firestore().collection(users).doc(uid).get();
+
+    if (user.exists) {
+      await dispatch(fetchUser(uid));
+    } else {
+      const { name, email, date = profile.birthday } = profile;
+      let birthday = new Date(date);
+
+      birthday = birthday.toISOString().substring(0, 10);
+
+      const publicData = {
+        email,
+        name,
+        birthday,
+      };
+
+      await firestore.firestore().collection(users).doc(uid).set(publicData);
+    }
+  };
+}
