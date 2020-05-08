@@ -1,12 +1,22 @@
 {
   "version": "0.2.0",
   "configurations": [
-      {
-          "name": "Chrome",
-          "type": "chrome",
-          "request": "launch",
-          "url": "http://localhost:3000/",
-          "webRoot": "${workspaceFolder}/src/index.js"
-      }
+    {
+      "type": "node",
+      "request": "attach",
+      "name": "Attach",
+      "protocol": "inspector",
+      "restart": true,
+      "port": 9229,
+      "address": "127.0.0.1",
+      "skipFiles": ["<node_internals>/**"]
+    },
+    {
+      "name": "Chrome",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:3000/",
+      "webRoot": "${workspaceFolder}/src/index.js"
+    }
   ]
 }

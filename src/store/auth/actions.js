@@ -34,9 +34,8 @@ export function fetchUser(id) {
 
     await firestore
       .firestore()
-      .collection('users')
-      .doc(id)
-      .collection('address')
+      .collection('users_addresses')
+      .where('userId', '==', id)
       .get()
       .then(snapshop => {
         snapshop.docs.forEach(doc => {
@@ -108,10 +107,8 @@ export function registerAddress(payload) {
   return async dispatch => {
     const docRef = await firestore
       .firestore()
-      .collection('users')
-      .doc(firestore.auth().currentUser.uid)
-      .collection('address')
-      .add(payload);
+      .collection('users_addresses')
+      .add({ userId: firestore.auth().currentUser.uid, ...payload });
 
     dispatch(receiveAddress({ id: docRef.id, ...payload }));
   };
@@ -147,25 +144,67 @@ export function authenticateUser(payload) {
   };
 }
 
-export function signinWithGoogle(){
+export function signinWithGoogle() {
   const provider = new firestore.auth.GoogleAuthProvider();
 
-  return async dispatch =>{
-  firestore.auth().signInWithPopup(provider).then(function(result) {
-    // This gives you a Google Access Token. You can use it to access the Google API.
-    var token = result.credential.accessToken;
-    // The signed-in user info.
-    var user = result.user;
-    // ...
-  }).catch(function(error) {
-    // Handle Errors here.
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    // The email of the user's account used.
-    var email = error.email;
-    // The firebase.auth.AuthCredential type that was used.
-    var credential = error.credential;
-    // ...
-  });
+  return async dispatch => {
+    firestore
+      .auth()
+      .signInWithPopup(provider)
+      .then(function (result) {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        var token = result.credential.accessToken;
+        // The signed-in user info.
+        var user = result.user;
+        // ...
+      })
+      .catch(function (error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // The email of the user's account used.
+        var email = error.email;
+        // The firebase.auth.AuthCredential type that was used.
+        var credential = error.credential;
+        // ...
+      });
+  };
 }
+
+export function signInWithFacebook() {
+  const users = 'users';
+  const provider = new firestore.auth.FacebookAuthProvider();
+
+  provider.addScope('user_birthday');
+  provider.addScope('public_profile');
+
+  provider.setCustomParameters({
+    display: 'popup',
+  });
+
+  return async dispatch => {
+    const res = await firestore.auth().signInWithPopup(provider);
+
+    const profile = res.additionalUserInfo.profile;
+    const uid = res.user.uid;
+
+    const user = await firestore.firestore().collection(users).doc(uid).get();
+
+    if (user.exists) {
+      await dispatch(fetchUser(uid));
+    } else {
+      const { name, email, date = profile.birthday } = profile;
+      let birthday = new Date(date);
+
+      birthday = birthday.toISOString().substring(0, 10);
+
+      const publicData = {
+        email,
+        name,
+        birthday,
+      };
+
+      await firestore.firestore().collection(users).doc(uid).set(publicData);
+    }
+  };
 }
