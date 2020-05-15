@@ -2,7 +2,7 @@ import React from 'react';
 import '../../css/home-page.css';
 import '../../css/button.css';
 import '../../css/grid.css';
-import Image from '../../components/Image'
+import Image from '../../components/Image';
 import Background from '../../components/Background';
 import Button from '../../components/Button';
 import Silhueta from '../../img/silhueta.png';
@@ -16,11 +16,9 @@ export default function Home() {
   const dispatch = useDispatch();
   const user = useSelector(store => store.auth.user);
 
-  function handleCutRequest() {
-  }
+  function handleCutRequest() {}
 
-  function handleCutEvaluate() {
-  }
+  function handleCutEvaluate() {}
 
   async function handleLogout(event) {
     event.preventDefault();
@@ -43,8 +41,16 @@ export default function Home() {
       </div>
 
       <div className="div-buttons">
-        <Button classe="button" text={'Solicitar Corte'} event={handleCutRequest} />
-        <Button classe="button" text={'Avaliar Corte'} event={handleCutEvaluate} />
+        <Button
+          classe="button"
+          text={'Solicitar Corte'}
+          event={handleCutRequest}
+        />
+        <Button
+          classe="button"
+          text={'Avaliar Corte'}
+          event={handleCutEvaluate}
+        />
         <Button classe="button" text={'Perfil'} event={handleProfile} />
         <Button classe="button" text={'Logout'} event={handleLogout} />
       </div>

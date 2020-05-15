@@ -21,7 +21,9 @@ export default function ForgotMyPass() {
   async function handleResetPassword() {
     setSuccessMessage('');
     await dispatch(resetPassword(email));
-    setSuccessMessage('Email enviado. Caso esteja correto, você receberá um link com uma redefinição de senha.');
+    setSuccessMessage(
+      'Email enviado. Caso esteja correto, você receberá um link com uma redefinição de senha.'
+    );
   }
 
   function handleGoHome() {
@@ -33,7 +35,9 @@ export default function ForgotMyPass() {
       <div className="div-Silhueta">
         <Image src={Silhueta} alt="Logo Barba de Homem" />
         <h2> Recuperar Senha</h2>
-        {successMessage && <span className="success-message">{successMessage}</span>}
+        {successMessage && (
+          <span className="success-message">{successMessage}</span>
+        )}
       </div>
       <div className="div-forgotmypass">
         <h3>Informe seu endereço de email</h3>

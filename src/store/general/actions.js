@@ -1,7 +1,7 @@
-import { SET_LOADER } from "../actionTypes";
+import { SET_LOADER } from '../actionTypes';
 
 /**
- * @param {boolean} payload 
+ * @param {boolean} payload
  */
 export function setLoading(payload) {
   return {
