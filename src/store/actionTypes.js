@@ -1,0 +1,3 @@
+export const RECEIVE_USER = 'RECEIVE_USER';
+export const RECEIVE_ADDRESS = 'RECEIVE_ADDRESS';
+export const SET_LOADER = 'SET_LOADER';

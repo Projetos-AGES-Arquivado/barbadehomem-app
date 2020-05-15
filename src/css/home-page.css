@@ -1,0 +1,81 @@
+
+.background {
+  width: 100vw;
+  min-height: 100vh;
+  background: #02025e; /* Old browsers */
+  background: -moz-linear-gradient(top,  #02025e 30%, #fe6600 100%); 
+  background: -webkit-linear-gradient(top,  #02025e 30%, #fe6600 100%);
+}
+
+.title {
+  color: white;
+  text-align: center;
+  font-size: 90%;
+  margin: none;
+}
+
+.div-buttons{
+  margin: 0 auto;
+  text-align: center;
+  width: 90%;
+}
+
+.logo{
+  margin: 0 auto;
+  padding: 10% 0;
+  width: 30%;
+}
+.logo img{
+  width: 100%;
+  height: 100%;
+}
+
+@media (min-width: 500px) {
+  /* Tablet */
+  .title {
+    font-size: 115%;
+    margin: 5% 0;
+  }
+
+  .div-buttons{
+    margin: 0 auto;
+    width: 80%;
+  }
+  
+  .logo{
+    padding: 10% 0 0;
+    width: 20%;
+  }
+}
+
+@media (min-width: 800px) {
+  /* Tablet */
+
+  .div-buttons{
+    margin: 0 auto;
+    text-align: center;
+    width: 80%;
+  }
+  
+  .logo{
+    padding: 5% 0 0;
+  }
+}
+
+@media (min-width: 1000px) {
+  /* Desktop */
+  .title {
+    margin: 3% 0;
+  }
+
+  .div-buttons{
+    margin: 0 auto;
+    text-align: center;
+    width: 45%;
+  }
+  
+  .logo{
+    width: 10%;
+    padding: 5% 0 1%;
+  }
+}

@@ -11,3 +11,19 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.center-loader {
+  position: absolute; /* child */
+  top: 50%;
+  left: 50%;
+  margin-left: -4%;
+  margin-top: -10%;
+}
+
+.err-message {
+  color: red;
+}
+
+.success-message {
+  color: greenyellow;
+}
