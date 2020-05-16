@@ -1,18 +1,17 @@
 import React from 'react';
 import Loader from 'react-loader-spinner';
-import Background from '../../components/Background';
+import './styles.css';
 
 export default function Loading() {
   return (
-    <Background>
+    <div className="loader-container">
       <Loader
-        className="center-loader"
+        color="#fff"
         type="Circles"
-        color="#FFFFFF"
         height="15%"
         width="15%"
         visible={true}
       />
-    </Background>
+    </div>
   );
 }

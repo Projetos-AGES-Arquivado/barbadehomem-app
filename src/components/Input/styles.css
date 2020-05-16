@@ -1,0 +1,35 @@
+.input-container {
+  width: 100%;
+  color: #666360;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+  padding: 16px 16px 5px 0;
+}
+
+.input-container input {
+  flex: 1;
+  border: 0;
+  background: transparent;
+  color: #f4ede8;
+  text-align: left;
+}
+
+.input-container input::placeholder {
+  color: #fff;
+  letter-spacing: 0.135em;
+  font-size: 17px;
+  opacity: 0.4;
+}
+
+.input-container input,
+textarea {
+  color: #fff;
+  letter-spacing: 0.135em;
+  font-size: 17px;
+}
+
+.input-container svg {
+  margin-right: 16px;
+  color: #fff;
+}
