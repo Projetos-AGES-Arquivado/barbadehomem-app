@@ -1,15 +1,12 @@
 import React from 'react';
-import '../../css/home-page.css';
-import '../../css/button.css';
-import '../../css/grid.css';
-import Image from '../../components/Image';
-import Background from '../../components/Background';
 import Button from '../../components/Button';
 import Silhueta from '../../img/silhueta.png';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { signOut } from '../../store/auth/actions';
+
+import './styles.css';
 
 export default function Home() {
   const history = useHistory();
@@ -20,9 +17,11 @@ export default function Home() {
 
   function handleCutEvaluate() {}
 
-  async function handleLogout(event) {
-    event.preventDefault();
+  async function handleLogout(e) {
+    e.preventDefault();
+
     await dispatch(signOut());
+
     history.push('/');
   }
 
@@ -31,29 +30,18 @@ export default function Home() {
   }
 
   return (
-    <Background>
-      <div className="logo">
-        <Image src={Silhueta} alt="Logo Barba de Homem" />
-      </div>
-
-      <div className="title">
+    <div className="home-container">
+      <header>
+        <img src={Silhueta} alt="Logo Barba de Homem" />
         <h3> Bem-vindo, {user.name} </h3>
-      </div>
+      </header>
 
-      <div className="div-buttons">
-        <Button
-          classe="button"
-          text={'Solicitar Corte'}
-          event={handleCutRequest}
-        />
-        <Button
-          classe="button"
-          text={'Avaliar Corte'}
-          event={handleCutEvaluate}
-        />
-        <Button classe="button" text={'Perfil'} event={handleProfile} />
-        <Button classe="button" text={'Logout'} event={handleLogout} />
-      </div>
-    </Background>
+      <nav className="home-menu">
+        <Button onClick={handleCutRequest}>Solicitar Corte</Button>
+        <Button onClick={handleCutEvaluate}>Avaliar Corte</Button>
+        <Button onClick={handleProfile}>Perfil</Button>
+        <Button onClick={handleLogout}>Logout</Button>
+      </nav>
+    </div>
   );
 }

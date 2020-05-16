@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
+import { FiCornerDownLeft } from 'react-icons/fi';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-
 import { registerAddress } from '../../store/auth/actions';
+import './styles.css';
+
+import Button from '../../components/Button';
+import Input from '../../components/Input';
 
 export default function RegisterAddress() {
   const history = useHistory();
@@ -12,8 +16,6 @@ export default function RegisterAddress() {
   const [num, setNum] = useState('');
   const [complement, setComplement] = useState('');
   const [district, setDistrict] = useState('');
-  const [city, setCity] = useState('');
-  const [uf, setUf] = useState('');
 
   function handleGoBack() {
     history.push('/register');
@@ -22,67 +24,59 @@ export default function RegisterAddress() {
   async function handleRegister(e) {
     e.preventDefault();
 
-    await dispatch(
-      registerAddress({ street, num, complement, district, city, uf })
-    );
+    await dispatch(registerAddress({ street, num, complement, district }));
 
     history.push('/home');
   }
 
   return (
-    <div>
-      <form onSubmit={handleRegister}>
-        <ul>
-          <li>
-            <input
-              type="text"
-              placeholder="Rua"
-              value={street}
-              onChange={e => setStreet(e.target.value)}
-            />
-          </li>
-          <li>
-            <input
+    <div className="register-address-container">
+      <header>
+        <FiCornerDownLeft size={25} onClick={handleGoBack} />
+        <h1>Cadastre seu endereço</h1>
+      </header>
+
+      <p>No momento atendemos apenas na região de Porto Alegre.</p>
+
+      <form>
+        <Input
+          type="text"
+          value={street}
+          onChange={e => setStreet(e.target.value)}
+          placeholder="Rua"
+        />
+
+        <div className="additional-information">
+          <div className="number">
+            <Input
               type="number"
-              placeholder="Nº"
               value={num}
               onChange={e => setNum(e.target.value)}
+              placeholder="Nº"
             />
-            <input
+          </div>
+
+          <div>
+            <Input
               type="text"
-              placeholder="Comp"
               value={complement}
               onChange={e => setComplement(e.target.value)}
+              placeholder="Complemento"
             />
-          </li>
-          <li>
-            <input
-              type="text"
-              placeholder="Bairro"
-              value={district}
-              onChange={e => setDistrict(e.target.value)}
-            />
-          </li>
-          <li>
-            <input
-              type="text"
-              placeholder="Cidade"
-              value={city}
-              onChange={e => setCity(e.target.value)}
-            />
-          </li>
-          <li>
-            <input
-              type="text"
-              placeholder="UF"
-              value={uf}
-              onChange={e => setUf(e.target.value)}
-            />
-            <button type="submit">Registrar</button>
-          </li>
-        </ul>
+          </div>
+        </div>
+
+        <Input
+          type="text"
+          value={district}
+          onChange={e => setDistrict(e.target.value)}
+          placeholder="Bairro"
+        />
+
+        <Button type="submit" onClick={handleRegister}>
+          Criar conta
+        </Button>
       </form>
-      <button onClick={handleGoBack}>Voltar</button>
     </div>
   );
 }

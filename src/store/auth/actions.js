@@ -100,8 +100,6 @@ export function registerUser(payload) {
  * @param {string} payload.num
  * @param {string} payload.complement
  * @param {string} payload.district
- * @param {string} payload.city
- * @param {string} payload.uf
  */
 export function registerAddress(payload) {
   return async dispatch => {

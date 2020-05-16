@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&family=Source+Sans+Pro:wght@600&display=swap');
+
+.register-address-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.register-address-container header {
+  width: 100%;
+  height: 131px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.register-address-container h1 {
+  margin: auto;
+  color: #fff;
+  font-size: 22px;
+}
+
+.register-address-container header svg {
+  margin-left: -15px;
+  color: #fff;
+}
+
+.register-address-container p {
+  margin-top: 15px;
+  text-align: justify;
+  font-size: 19px;
+  color: #fff;
+  padding: 0 15px;
+}
+
+.additional-information {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.additional-information .number input {
+  width: 50px;
+}
+
+.additional-information .number {
+  width: 50px;
+}
+
+.register-address-container button {
+  margin-top: 50px;
+}
+
+@media (min-width: 1000px) {
+  .register-address-container form {
+    margin-top: 80px;
+  }
+
+  .register-address-container header {
+    width: 100vw;
+    padding: 0 100px;
+  }
+
+  .register-address-container h1 {
+    margin: auto;
+  }
+
+  .register-address-container button {
+    margin-top: 80px;
+  }
+}
