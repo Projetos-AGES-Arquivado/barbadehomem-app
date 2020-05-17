@@ -1,11 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import { FiCornerDownLeft } from 'react-icons/fi';
+import {} from 'firebase';
+
+import { getAppointments } from '../../store/auth/actions';
+import formatDate from '../../utils/formatDate';
 
 import { Header, Solicitation, Container } from './styles';
 
-const Solicitations = props => {
+const Solicitations = () => {
   const history = useHistory();
+  const [appointments, setAppointments] = useState([]);
+
+  useEffect(() => {
+    async function loadAppointments() {
+      const newAppointments = await getAppointments();
+
+      setAppointments(newAppointments);
+    }
+
+    loadAppointments();
+  }, []);
+
+  console.log(appointments[0].cost);
+
   const handleGoBack = e => {
     history.goBack();
     e.preventDefault();

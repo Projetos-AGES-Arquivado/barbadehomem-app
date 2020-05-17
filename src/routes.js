@@ -7,7 +7,7 @@ import Register from './pages/Register';
 import Profile from './pages/Profile';
 import ForgotMyPass from './pages/ForgotMyPass';
 import RegisterAddress from './pages/RegisterAddress';
-import Solicitations from './pages/Solicitations';
+import Appointments from './pages/Appointments';
 import Home from './pages/Home';
 
 function PrivateRoute({ component: Component, ...rest }) {
@@ -41,7 +41,7 @@ export default function routes() {
         <UnauthRoute path="/register" exact component={Register} />
         <PrivateRoute path="/home" exact component={Home} />
         <PrivateRoute path="/home/profile" component={Profile} />
-        <PrivateRoute path="/home/solicitations" component={Solicitations} />
+        <PrivateRoute path="/home/solicitations" component={Appointments} />
         <Route path="/register/address" component={RegisterAddress} />
       </Switch>
     </BrowserRouter>
