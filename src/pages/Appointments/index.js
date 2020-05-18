@@ -22,9 +22,7 @@ const Solicitations = () => {
     loadAppointments();
   }, []);
 
-  console.log(appointments[0].cost);
-
-  const handleGoBack = e => {
+  const handleGoBack = e => { 
     history.goBack();
     e.preventDefault();
   };
@@ -36,18 +34,33 @@ const Solicitations = () => {
           <FiCornerDownLeft size={25} onClick={handleGoBack} />
           <h1>Minhas solicitações</h1>
         </Header>
-
-        <Solicitation pending>
+        <Solicitation booked>
           <li>
             <label>Agendado: 17/05/2020</label>
+            <strong>R$25,00</strong>
+          </li>
+          <li>
+            <label>Horário: 13h</label>
+            <strong className="status">Agendado</strong>
+          </li>
+          <li>
+            <label>Prestador: Thiago</label>
+          </li>
+          <li>
+            <label>Serviços: Barba</label>
+          </li>
+        </Solicitation>
+        <Solicitation done>
+          <li>
+            <label>Concluído: 23/05/2020</label>
             <strong>R$50,00</strong>
           </li>
           <li>
-            <label>Horário: 17h30</label>
-            <strong className="status">Em análise</strong>
+            <label>Horário: 19h30</label>
+            <strong className="status">Concluído</strong>
           </li>
           <li>
-            <label>Prestador: Marlon</label>
+            <label>Prestador: Bruno</label>
           </li>
           <li>
             <label>Serviços: Corte + Barba</label>
@@ -55,7 +68,7 @@ const Solicitations = () => {
         </Solicitation>
         <Solicitation done>
           <li>
-            <label>Agendado: 22/05/2020</label>
+            <label>Concluído: 22/05/2020</label>
             <strong>R$25,00</strong>
           </li>
           <li>
@@ -63,7 +76,7 @@ const Solicitations = () => {
             <strong className="status">Concluído</strong>
           </li>
           <li>
-            <label>Prestador: Frank</label>
+            <label>Prestador: Franck</label>
           </li>
           <li>
             <label>Serviços: Corte</label>

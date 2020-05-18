@@ -65,5 +65,12 @@ export const Solicitation = styled.ul`
       css`
         color: #fa8072;
       `}
+
+      ${props =>
+        props.booked &&
+        css`
+          color: #0000FF;
+        `}
+
     } 
 `;
