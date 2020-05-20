@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import { FiCornerDownLeft } from 'react-icons/fi';
-import {} from 'firebase';
 
-import { getAppointments } from '../../store/auth/actions';
-import formatDate from '../../utils/formatDate';
+import { store } from '../../store';
+import {
+  formatteDate,
+  formattedServices,
+  formattedTime,
+  formattedValue,
+  formattedStatus,
+} from '../../utils';
 
 import { Header, Solicitation, Container } from './styles';
 
@@ -13,16 +18,19 @@ const Solicitations = () => {
   const [appointments, setAppointments] = useState([]);
 
   useEffect(() => {
-    async function loadAppointments() {
-      const newAppointments = await getAppointments();
+    function recoverAppointments() {
+      const existingAppointments = store.getState().appointment
+        .userAppointments;
 
-      setAppointments(newAppointments);
+      if (existingAppointments) {
+        setAppointments([...existingAppointments]);
+      }
     }
 
-    loadAppointments();
+    recoverAppointments();
   }, []);
 
-  const handleGoBack = e => { 
+  const handleGoBack = e => {
     history.goBack();
     e.preventDefault();
   };
@@ -34,135 +42,27 @@ const Solicitations = () => {
           <FiCornerDownLeft size={25} onClick={handleGoBack} />
           <h1>Minhas solicitações</h1>
         </Header>
-        <Solicitation booked>
-          <li>
-            <label>Agendado: 17/05/2020</label>
-            <strong>R$25,00</strong>
-          </li>
-          <li>
-            <label>Horário: 13h</label>
-            <strong className="status">Agendado</strong>
-          </li>
-          <li>
-            <label>Prestador: Thiago</label>
-          </li>
-          <li>
-            <label>Serviços: Barba</label>
-          </li>
-        </Solicitation>
-        <Solicitation done>
-          <li>
-            <label>Concluído: 23/05/2020</label>
-            <strong>R$50,00</strong>
-          </li>
-          <li>
-            <label>Horário: 19h30</label>
-            <strong className="status">Concluído</strong>
-          </li>
-          <li>
-            <label>Prestador: Bruno</label>
-          </li>
-          <li>
-            <label>Serviços: Corte + Barba</label>
-          </li>
-        </Solicitation>
-        <Solicitation done>
-          <li>
-            <label>Concluído: 22/05/2020</label>
-            <strong>R$25,00</strong>
-          </li>
-          <li>
-            <label>Horário: 20h45</label>
-            <strong className="status">Concluído</strong>
-          </li>
-          <li>
-            <label>Prestador: Franck</label>
-          </li>
-          <li>
-            <label>Serviços: Corte</label>
-            <Link to="">Avaliar</Link>
-          </li>
-        </Solicitation>
-        <Solicitation canceled>
-          <li>
-            <label>Agendado: 17/05/2020</label>
-            <strong>R$25,00</strong>
-          </li>
-          <li>
-            <label>Horário: 9h</label>
-            <strong className="status">Cancelado</strong>
-          </li>
-          <li>
-            <label>Prestador: Thiago</label>
-          </li>
-          <li>
-            <label>Serviços: Barba</label>
-          </li>
-        </Solicitation>
-        <Solicitation canceled>
-          <li>
-            <label>Agendado: 17/05/2020</label>
-            <strong>R$25,00</strong>
-          </li>
-          <li>
-            <label>Horário: 9h</label>
-            <strong className="status">Cancelado</strong>
-          </li>
-          <li>
-            <label>Prestador: Thiago</label>
-          </li>
-          <li>
-            <label>Serviços: Barba</label>
-          </li>
-        </Solicitation>
-        <Solicitation canceled>
-          <li>
-            <label>Agendado: 17/05/2020</label>
-            <strong>R$25,00</strong>
-          </li>
-          <li>
-            <label>Horário: 9h</label>
-            <strong className="status">Cancelado</strong>
-          </li>
-          <li>
-            <label>Prestador: Thiago</label>
-          </li>
-          <li>
-            <label>Serviços: Barba</label>
-          </li>
-        </Solicitation>
-        <Solicitation canceled>
-          <li>
-            <label>Agendado: 17/05/2020</label>
-            <strong>R$25,00</strong>
-          </li>
-          <li>
-            <label>Horário: 9h</label>
-            <strong className="status">Cancelado</strong>
-          </li>
-          <li>
-            <label>Prestador: Thiago</label>
-          </li>
-          <li>
-            <label>Serviços: Barba</label>
-          </li>
-        </Solicitation>
-        <Solicitation canceled>
-          <li>
-            <label>Agendado: 17/05/2020</label>
-            <strong>R$25,00</strong>
-          </li>
-          <li>
-            <label>Horário: 9h</label>
-            <strong className="status">Cancelado</strong>
-          </li>
-          <li>
-            <label>Prestador: Thiago</label>
-          </li>
-          <li>
-            <label>Serviços: Barba</label>
-          </li>
-        </Solicitation>
+
+        {appointments.map(appointment => (
+          <Solicitation key={appointment.id} status={appointment.status}>
+            <li>
+              <label>Agendado: {formatteDate(appointment.date)}</label>
+              <strong>{formattedValue(appointment.cost)}</strong>
+            </li>
+            <li>
+              <label>Horário: {formattedTime(appointment.date)}</label>
+              <p>{formattedStatus(appointment.status)}</p>
+            </li>
+            <li>
+              <label>Prestador: {appointment.provider.name}</label>
+            </li>
+            <li>
+              <label>Serviços: {formattedServices(appointment.services)}</label>
+              {appointment?.wasRated === false && <Link to="">Avaliar</Link>}
+              {appointment?.wasRated === true && <span>Avaliado</span>}
+            </li>
+          </Solicitation>
+        ))}
       </Container>
     </>
   );

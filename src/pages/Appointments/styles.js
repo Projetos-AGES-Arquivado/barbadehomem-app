@@ -1,4 +1,3 @@
-import React from 'react';
 import styled, { css } from 'styled-components';
 
 export const Header = styled.header`
@@ -41,36 +40,51 @@ export const Solicitation = styled.ul`
   & > li {
     display: flex;
     justify-content: space-between;
+    align-items:baseline;
   }
 
   & a {
     text-decoration: underline;
   }
 
-  & .status {
+  &  p{
+    border: 1px solid;
+    border-radius: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 500;
+    padding: 5px 5px;
+    margin-top: 3px;
+
     ${props =>
-      props.pending &&
+      props.status === 'pending' &&
       css`
-        color: #ff5;
+        border-color: #c1981c;
+        background-color: #c1981c;
       `}
 
     ${props =>
-      props.done &&
+      props.status === 'booked' &&
       css`
-        color: #32cd32;
-      `}
-
-    ${props =>
-      props.canceled &&
-      css`
-        color: #fa8072;
+        border-color: #4267b2;
+        background-color: #4267b2;
       `}
 
       ${props =>
-        props.booked &&
+        props.status === 'done' &&
         css`
-          color: #0000FF;
+          border-color: #228b22;
+          background-color: #228b22;
         `}
 
-    } 
+        ${props =>
+          props.status === 'canceled' &&
+          css`
+            border-color: #b22222;
+            background-color: #b22222;
+          `}
+  }
+
+  & span {
+    color: #808080;
+  }
 `;

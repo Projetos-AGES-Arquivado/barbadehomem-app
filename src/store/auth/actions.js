@@ -202,33 +202,3 @@ export function signInWithFacebook() {
     }
   };
 }
-
-export async function getAppointments() {
-  const { uid } = firestore.auth().currentUser;
-
-  const appointmentsDoc = await firestore
-    .firestore()
-    .collection('appointments')
-    .where('userId', '==', uid)
-    .get();
-
-  if (appointmentsDoc.empty) return null;
-
-  const appointments = appointmentsDoc.docs.map(appointment => {
-    const { barberId, cost, date, services, status } = appointment.data();
-    const { newDate, time } = formattedDate(date);
-
-    const formattedAppointment = {
-      barberId,
-      cost,
-      services,
-      status,
-      date: newDate,
-      hour: time,
-    };
-
-    return formattedAppointment;
-  });
-
-  return appointments;
-}
