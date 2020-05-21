@@ -1,4 +1,4 @@
-export const formatteDate = value => {
+export const formattedDate = value => {
   const date = new Date(value.toDate());
   const newDate = date.toLocaleDateString('pt-BR');
 

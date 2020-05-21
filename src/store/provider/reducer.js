@@ -1,7 +1,7 @@
-import { RECEIVE_APPOINTMENTS } from './actionTypes';
+import { RECEIVE_PROVIDERS } from './actionTypes';
 
 const INITIAL_STATE = {
-  appointments: [],
+  providers: [],
 };
 
 /**
@@ -9,12 +9,12 @@ const INITIAL_STATE = {
  * @param {string} action.type
  * @param {string} action.payload
  */
-export default function appointmentReducer(state = INITIAL_STATE, action) {
+export default function providerReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
-    case RECEIVE_APPOINTMENTS:
+    case RECEIVE_PROVIDERS:
       return {
         ...state,
-        appointments: action.payload,
+        providers: action.payload,
       };
     default:
       return state;

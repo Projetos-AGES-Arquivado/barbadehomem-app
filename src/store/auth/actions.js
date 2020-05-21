@@ -2,8 +2,6 @@ import { RECEIVE_USER, RECEIVE_ADDRESS } from '../actionTypes';
 
 import { firestore } from '../../plugins/firebase';
 
-import formattedDate from '../../utils/formatDate';
-
 export function receiveUser(payload) {
   return {
     type: RECEIVE_USER,

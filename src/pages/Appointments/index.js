@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { useHistory, Link } from 'react-router-dom';
 import { FiCornerDownLeft } from 'react-icons/fi';
 
-import { store } from '../../store';
 import {
-  formatteDate,
+  formattedDate,
   formattedServices,
   formattedTime,
   formattedValue,
@@ -15,20 +15,7 @@ import { Header, Solicitation, Container } from './styles';
 
 const Solicitations = () => {
   const history = useHistory();
-  const [appointments, setAppointments] = useState([]);
-
-  useEffect(() => {
-    function recoverAppointments() {
-      const existingAppointments = store.getState().appointment
-        .userAppointments;
-
-      if (existingAppointments) {
-        setAppointments([...existingAppointments]);
-      }
-    }
-
-    recoverAppointments();
-  }, []);
+  const appointments = useSelector(store => store.appointment.appointments);
 
   const handleGoBack = e => {
     history.goBack();
@@ -46,7 +33,7 @@ const Solicitations = () => {
         {appointments.map(appointment => (
           <Solicitation key={appointment.id} status={appointment.status}>
             <li>
-              <label>Agendado: {formatteDate(appointment.date)}</label>
+              <label>Agendado: {formattedDate(appointment.date)}</label>
               <strong>{formattedValue(appointment.cost)}</strong>
             </li>
             <li>
