@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { registerUser } from '../../store/auth/actions';
 import './styles.css';
+import { phoneParser } from '../../utils';
 
 export default function Register() {
   const history = useHistory();
@@ -83,9 +84,9 @@ export default function Register() {
             Telefone
             <input
               type="tel"
-              value={phone}
+              value={phoneParser(phone)}
               onChange={e => setPhone(e.target.value)}
-              placeholder="99999-9999"
+              placeholder="(99) 99999-9999"
             />
           </li>
           <button onClick={handleGoBack}>Voltar</button>
