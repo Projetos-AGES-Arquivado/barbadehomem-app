@@ -1,7 +1,7 @@
 import IMask from "imask";
 
 export const phoneParser = (v) => {
-  if (v === undefined) return;
+  if (v === null) return;
 
   const masked = IMask.createMask({
     mask: "(00) 00000-0000",
