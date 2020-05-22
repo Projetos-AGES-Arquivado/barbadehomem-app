@@ -95,7 +95,6 @@ export default function Register() {
               value={phone}
               onChange={e => setPhone(phoneParser(e.target.value))}
               placeholder="(99) 99999-9999"
-              max="11"
             />
           </li>
           <button onClick={handleGoBack}>Voltar</button>
