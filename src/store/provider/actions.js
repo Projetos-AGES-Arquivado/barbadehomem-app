@@ -20,12 +20,13 @@ export const fetchProviders = () => {
         name,
       });
     });
+
     dispatch(receiveProviders(providers));
   };
 };
 
 export const findProviderById = id => {
-  const providers = store.getState().appointment.providers;
+  const providers = store.getState().provider.providers;
 
   const provider = providers?.find(provider => provider.id === id);
 
