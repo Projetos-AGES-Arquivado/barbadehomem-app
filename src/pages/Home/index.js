@@ -13,7 +13,11 @@ export default function Home() {
   const dispatch = useDispatch();
   const user = useSelector(store => store.auth.user);
 
-  function handleCutRequest() {}
+  function handleCutRequest(e) {
+    e.preventDefault();
+
+    history.push('/home/cutrequest');
+  }
 
   function handleCutEvaluate() {}
 

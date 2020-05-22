@@ -9,6 +9,7 @@ import ForgotMyPass from './pages/ForgotMyPass';
 import RegisterAddress from './pages/RegisterAddress';
 import Appointments from './pages/Appointments';
 import Home from './pages/Home';
+import CutRequest from './pages/CutRequest';
 
 function PrivateRoute({ component: Component, ...rest }) {
   const user = useSelector(state => state.auth.user);
@@ -42,6 +43,7 @@ export default function routes() {
         <PrivateRoute path="/home" exact component={Home} />
         <PrivateRoute path="/home/profile" component={Profile} />
         <PrivateRoute path="/home/solicitations" component={Appointments} />
+        <PrivateRoute path="/home/cutrequest" component={CutRequest} />
         <Route path="/register/address" component={RegisterAddress} />
       </Switch>
     </BrowserRouter>
