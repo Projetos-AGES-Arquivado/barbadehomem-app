@@ -2,11 +2,14 @@ import React, { useState } from 'react';
 import { FiCornerDownLeft } from 'react-icons/fi';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import * as Yup from 'yup';
+
 import { registerAddress } from '../../store/auth/actions';
-import './styles.css';
 
 import Button from '../../components/Button';
 import Input from '../../components/Input';
+
+import './styles.css';
 
 export default function RegisterAddress() {
   const history = useHistory();
@@ -16,6 +19,7 @@ export default function RegisterAddress() {
   const [num, setNum] = useState('');
   const [complement, setComplement] = useState('');
   const [district, setDistrict] = useState('');
+  const [errMessage, setErrMessage] = useState('');
 
   function handleGoBack() {
     history.push('/register');
@@ -24,9 +28,35 @@ export default function RegisterAddress() {
   async function handleRegister(e) {
     e.preventDefault();
 
-    await dispatch(registerAddress({ street, num, complement, district }));
+    const newUserAddress = {
+      street,
+      num,
+      complement,
+      district,
+    };
 
-    history.push('/home');
+    const schema = Yup.object().shape({
+      district: Yup.string().required('Informe o bairro.'),
+      complement: Yup.string().optional(),
+      num: Yup.string().required('Informe o número.'),
+      street: Yup.string().required('Informe a rua.'),
+    });
+
+    try {
+      await schema.validate(newUserAddress, {
+        abortEarly: true,
+      });
+
+      await dispatch(registerAddress(newUserAddress));
+
+      history.push('/home');
+    } catch (err) {
+      if (err instanceof Yup.ValidationError) {
+        setErrMessage(err.message);
+
+        return;
+      }
+    }
   }
 
   return (
@@ -37,6 +67,8 @@ export default function RegisterAddress() {
       </header>
 
       <p>No momento atendemos apenas na região de Porto Alegre.</p>
+
+      {!!errMessage && <span className="err-message">{errMessage}</span>}
 
       <form>
         <Input
