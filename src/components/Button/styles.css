@@ -1,0 +1,17 @@
+.button-container button {
+  width: 100%;
+  padding: 8px 0;
+  border-radius: 50px;
+  color: white;
+  font-size: 18px;
+  border: solid 1px white;
+
+  background: none;
+
+  transition: background-color 0.2s;
+}
+
+.button-container button:hover {
+  background-color: #e5e4e2;
+  opacity: 0.8;
+}

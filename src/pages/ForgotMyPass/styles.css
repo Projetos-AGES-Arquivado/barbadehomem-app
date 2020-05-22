@@ -1,0 +1,48 @@
+.forgot-password-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.forgot-password-container header {
+  width: 100%;
+  height: 131px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+
+  padding: 0 40px;
+}
+
+.forgot-password-container header svg {
+  margin-left: -15px;
+  color: #fff;
+}
+
+.forgot-password-container h1 {
+  margin: auto;
+  color: #fff;
+  font-size: 22px;
+}
+
+.forgot-password-container button {
+  margin-top: 25px;
+}
+
+@media screen and (min-width: 400px) {
+  .forgot-password-container form {
+    margin-top: 150px;
+  }
+
+  .forgot-password-container header {
+    width: 100vw;
+    padding: 0 100px;
+  }
+
+  .forgot-password-container h1 {
+    margin: auto;
+  }
+}

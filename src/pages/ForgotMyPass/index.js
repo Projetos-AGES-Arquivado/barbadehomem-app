@@ -1,25 +1,26 @@
 import React, { useState } from 'react';
+import { FiCornerDownLeft } from 'react-icons/fi';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-import '../../css/forgot-page.css';
-
-import Silhueta from '../../img/silhueta.png';
-import Background from '../../components/Background';
-
 import { resetPassword } from '../../store/auth/actions';
 import Button from '../../components/Button';
-import Image from '../../components/Image';
+import Input from '../../components/Input';
+
+import './styles.css';
 
 export default function ForgotMyPass() {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const [email, setEmail] = useState();
+  const [email, setEmail] = useState('');
   const [successMessage, setSuccessMessage] = useState();
 
-  async function handleResetPassword() {
+  async function handleResetPassword(e) {
+    e.preventDefault();
+
     setSuccessMessage('');
+
     await dispatch(resetPassword(email));
     setSuccessMessage(
       'Email enviado. Caso esteja correto, você receberá um link com uma redefinição de senha.'
@@ -31,24 +32,26 @@ export default function ForgotMyPass() {
   }
 
   return (
-    <Background>
-      <div className="div-Silhueta">
-        <Image src={Silhueta} alt="Logo Barba de Homem" />
-        <h2> Recuperar Senha</h2>
+    <div className="forgot-password-container">
+      <header>
+        <FiCornerDownLeft size={25} onClick={handleGoHome} />
+        <h1>Recuperar conta</h1>
+      </header>
+
+      <form onSubmit={handleResetPassword}>
         {successMessage && (
           <span className="success-message">{successMessage}</span>
         )}
-      </div>
-      <div className="div-forgotmypass">
-        <h3>Informe seu endereço de email</h3>
-        <input
-          value={email}
+
+        <Input
           type="email"
-          onChange={e => setEmail(e.currentTarget.value)}
+          placeholder="E-mail"
+          value={email}
+          onChange={e => setEmail(e.target.value)}
         />
-        <Button classe="button" text="Enviar" event={handleResetPassword} />
-        <Button classe="button" text="Voltar" event={handleGoHome} />
-      </div>
-    </Background>
+
+        <Button type="submit">Enviar</Button>
+      </form>
+    </div>
   );
 }

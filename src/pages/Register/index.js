@@ -1,17 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { FiCornerDownLeft } from 'react-icons/fi';
 import { useHistory } from 'react-router-dom';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { registerUser } from '../../store/auth/actions';
 import './styles.css';
 import { phoneParser, birthdayParser } from '../../utils';
 
-export default function Register() {
-  const history = useHistory();
-  const dispatch = useDispatch();
+import Button from '../../components/Button';
+import Input from '../../components/Input';
 
-  //DECLARAÇÕES DE ESTADO DOS DADOS DO USUÁRIO
+export default function Register() {
+  const dispatch = useDispatch();
+  const history = useHistory();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [repeatPassword, setRepeatPassword] = useState('');
   const [name, setName] = useState('');
   const [birthday, setBirthday] = useState('');
   const [phone, setPhone] = useState('');
@@ -40,8 +45,12 @@ export default function Register() {
   }
 
   return (
-    <div className="container">
-      <h1>Estou na tela de cadastro</h1>
+    <div className="register-container">
+      <header className="header-register">
+        <FiCornerDownLeft size={25} onClick={handleGoBack} />
+        <h1>Crie sua conta</h1>
+      </header>
+
       <form onSubmit={handleUserRegister}>
         <ul>
           {errMessage && (

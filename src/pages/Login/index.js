@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { FiMail, FiLock } from 'react-icons/fi';
 import { useDispatch } from 'react-redux';
 import { useHistory, Link } from 'react-router-dom';
 import {
@@ -7,18 +8,14 @@ import {
   signInWithFacebook,
 } from '../../store/auth/actions';
 
-import '../../css/login-page.css';
-import '../../css/grid.css';
+import './styles.css';
 
-import Logo from '../../img/logo.png';
-import emailImg from '../../img/mail.png';
-import pass from '../../img/password.png';
-import facebook from '../../img/facebook.png';
-import google from '../../img/google.png';
+import logoImg from '../../img/logo.png';
+import facebookImg from '../../img/facebook.png';
+import googleImg from '../../img/google.png';
 
 import Button from '../../components/Button';
-import Image from '../../components/Image';
-import Background from '../../components/Background';
+import Input from '../../components/Input';
 
 export default function LoginPage() {
   const history = useHistory();
@@ -64,77 +61,44 @@ export default function LoginPage() {
   }
 
   return (
-    <Background>
-      <div className="div-logo">
-        <Image src={Logo} alt="Logo Barba de Homem" />
-      </div>
+    <div className="login-container">
+      <header className="header-login">
+        <img src={logoImg} alt="Barba De Homem" />
+      </header>
 
-      <div className="div-login">
-        {errMessage && <span className="err-message">{errMessage}</span>}
+      {errMessage && <span className="err-message">{errMessage}</span>}
 
-        <div className="float">
-          <div className="login-password-img">
-            <Image src={emailImg} alt="email" />
-          </div>
+      <form onSubmit={handleLogin}>
+        <Input
+          Icon={FiMail}
+          type="email"
+          placeholder="E-mail"
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+        />
+        <Input
+          Icon={FiLock}
+          type="password"
+          placeholder="Senha"
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+        />
 
-          <div className="div-input">
-            <input
-              type="text"
-              placeholder="Email"
-              onChange={e => setEmail(e.currentTarget.value)}
-            />
-          </div>
+        <Link to="forgotmypass">Esqueceu sua senha?</Link>
+
+        <div className="sign-in-with">
+          <img src={googleImg} alt="Google" onClick={handleSignInWithGoogle} />
+          <img
+            src={facebookImg}
+            alt="Facebook"
+            onClick={handleSignInWithFacebook}
+          />
         </div>
 
-        <div className="float">
-          <div className="login-password-img">
-            <Image src={pass} alt="email" />
-          </div>
+        <Button type="submit">Entrar</Button>
+      </form>
 
-          <div className="div-input">
-            <input
-              type="password"
-              placeholder="Senha"
-              onChange={e => setPassword(e.currentTarget.value)}
-            />
-          </div>
-        </div>
-      </div>
-
-      <div className="forgot-password">
-        {/* Necessário trocar a tag "a" por link depois que tiver as rotas */}
-        <Link className="link" to="/forgotmypass">
-          Esqueceu sua senha?
-        </Link>
-      </div>
-
-      <div className="div-cadastros">
-        <div className="float register-img">
-          <div>
-            {/* Necessário trocar para link para fazer o redirecionamento pra api do google */}
-            <button className="google-button" onClick={handleSignInWithGoogle}>
-              <Image src={google} alt="google" />
-            </button>
-          </div>
-
-          <div>
-            {/* Necessário trocar para link para fazer o redirecionamento pra api do facebook */}
-            <Image
-              src={facebook}
-              alt="facebook"
-              onClick={handleSignInWithFacebook}
-            />
-          </div>
-        </div>
-
-        {/* Fazer evento para quando clicar fazer login */}
-        <Button classe="button" text={'Logar'} event={handleLogin} />
-
-        <div className="cadastrar">
-          {/* Necessário trocar a tag "a" por link depois que tiver as rotas */}
-          <Link to="/register">Cadastrar</Link>
-        </div>
-      </div>
-    </Background>
+      <Link to="register">Cadastrar</Link>
+    </div>
   );
 }
