@@ -1,3 +1,59 @@
-.container form ul li {
-  list-style-type: none;
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&family=Source+Sans+Pro:wght@600&display=swap');
+
+.register-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-register {
+  width: 100%;
+  height: 131px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.register-container header svg {
+  margin-left: -15px;
+  color: #fff;
+}
+
+.register-container h1 {
+  margin: auto;
+  color: #fff;
+  font-size: 22px;
+}
+
+form {
+  width: 80%;
+  margin-top: 130px;
+  display: block;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+}
+
+.register-container form input {
+  margin-top: 15px;
+}
+
+.register-container form button {
+  margin-top: 80px;
+}
+
+@media (min-width: 1000px) {
+  .register-container header {
+    width: 100vw;
+    padding: 0 100px;
+  }
+
+  .register-container h1 {
+    margin: auto;
+  }
 }

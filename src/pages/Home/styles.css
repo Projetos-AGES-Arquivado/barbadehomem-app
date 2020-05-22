@@ -1,0 +1,33 @@
+.home-container header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0;
+}
+
+.home-container header h3 {
+  color: #fff;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.home-container img {
+  width: 250px;
+  height: 250px;
+}
+
+.home-container nav {
+  margin-top: 70px;
+  display: block;
+  padding: 0 35px;
+}
+
+.home-container nav button {
+  margin-top: 20px;
+}
+
+@media screen and (min-width: 400px) {
+  .home-container nav {
+    margin-top: 0;
+  }
+}
