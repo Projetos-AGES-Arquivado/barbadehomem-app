@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { registerUser } from '../../store/auth/actions';
 import './styles.css';
-import { phoneParser } from '../../utils';
+import { phoneParser, birthdayParser } from '../../utils';
 
 export default function Register() {
   const history = useHistory();
@@ -23,6 +23,7 @@ export default function Register() {
 
   async function handleUserRegister(e) {
     e.preventDefault();
+    console.log(phone);
 
     try {
       await dispatch(registerUser({ email, name, birthday, phone, password }));
@@ -75,17 +76,15 @@ export default function Register() {
           <li>
             Nascimento
             <input
-              type="date"
               value={birthday}
-              onChange={e => setBirthday(e.target.value)}
+              onChange={e => setBirthday(birthdayParser(e.target.value))}
             />
           </li>
           <li>
             Telefone
             <input
-              type="tel"
-              value={phoneParser(phone)}
-              onChange={e => setPhone(e.target.value)}
+              value={phone}
+              onChange={e => setPhone(phoneParser(e.target.value))}
               placeholder="(99) 99999-9999"
               max="11"
             />
