@@ -20,6 +20,7 @@ export default function authReducer(state = INITIAL_STATE, action) {
           adresses: [...(state.user.address || []), action.payload],
         },
       };
+
     default:
       return state;
   }

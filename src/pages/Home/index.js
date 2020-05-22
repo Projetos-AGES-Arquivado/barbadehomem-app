@@ -17,6 +17,12 @@ export default function Home() {
 
   function handleCutEvaluate() {}
 
+  function handleSolicitations(e) {
+    e.preventDefault();
+
+    history.push('/home/solicitations');
+  }
+
   async function handleLogout(e) {
     e.preventDefault();
 
@@ -38,6 +44,7 @@ export default function Home() {
 
       <nav className="home-menu">
         <Button onClick={handleCutRequest}>Solicitar Corte</Button>
+        <Button onClick={handleSolicitations}>Minhas Solicitações</Button>
         <Button onClick={handleCutEvaluate}>Avaliar Corte</Button>
         <Button onClick={handleProfile}>Perfil</Button>
         <Button onClick={handleLogout}>Logout</Button>
