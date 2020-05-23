@@ -5,7 +5,6 @@ import React from 'react';
 // import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { FiCornerDownLeft } from 'react-icons/fi';
-import Button from '../../components/Button';
 
 import { Header } from './styles';
 
@@ -18,21 +17,14 @@ export default function CutRequest() {
     const handleGoBack = e => {
         history.goBack();
         e.preventDefault();
-    };
-    const handleCutRequestPickBarber = e => {
-        
-        history.push('/cutrequest/cutrequestpickbarber');
-    }
-
-
+      };
 
     return (
         <div>
             <Header>
                 <FiCornerDownLeft size={25} onClick={handleGoBack} />
-                <h1>Solicitar Corte</h1>
+                <h1>Escolher Barbeiro</h1>
             </Header>
-            <Button onClick={handleCutRequestPickBarber}>Próximo</Button>
         </div>
     );
 }
