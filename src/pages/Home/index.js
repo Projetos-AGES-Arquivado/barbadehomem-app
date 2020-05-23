@@ -11,6 +11,7 @@ import './styles.css';
 export default function Home() {
   const history = useHistory();
   const dispatch = useDispatch();
+
   const user = useSelector(store => store.auth.user);
 
   function handleCutRequest() {}
@@ -39,7 +40,7 @@ export default function Home() {
     <div className="home-container">
       <header>
         <img src={Silhueta} alt="Logo Barba de Homem" />
-        <h3> Bem-vindo, {user.name} </h3>
+        <h3> Bem-vindo, {user?.name} </h3>
       </header>
 
       <nav className="home-menu">
