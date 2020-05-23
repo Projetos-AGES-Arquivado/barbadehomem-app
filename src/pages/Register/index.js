@@ -60,6 +60,7 @@ export default function Register() {
 
       if (password !== repeatPassword) {
         setErrMessage('As senhas não são iguais.');
+        return;
       }
 
       await dispatch(registerUser(newUser));
