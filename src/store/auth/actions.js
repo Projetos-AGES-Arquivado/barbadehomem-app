@@ -188,7 +188,7 @@ export function signInWithFacebook() {
       const { name, email, date = profile.birthday } = profile;
       let birthday = new Date(date);
 
-      birthday = birthday.toISOString().substring(0, 10);
+      birthday = birthday?.toISOString().substring(0, 10);
 
       const publicData = {
         email,
