@@ -27,7 +27,7 @@
   },
   "scripts": {
     "postinstall": "cp .env.sample .env",
-    "start": "react-scripts --inspect start",
+    "start": "react-scripts HTTPS=true start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
