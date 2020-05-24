@@ -1,17 +1,30 @@
-import React from "react";
-import { useHistory } from "react-router-dom";
+import React from 'react';
+// import Button from '../../components/Button';
+// import Silhueta from '../../img/silhueta.png';
 
+// import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { FiCornerDownLeft } from 'react-icons/fi';
+import Button from '../../components/Button';
+
+import { Header } from './styles';
+
+import './styles.js';
 export default function Profile() {
   const history = useHistory();
-
-  function handleGoBack() {
-    history.goBack();
-  }
+  //   const dispatch = useDispatch();
+  //   const user = useSelector(store => store.auth.user);
+  const handleGoBack = e => {
+      history.goBack();
+      e.preventDefault();
+  };
 
   return (
-    <div>
-      <h1>Estou na tela de perfil do usuário</h1>
-      <button onClick={handleGoBack}>Voltar</button>
-    </div>
+      <div>
+          <Header>
+              <FiCornerDownLeft size={25} onClick={handleGoBack} />
+              <h1>Perfil</h1>
+          </Header>
+      </div>
   );
 }
