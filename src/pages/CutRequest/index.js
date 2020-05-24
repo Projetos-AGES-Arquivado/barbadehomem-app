@@ -21,7 +21,7 @@ export default function CutRequest() {
     };
     const handleCutRequestPickBarber = e => {
         
-        history.push('/cutrequest/cutrequestpickbarber');
+        history.push("/home/cutrequest/pickbarber");
     }
 
 
