@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { FiCornerDownLeft } from 'react-icons/fi';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import * as Yup from 'yup';
 
 import { resetPassword } from '../../store/auth/actions';
 import Button from '../../components/Button';
@@ -14,17 +15,40 @@ export default function ForgotMyPass() {
   const dispatch = useDispatch();
 
   const [email, setEmail] = useState('');
-  const [successMessage, setSuccessMessage] = useState();
+  const [tooltipMessage, setTooltipMessage] = useState('');
+  const [tooltipClass, setTooptipClass] = useState('success-message');
 
   async function handleResetPassword(e) {
     e.preventDefault();
 
-    setSuccessMessage('');
+    const userEmail = {
+      email,
+    };
 
-    await dispatch(resetPassword(email));
-    setSuccessMessage(
-      'Email enviado. Caso esteja correto, você receberá um link com uma redefinição de senha.'
-    );
+    const schema = Yup.object().shape({
+      email: Yup.string()
+        .required('E-mail obrigatório.')
+        .email('Digite um e-mail válido.'),
+    });
+
+    try {
+      await schema.validate(userEmail, {
+        abortEarly: true,
+      });
+
+      await dispatch(resetPassword(email));
+
+      setTooltipMessage(
+        'Email enviado. Caso esteja correto, você receberá um link com instruções para a redefinição da senha.'
+      );
+      setTooptipClass('success-message');
+    } catch (err) {
+      if (err instanceof Yup.ValidationError) {
+        setTooltipMessage(err.message);
+        setTooptipClass('err-message');
+        return;
+      }
+    }
   }
 
   function handleGoHome() {
@@ -39,12 +63,11 @@ export default function ForgotMyPass() {
       </header>
 
       <form onSubmit={handleResetPassword}>
-        {successMessage && (
-          <span className="success-message">{successMessage}</span>
+        {tooltipMessage && (
+          <span className={tooltipClass}>{tooltipMessage}</span>
         )}
 
         <Input
-          type="email"
           placeholder="E-mail"
           value={email}
           onChange={e => setEmail(e.target.value)}

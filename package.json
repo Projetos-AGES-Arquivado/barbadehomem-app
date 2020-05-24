@@ -13,6 +13,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-icons": "^3.10.0",
+    "react-imask": "^6.0.3",
     "react-loader-spinner": "^3.1.14",
     "react-redux": "^7.2.0",
     "react-redux-firebase": "^3.3.0",
@@ -22,7 +23,8 @@
     "redux-firestore": "^0.13.0",
     "redux-thunk": "^2.3.0",
     "start": "^5.1.0",
-    "styled-components": "^5.1.0"
+    "styled-components": "^5.1.0",
+    "yup": "^0.29.0"
   },
   "scripts": {
     "postinstall": "cp .env.sample .env",

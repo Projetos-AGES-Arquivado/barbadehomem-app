@@ -1,13 +1,17 @@
 import React from 'react';
-import { FiCornerDownLeft } from 'react-icons/fi';
 import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { registerUser } from '../../store/auth/actions';
-import './styles.css';
+import * as Yup from 'yup';
 
+import { registerUser } from '../../store/auth/actions';
+import { birthdayParser, phoneParser } from '../../utils';
+
+import { FiCornerDownLeft } from 'react-icons/fi';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
+
+import './styles.css';
 
 export default function Register() {
   const dispatch = useDispatch();
@@ -27,8 +31,48 @@ export default function Register() {
 
   async function handleUserRegister(e) {
     e.preventDefault();
-    await dispatch(registerUser({ email, name, birthday, phone, password }));
-    history.push('/register/address');
+
+    const newUser = {
+      name,
+      email,
+      birthday,
+      phone,
+      password,
+    };
+
+    const schema = Yup.object().shape({
+      phone: Yup.string().length(15, 'Digite um telefone válido.'),
+      birthday: Yup.string().length(10, 'Digite uma data válida.'),
+      password: Yup.string().min(
+        6,
+        'A senha precisa ter pelo menos 6 dígitos.'
+      ),
+      email: Yup.string()
+        .required('E-mail obrigatório.')
+        .email('Digite um e-mail válido.'),
+      name: Yup.string().required('Nome obrigatório.'),
+    });
+
+    try {
+      await schema.validate(newUser, {
+        abortEarly: true,
+      });
+
+      if (password !== repeatPassword) {
+        setErrMessage('As senhas não são iguais.');
+      }
+
+      await dispatch(registerUser(newUser));
+      history.push('/register/address');
+    } catch (err) {
+      if (err instanceof Yup.ValidationError) {
+        setErrMessage(err.message);
+        return;
+      } else if (err.code === 'auth/email-already-in-use') {
+        setErrMessage('Já existe uma conta vinculada à esse email.');
+        return;
+      }
+    }
   }
 
   return (
@@ -37,6 +81,8 @@ export default function Register() {
         <FiCornerDownLeft size={25} onClick={handleGoBack} />
         <h1>Crie sua conta</h1>
       </header>
+
+      {!!errMessage && <span className="err-message">{errMessage}</span>}
 
       <form onSubmit={handleUserRegister}>
         <Input
@@ -48,7 +94,6 @@ export default function Register() {
 
         <Input
           placeholder="E-mail"
-          type="email"
           value={email}
           onChange={e => setEmail(e.target.value)}
         />
@@ -68,19 +113,19 @@ export default function Register() {
         />
 
         <Input
-          placeholder="Nascimento (dd/mm/aaaa)"
+          placeholder="Nascimento"
           type="text"
           value={birthday}
-          onChange={e => setBirthday(e.target.value)}
+          onChange={e => setBirthday(birthdayParser(e.target.value))}
         />
 
         <Input
           placeholder="Telefone"
           type="text"
           value={phone}
-          onChange={e => setPhone(e.target.value)}
+          onChange={e => setPhone(phoneParser(e.target.value))}
         />
-          <Button type="submit">Próximo ></Button>
+        <Button type="submit">Próximo ></Button>
       </form>
     </div>
   );
