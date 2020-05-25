@@ -48,7 +48,6 @@ export function fetchUser(id) {
             street: doc.data().street,
             uf: doc.data().uf,
           };
-
           dispatch(receiveAddress(address));
         });
       });

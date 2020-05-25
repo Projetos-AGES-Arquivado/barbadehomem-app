@@ -31,10 +31,9 @@ export default function Profile() {
       <TopMenuProfile />
 
       <form action="">
-        <Input type="text" value={user.name} placeholder="Nome" />
-        <Input type="text" value={user.phone} placeholder="Telefone" />
-        <Input type="text" value={user.birthday} placeholder="Nascimento" />
-        <Input id="email" type="text" value={user.email} readOnly />
+        <Input type="password" placeholder="Atual" />
+        <Input type="password" placeholder="Nova senha" />
+        <Input type="password" placeholder="Confirmar senha" />
 
         <Button type="submit">Salvar</Button>
       </form>

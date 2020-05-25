@@ -14,7 +14,8 @@ import './styles.js';
 export default function Profile() {
   const history = useHistory();
   const dispatch = useDispatch();
-  const user = useSelector(store => store.auth.user);
+  const address = useSelector(store => store.user.addresses);
+  console.log(address);
 
   const handleGoBack = e => {
     history.push('/');
@@ -30,14 +31,18 @@ export default function Profile() {
 
       <TopMenuProfile />
 
-      <form action="">
-        <Input type="text" value={user.name} placeholder="Nome" />
-        <Input type="text" value={user.phone} placeholder="Telefone" />
-        <Input type="text" value={user.birthday} placeholder="Nascimento" />
-        <Input id="email" type="text" value={user.email} readOnly />
+      {/* <form action="">
+        <Input type="text" value={address.street} placeholder="Rua" />
+        <Input type="text" value={address.number} placeholder="Nº" />
+        <Input
+          type="text"
+          value={address.complement}
+          placeholder="Complemento"
+        />
+        <Input type="text" value={address.district} placeholder="Bairro" />
 
         <Button type="submit">Salvar</Button>
-      </form>
+      </form> */}
     </Container>
   );
 }
