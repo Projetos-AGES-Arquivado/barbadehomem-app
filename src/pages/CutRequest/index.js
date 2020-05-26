@@ -25,9 +25,8 @@ export default function CutRequest() {
         e.preventDefault()
        if(!handleCheckbox()){
             return setErrMessage('Escolha apenas uma das opcões abaixo')
-            
-
         }else{
+
            history.push("/home/cutrequest/pickbarber");
        }
     }
@@ -55,8 +54,9 @@ export default function CutRequest() {
         return true
 
     }
-
-
+    function handleClick(e){
+        document.getElementById(e).click() 
+    }
 
     return (
         <div className = "CutRequest-container">  
@@ -67,26 +67,26 @@ export default function CutRequest() {
 
             <span className = 'err-message'>{errMessage}</span>
 
-            <form className = 'forminput'>
+            <form className = 'forminput' onClick = {e=> handleClick(e = 'Corte')}>
                 <input type = "checkbox" id ='Corte'/>
-                <label>Corte</label>
+                <label>Corte -</label>
                 <span className = 'text'>25$</span>
             </form>
 
-            <form className = 'forminput'>
+            <form className = 'forminput' onClick = {e=> handleClick(e = 'Barba')}>
                 <input type = "checkbox" id = 'Barba' />
-                <label>Barba</label>
+                <label>Barba -</label>
                 <span className = 'text'>25$</span>
             </form>
 
-            <form className = 'forminput'>
+            <form className = 'forminput' onClick = {e=> handleClick(e = 'Corte&Barba')}>
                 <input type = "checkbox" id = 'Corte&Barba'/>
-                <label>Corte & Barba</label>
+                <label>Corte & Barba -</label>
                 <span className = 'text_CB'>50$</span>
             </form>
 
             <form className ='formbutton'>
-                <Button onClick={handleCutRequestPickBarber}>Próximo</Button>
+                <Button onClick={handleCutRequestPickBarber}>Agendar horário</Button>
             </form>    
         </div>
     );
