@@ -19,7 +19,7 @@ export default function CutRequest() {
         e.preventDefault();
     };
     const handleCutRequestPickBarber = e => {
-        
+
         history.push("/home/cutrequest/pickbarber");
     }
 
@@ -33,8 +33,18 @@ export default function CutRequest() {
             </header>
             <form className = 'forminput'>
                 <input type = "checkbox"/>
-                <label> Corte</label>
-                <text>25$</text>
+                <label>Corte</label>
+                <text className = 'text'>25$</text>
+            </form>
+            <form className = 'forminput'>
+                <input type = "checkbox"/>
+                <label>Barba</label>
+                <text className = 'text'>25$</text>
+            </form>
+            <form className = 'forminput'>
+                <input type = "checkbox"/>
+                <label>Corte & Barba</label>
+                <text className = 'text_CB'>50$</text>
             </form>
             <form className ='formbutton'>
                 <Button onClick={handleCutRequestPickBarber}>Próximo</Button>

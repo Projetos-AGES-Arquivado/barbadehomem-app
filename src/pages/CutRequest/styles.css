@@ -50,6 +50,34 @@
   
 }
 
-.CutRequest-container text{
+.text{
   margin-left: 55%;
+}
+.text_CB{
+  margin-left: 28%;
+ }
+
+ @media (min-width: 500px) {
+  .CutRequest-container header {
+    width: 100vw;
+    padding: 0 100px;
+  }
+
+  .CutRequest-container h1 {
+    margin: auto;
+  }
+  .text_CB{
+    margin-left: 30%;
+   }
+ }
+
+@media (min-width: 1000px) {
+  .CutRequest-container header {
+    width: 100vw;
+    padding: 0 100px;
+  }
+
+  .CutRequest-container h1 {
+    margin: auto;
+  }
 }
