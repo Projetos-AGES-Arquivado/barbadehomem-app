@@ -54,7 +54,16 @@
   margin-left: 55%;
 }
 .text_CB{
-  margin-left: 28%;
+  margin-left: 30.5%;
+ }
+ 
+ @media (max-width: 400px){
+  .text{
+    margin-left: 50%;
+  }
+  .text_CB{
+    margin-left:22.5%;
+   }
  }
 
  @media (min-width: 500px) {

@@ -24,8 +24,8 @@ export default function CutRequest() {
     const handleCutRequestPickBarber = e => { 
         e.preventDefault()
        if(!handleCheckbox()){
-            setErrMessage('Escolha apenas uma das opcões abaixo')
-            return
+            return setErrMessage('Escolha apenas uma das opcões abaixo')
+            
 
         }else{
            history.push("/home/cutrequest/pickbarber");
