@@ -7,9 +7,8 @@ import { useHistory } from 'react-router-dom';
 import { FiCornerDownLeft } from 'react-icons/fi';
 import Button from '../../components/Button';
 
-import { Header } from './styles';
-
-import './styles.js';
+import './styles.css';
+import { Checkbox } from 'antd';
 
 export default function CutRequest() {
     const history = useHistory();
@@ -27,12 +26,19 @@ export default function CutRequest() {
 
 
     return (
-        <div>
-            <Header>
+        <div className = "CutRequest-container">  
+            <header className="header-CutRequest">
                 <FiCornerDownLeft size={25} onClick={handleGoBack} />
                 <h1>Solicitar Corte</h1>
-            </Header>
-            <Button onClick={handleCutRequestPickBarber}>Próximo</Button>
+            </header>
+            <form className = 'forminput'>
+                <input type = "checkbox"/>
+                <label> Corte</label>
+                <text>25$</text>
+            </form>
+            <form className ='formbutton'>
+                <Button onClick={handleCutRequestPickBarber}>Próximo</Button>
+            </form>    
         </div>
     );
 }
