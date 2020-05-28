@@ -22,7 +22,8 @@
     "redux-firestore": "^0.13.0",
     "redux-thunk": "^2.3.0",
     "start": "^5.1.0",
-    "styled-components": "^5.1.0"
+    "styled-components": "^5.1.0",
+    "yup": "^0.29.1"
   },
   "scripts": {
     "postinstall": "cp .env.sample .env",
