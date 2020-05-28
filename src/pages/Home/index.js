@@ -18,7 +18,7 @@ export default function Home() {
 
   async function handleCutRequest() {
     //Caso não exista endereço cadastrado, destina a página de cadastro de endereço
-    if(address==undefined){
+    if(!address){
         history.push('/register/address');
     }
 
