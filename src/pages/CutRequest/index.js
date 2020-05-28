@@ -10,26 +10,34 @@ export default function CutRequest() {
   const services = useSelector(store => store.service.services);
   const [errMessage, setErrMessage] = useState('');
   const history = useHistory();
+  const selectedServices = [];
 
   const handleGoBack = e => {
     history.goBack();
     e.preventDefault();
   };
+
   const handleCutRequestPickBarber = e => {
     e.preventDefault();
-    if (!handleCheckbox()) {
-      return setErrMessage('Escolha apenas uma das opcões abaixo');
+
+    if (selectedServices.length === 0) {
+      return setErrMessage('Escolha uma das opcões abaixo');
     } else {
       history.push('/home/cutrequest/pickbarber');
     }
   };
 
-  function handleCheckbox() {
-    // let count = 0;
-  }
-
-  function handleClick(e) {
-    document.getElementById(e).click();
+  function handleClick(id) {
+    const element = document.getElementById(id);
+    if (element.checked) {
+      selectedServices.push(element.value);
+      console.log(selectedServices);
+    }
+    else {
+      const findIndex = selectedServices.findIndex(service => service === element.value);
+      selectedServices.splice(findIndex, 1);
+      console.log(selectedServices);
+    }
   }
 
   return (
@@ -42,8 +50,8 @@ export default function CutRequest() {
       <span className="err-message">{errMessage}</span>
 
       {services.map(service => (
-        <div className="forminput" onClick={e => handleClick()}>
-          <input type="checkbox" id="Corte" />
+        <div className="forminput">
+          <input type="checkbox" id={service.titleService} value={service.titleService} onClick={() => handleClick(service.titleService)}/>
           <label>{service.titleService}</label>
           <span className="text">{service.cost}</span>
           <span className="text">{service.duration}</span>

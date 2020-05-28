@@ -1,21 +1,21 @@
-import React from 'react';
-// import Button from '../../components/Button';
-// import Silhueta from '../../img/silhueta.png';
-
+import React, {useState} from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { FiCornerDownLeft } from 'react-icons/fi';
+
+import Button from '../../components/Button';
+import Silhueta from '../../img/silhueta.png';
 
 import { Header } from './styles';
 
 import './styles.js';
 
-export default function CutRequest() {
+export default function CutRequestPickBarber() {
   const providers = useSelector(store => store.provider.providers);
-
+  const [errMessage, setErrMessage] = useState('');
   const history = useHistory();
-  //   const dispatch = useDispatch();
-  //   const user = useSelector(store => store.auth.user);
+  
+
   const handleGoBack = e => {
     history.goBack();
     e.preventDefault();
