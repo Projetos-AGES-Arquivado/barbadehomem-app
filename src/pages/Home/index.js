@@ -16,7 +16,7 @@ export default function Home() {
   const user = useSelector(store => store.auth.user);
   const address = user?.adresses;
 
-  async function handleCutRequest() {
+  function handleCutRequest() {
     //Caso não exista endereço cadastrado, destina a página de cadastro de endereço
     if(!address){
         history.push('/register/address');
