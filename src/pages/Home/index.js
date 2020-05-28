@@ -47,7 +47,7 @@ export default function Home() {
       </header>
 
       <nav className="home-menu">
-        <Button onClick={handleCutRequest}>Solicitar Corte</Button>
+        <Button onClick={handleCutRequest}>Solicitar Serviço</Button>
         <Button onClick={handleSolicitations}>Minhas Solicitações</Button>
         <Button onClick={handleCutEvaluate}>Avaliar Corte</Button>
         <Button onClick={handleProfile}>Perfil</Button>
