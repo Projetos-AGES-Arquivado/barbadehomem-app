@@ -9,10 +9,8 @@ import './styles.css';
 export default function CutRequest() {
   const services = useSelector(store => store.service.services);
   const [errMessage, setErrMessage] = useState('');
-
   const history = useHistory();
-  //   const dispatch = useDispatch();
-  //   const user = useSelector(store => store.auth.user);
+
   const handleGoBack = e => {
     history.goBack();
     e.preventDefault();
@@ -27,27 +25,9 @@ export default function CutRequest() {
   };
 
   function handleCheckbox() {
-    var cont = 0;
-    // if (document.getElementById('Corte').checked) {
-    //   setService('Corte');
-    //   setValue('25');
-    //   cont++;
-    // }
-    // if (document.getElementById('Barba').checked) {
-    //   setService('Barba');
-    //   setValue('25');
-    //   cont++;
-    // }
-    // if (document.getElementById('Corte&Barba').checked) {
-    //   setService('Corte&Barba');
-    //   setValue('50');
-    //   cont++;
-    // }
-    // if (cont != 1) {
-    //   return false;
-    // }
-    // return true;
+    // let count = 0;
   }
+
   function handleClick(e) {
     document.getElementById(e).click();
   }
@@ -56,37 +36,23 @@ export default function CutRequest() {
     <div className="CutRequest-container">
       <header className="header-CutRequest">
         <FiCornerDownLeft size={25} onClick={handleGoBack} />
-        <h1>Solicitar Corte</h1>
+        <h1>Solicitar Serviço</h1>
       </header>
 
       <span className="err-message">{errMessage}</span>
 
       {services.map(service => (
-        <form className="forminput" onClick={e => handleClick((e = 'Corte'))}>
+        <div className="forminput" onClick={e => handleClick()}>
           <input type="checkbox" id="Corte" />
-          <label>{service.name}</label>
+          <label>{service.titleService}</label>
           <span className="text">{service.cost}</span>
-        </form>
+          <span className="text">{service.duration}</span>
+          <span className="text">{service.description}</span>
+        </div>
       ))}
-
-      <form className="forminput" onClick={e => handleClick((e = 'Barba'))}>
-        <input type="checkbox" id="Barba" />
-        <label>Barba -</label>
-        <span className="text">25$</span>
-      </form>
-
-      <form
-        className="forminput"
-        onClick={e => handleClick((e = 'Corte&Barba'))}
-      >
-        <input type="checkbox" id="Corte&Barba" />
-        <label>Corte & Barba -</label>
-        <span className="text_CB">50$</span>
-      </form>
-
-      <form className="formbutton">
+      <div className="formbutton">
         <Button onClick={handleCutRequestPickBarber}>Agendar horário</Button>
-      </form>
+      </div>
     </div>
   );
 }

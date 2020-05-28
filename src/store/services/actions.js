@@ -10,8 +10,30 @@ const receiveServices = payload => {
 
 export const fetchServices = () => {
   return async dispatch => {
-    //TODO...
+    let services = [];
 
-    await dispatch(receiveServices());
+    const servicesRef = await firestore
+      .firestore()
+      .collection('services')
+      .get();
+
+    servicesRef.forEach(service => {
+      const { id } = service;
+      const {
+        titleService,
+        cost,
+        duration,
+        description
+      } = service.data();
+
+      services.push({
+        id,
+        titleService,
+        cost,
+        duration,
+        description
+      });
+    });
+    await dispatch(receiveServices(services));
   };
 };
