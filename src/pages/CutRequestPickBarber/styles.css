@@ -1,0 +1,82 @@
+.CutRequest-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.header-CutRequest {
+  width: 100%;
+  height: 131px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.CutRequest-container header svg {
+  margin-left: -15px;
+  color: #fff;
+}
+
+.CutRequest-container h1 {
+  margin: auto;
+  color: #fff;
+  font-size: 22px;
+}
+.forminput{
+  display: block;
+  margin-top: 40px;
+  border-radius:5px;
+  border: 1px solid;
+  width: 80%;
+  padding: 30px 10px;
+  
+}
+
+.formbutton {
+  width: 80%;
+  margin-top: 80px;
+  display: block;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+}
+.CutRequest-container label{
+  margin-left: 30px;
+  font-size: 20px;
+  
+}
+
+.text{
+  margin-left: 2%;
+}
+.text_CB{
+  margin-left: 2%;
+ }
+
+
+ @media (min-width: 600px) {
+  .CutRequest-container header {
+    width: 100vw;
+    padding: 0 100px;
+  }
+
+  .CutRequest-container h1 {
+    margin: auto;
+  }
+
+ }
+
+@media (min-width: 1000px) {
+  .CutRequest-container header {
+    width: 100vw;
+    padding: 0 100px;
+  }
+
+  .CutRequest-container h1 {
+    margin: auto;
+  }
+}
