@@ -4,6 +4,7 @@
   align-items: center;
   justify-content: center;
 }
+
 .header-CutRequest {
   width: 100%;
   height: 131px;
@@ -26,22 +27,26 @@
   color: #fff;
   font-size: 22px;
 }
-.forminput{
-  display: block;
-  margin-top: 40px;
-  border-radius:5px;
+
+.div-cutRequest{
+  margin-top: 20px;
+  border-radius: 10px;
   border: 1px solid;
   width: 80%;
-  padding: 30px 10px;
-  
+  padding: 10px 10px;
+}
+.div-cost-cutRequest{
+  float: right;
+  font-size: 20px;
+}
+.div-text-cutRequest{
+  font-size: 10px;
+  max-width: 220px;
 }
 
-.formbutton {
+.button-cutRequest {
   width: 80%;
-  margin-top: 80px;
-  display: block;
-  flex: 1;
-  flex-direction: column;
+  margin-top: 50px;
   align-items: center;
 }
 .CutRequest-container label{
@@ -49,14 +54,6 @@
   font-size: 20px;
   
 }
-
-.text{
-  margin-left: 2%;
-}
-.text_CB{
-  margin-left: 2%;
- }
-
 
  @media (min-width: 600px) {
   .CutRequest-container header {

@@ -3,16 +3,16 @@ import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { FiCornerDownLeft } from 'react-icons/fi';
 
-import Button from '../../components/Button';
-import Silhueta from '../../img/silhueta.png';
+// import Button from '../../components/Button';
+// import Silhueta from '../../img/silhueta.png';
 
-import { Header } from './styles';
+import { Header } from './styles.js';
 
 import './styles.css';
 
 export default function CutRequestPickBarber() {
   const providers = useSelector(store => store.provider.providers);
-  const [errMessage, setErrMessage] = useState('');
+  // const [errMessage, setErrMessage] = useState('');
   const history = useHistory();
   let selectedProviders = '';
   
@@ -43,6 +43,8 @@ export default function CutRequestPickBarber() {
           <label>{provider.name}</label>
         </div>
       ))}
+
+      
     </div>
   );
 }
