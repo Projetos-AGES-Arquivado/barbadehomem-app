@@ -11,7 +11,7 @@ export default function CutRequest() {
   const services = useSelector(store => store.service.services);
   const [errMessage, setErrMessage] = useState('');
   const history = useHistory();
-  const selectedServices = [];
+  const [selectedServices = [], setSelectedServices] = useState();
 
   const handleGoBack = e => {
     history.goBack();
@@ -24,7 +24,7 @@ export default function CutRequest() {
     if (selectedServices.length === 0) {
       return setErrMessage('Escolha uma das opcões abaixo');
     } else {
-      history.push('/home/cutrequest/pickbarber');
+      history.push({pathname:'/home/cutrequest/pickbarber',state: { services: selectedServices}});
     }
   };
 
@@ -39,6 +39,7 @@ export default function CutRequest() {
       selectedServices.splice(findIndex, 1);
       console.log(selectedServices);
     }
+    setSelectedServices(selectedServices)
   }
 
   return (

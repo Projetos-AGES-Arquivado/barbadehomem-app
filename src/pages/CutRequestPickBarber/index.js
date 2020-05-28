@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { FiCornerDownLeft } from 'react-icons/fi';
 import * as Yup from "yup";
 
@@ -18,6 +18,8 @@ export default function CutRequestPickBarber() {
   const [date,setDate] = useState('');
   const [time, setTime] = useState('');
   const history = useHistory();
+  const location = useLocation();
+  const services = location.state.services;
   let selectedProviders = '';
   
 
@@ -40,7 +42,7 @@ export default function CutRequestPickBarber() {
       await schema.validate(user,{
         abortEarly: false,
       })
-      console.log('foi')
+      console.log("")
 
     }catch(err){
       if(err instanceof Yup.ValidationError){
