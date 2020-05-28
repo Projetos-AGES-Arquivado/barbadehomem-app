@@ -3,13 +3,8 @@ import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { FiCornerDownLeft } from 'react-icons/fi';
 
-<<<<<<< HEAD
-// import Button from '../../components/Button';
-// import Silhueta from '../../img/silhueta.png';
-=======
 import Button from '../../components/Button';
 import Input from '../../components/Input/index'
->>>>>>> b6b05a76357a399e32a3b585fc07c4a3cb442152
 
 import { Header } from './styles.js';
 
@@ -49,9 +44,6 @@ export default function CutRequestPickBarber() {
         </div>
       ))}
 
-<<<<<<< HEAD
-      
-=======
       <div className ='divinput' >
         <span>Sugira uma data e um horário de sua escolha</span>
        <Input
@@ -67,7 +59,6 @@ export default function CutRequestPickBarber() {
       <div className="divbutton">
         <Button>Enviar Solicitação</Button>
       </div>
->>>>>>> b6b05a76357a399e32a3b585fc07c4a3cb442152
     </div>
   );
 }
