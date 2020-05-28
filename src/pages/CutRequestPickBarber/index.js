@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { FiCornerDownLeft } from 'react-icons/fi';
 
 import Button from '../../components/Button';
-import Silhueta from '../../img/silhueta.png';
+import Input from '../../components/Input/index'
 
 import { Header } from './styles';
 
@@ -31,18 +31,34 @@ export default function CutRequestPickBarber() {
   }
 
   return (
-    <div>
-      <Header>
+    <div className="PickBarber-container">
+      <header className="header-PickBarber">
         <FiCornerDownLeft size={25} onClick={handleGoBack} />
-        <h1>Escolher Barbeiro</h1>
-      </Header>
+        <h1>Selecionar Barbeiro</h1>
+      </header>
 
       {providers.map(provider => (
-        <div className="forminput">
+        <div className="divradio">
           <input type="radio" id={provider.name} name="provider" value={provider.name} onClick={() => handleClick(provider.name)}/>
-          <label>{provider.name}</label>
+          <label> {provider.name}</label>
         </div>
       ))}
+
+      <div className ='divinput' >
+        <span>Sugira uma data e um horário de sua escolha</span>
+       <Input
+          placeholder="(dd/mm/aaaa)"
+          type="date"
+        />
+       <Input
+          placeholder=""
+          type="time"
+        />
+      </div>
+
+      <div className="divbutton">
+        <Button>Enviar Solicitação</Button>
+      </div>
     </div>
   );
 }
