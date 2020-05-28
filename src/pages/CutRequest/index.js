@@ -52,12 +52,11 @@ export default function CutRequest() {
 
       {services.map(service => (
         <div className="div-cutRequest">
-          <div >
+          <div>
+            <div className="div-cost-cutRequest">R$ {service.cost},00 </div>
             <input type="checkbox" id={service.titleService} value={service.titleService} onClick={() => handleClick(service.titleService)} />
-            <label>{service.titleService}</label>
+            <label for={service.titleService}>{service.titleService}</label>
           </div>
-
-          <div className="div-cost-cutRequest">R$ {service.cost},00 </div>
           <div className="div-text-cutRequest">Duração: {service.duration} min</div>
           <div className="div-text-cutRequest">Descrição: {service.description} </div>
         </div>

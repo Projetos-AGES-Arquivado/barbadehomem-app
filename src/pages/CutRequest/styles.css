@@ -40,8 +40,10 @@
   font-size: 20px;
 }
 .div-text-cutRequest{
+  display: block;
   font-size: 10px;
   max-width: 220px;
+  margin-left:40px ;
 }
 
 .button-cutRequest {
@@ -52,7 +54,37 @@
 .CutRequest-container label{
   margin-left: 30px;
   font-size: 20px;
-  
+}
+
+/* Personalização Checked */
+input[type=checkbox] + label {
+  display: block;
+  margin: 4px;
+  cursor: pointer;
+}
+input[type=checkbox]{
+  display: none;
+}
+input[type=checkbox] + label:before {
+  content: "\2714";
+  border: 1px solid #fff;
+  border-radius: 5px;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  padding-left: 5px;
+  padding-bottom: 4px;
+  margin-right: 8px;
+  vertical-align: bottom;
+  color: transparent;
+  transition:.2s;
+}
+input[type=checkbox] + label:active:before {
+  transform: scale(0);
+}
+input[type=checkbox]:checked + label:before {
+  background-color: #fff;
+  color: #02025e;
 }
 
  @media (min-width: 600px) {
