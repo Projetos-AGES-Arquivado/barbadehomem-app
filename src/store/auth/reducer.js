@@ -17,9 +17,10 @@ export default function authReducer(state = INITIAL_STATE, action) {
         ...state,
         user: {
           ...state.user,
-          adresses: [...(state.user.address || []), action.payload],
+          addresses: [...(state.user.address || []), action.payload],
         },
       };
+
     default:
       return state;
   }

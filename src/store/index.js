@@ -1,24 +1,52 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
+
 import authReducer from './auth/reducer';
 import generalReducer from './general/reducer';
-import { auth } from '../plugins/firebase';
+import appointmentReducer from './appointment/reducer';
+import providerReducer from './provider/reducer';
+import serviceReducer from './services/reducer';
+
+import { auth, messaging, firestore } from '../plugins/firebase';
 import { setLoading } from './general/actions';
 import { fetchUser } from './auth/actions';
-import { sleep } from '../helpers';
+import { fetchAppointments } from './appointment/actions';
+import { fetchProviders } from './provider/actions';
+import { fetchServices } from './services/actions';
 
 export const store = createStore(
   combineReducers({
     auth: authReducer,
     general: generalReducer,
+    appointment: appointmentReducer,
+    provider: providerReducer,
+    service: serviceReducer,
   }),
   applyMiddleware(thunk)
 );
 
 auth.onAuthStateChanged(async user => {
-  await sleep(1500);
   if (user?.uid) {
+    setImmediate(async () => {
+      try {
+        await messaging.requestPermission();
+        const deviceToken = await messaging.getToken();
+        if (deviceToken) {
+          await firestore
+            .firestore()
+            .collection('users')
+            .doc(user?.uid)
+            .update({ deviceToken });
+        }
+        console.log('Saved device token for messaging', { userId: user?.uid });
+      } catch (err) {
+        console.log('Failed saving device token for messaging', err);
+      }
+    });
     await store.dispatch(fetchUser(user?.uid));
+    await store.dispatch(fetchProviders());
+    await store.dispatch(fetchAppointments());
+    await store.dispatch(fetchServices());
   }
   store.dispatch(setLoading(false));
 });

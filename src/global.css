@@ -5,6 +5,7 @@
   list-style-type: none;
   text-decoration: none;
   outline: 0;
+  color: #fff;
 }
 
 body {
@@ -26,11 +27,19 @@ code {
 }
 
 .err-message {
-  color: red;
+  color: #fc5959;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
 }
 
 .success-message {
   color: greenyellow;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
 }
 
 @media screen and (min-width: 400px) {

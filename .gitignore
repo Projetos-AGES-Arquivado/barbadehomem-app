@@ -4,6 +4,7 @@
 *.log
 
 # dependencies
+.firebase
 /node_modules
 /.pnp
 .pnp.js
@@ -27,3 +28,4 @@ yarn-error.log*
 
 #debugger
 /.vscode
+/READ-ME.md

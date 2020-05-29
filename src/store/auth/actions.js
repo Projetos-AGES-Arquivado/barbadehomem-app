@@ -1,6 +1,6 @@
 import { RECEIVE_USER, RECEIVE_ADDRESS } from '../actionTypes';
 
-import { firestore } from '../../plugins/firebase';
+import { firestore, messaging } from '../../plugins/firebase';
 
 export function receiveUser(payload) {
   return {
@@ -24,10 +24,10 @@ export function fetchUser(id) {
 
     const user = {
       id,
-      name: response.name,
-      email: response.email,
-      birthday: response.birthday,
-      phone: response.phone,
+      name: response?.name,
+      email: response?.email,
+      birthday: response?.birthday,
+      phone: response?.phone,
     };
 
     dispatch(receiveUser(user));
@@ -58,7 +58,11 @@ export function fetchUser(id) {
 export function signOut() {
   return async dispatch => {
     await firestore.auth().signOut();
-
+    try {
+      await messaging.deleteToken(await messaging.getToken());
+    } catch (err) {
+      //
+    }
     dispatch(receiveUser(null));
   };
 }
@@ -159,6 +163,7 @@ export function signinWithGoogle() {
         name,
       };
       await firestore.firestore().collection('users').doc(uid).set(publicData);
+      await dispatch(receiveUser(publicData));
     }
   };
 }
@@ -179,7 +184,6 @@ export function signInWithFacebook() {
 
     const profile = res.additionalUserInfo.profile;
     const uid = res.user.uid;
-
     const user = await firestore.firestore().collection(users).doc(uid).get();
 
     if (user.exists) {
@@ -188,7 +192,7 @@ export function signInWithFacebook() {
       const { name, email, date = profile.birthday } = profile;
       let birthday = new Date(date);
 
-      birthday = birthday.toISOString().substring(0, 10);
+      birthday = birthday?.toISOString().substring(0, 10);
 
       const publicData = {
         email,
@@ -197,6 +201,7 @@ export function signInWithFacebook() {
       };
 
       await firestore.firestore().collection(users).doc(uid).set(publicData);
+      await dispatch(receiveUser(publicData));
     }
   };
 }
