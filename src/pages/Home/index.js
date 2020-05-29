@@ -4,7 +4,8 @@ import Silhueta from '../../img/silhueta.png';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { signOut } from '../../store/auth/actions';
+import { signOut, fetchUser, receiveAddress } from '../../store/auth/actions';
+import { registerUser } from '../../store/auth/actions';
 
 import './styles.css';
 
@@ -13,11 +14,14 @@ export default function Home() {
   const dispatch = useDispatch();
 
   const user = useSelector(store => store.auth.user);
+  const address = user?.adresses;
 
-  function handleCutRequest(e) {
-    e.preventDefault();
+  function handleCutRequest() {
+    //Caso não exista endereço cadastrado, destina a página de cadastro de endereço
+    if(!address){
+        history.push('/register/address');
+    }
 
-    history.push('/home/cutrequest');
   }
 
   function handleCutEvaluate() {}

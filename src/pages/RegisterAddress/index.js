@@ -106,7 +106,7 @@ export default function RegisterAddress() {
         />
 
         <Button type="submit" onClick={handleRegister}>
-          Criar conta
+          Concluir Cadastro
         </Button>
       </form>
     </div>
