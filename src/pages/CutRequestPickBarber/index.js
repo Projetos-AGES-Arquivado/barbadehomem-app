@@ -64,7 +64,6 @@ export default function CutRequestPickBarber() {
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
         setErrMessage(err.message);
-        console.log(err.message);
       }
     }
   };
