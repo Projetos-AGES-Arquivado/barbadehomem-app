@@ -24,10 +24,10 @@ export function fetchUser(id) {
 
     const user = {
       id,
-      name: response.name,
-      email: response.email,
-      birthday: response.birthday,
-      phone: response.phone,
+      name: response?.name,
+      email: response?.email,
+      birthday: response?.birthday,
+      phone: response?.phone,
     };
 
     dispatch(receiveUser(user));

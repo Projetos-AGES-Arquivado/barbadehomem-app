@@ -66,6 +66,8 @@ export const registerAppointment = appointment => {
       date: parsedDate,
     };
 
-    //dispatch(receiveAppointments(newAppointment));
+    await firestore.firestore().collection('appointments').add(newAppointment);
+
+    await dispatch(fetchAppointments());
   };
 };

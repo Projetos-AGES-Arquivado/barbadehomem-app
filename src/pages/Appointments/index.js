@@ -45,7 +45,7 @@ const Solicitations = () => {
             </li>
             <li>
               <label>Serviços: {formattedServices(appointment.services)}</label>
-              {appointment?.wasRated === false && <Link to="">Avaliar</Link>}
+              {appointment?.wasRated === false && appointment.status ==='done' && <Link to="">Avaliar</Link>}
               {appointment?.wasRated === true && <span>Avaliado</span>}
             </li>
           </Solicitation>
