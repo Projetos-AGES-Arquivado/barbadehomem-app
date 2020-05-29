@@ -1,3 +1,5 @@
+import IMask from 'imask';
+
 export const formattedDate = value => {
   const date = new Date(value.toDate());
   const newDate = date.toLocaleDateString('pt-BR');
@@ -51,4 +53,17 @@ export const formattedStatus = value => {
     default:
       return null;
   }
+};
+
+export const birthdayParser = v => {
+  !(v instanceof String) || isNaN(v);
+
+  const masked = IMask.createMask({
+    mask: '00/00/0000',
+    lazy: true,
+  });
+
+  const maskedValue = masked.resolve(v);
+
+  return maskedValue;
 };
