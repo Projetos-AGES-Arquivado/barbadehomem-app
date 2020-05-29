@@ -1,6 +1,6 @@
 import { RECEIVE_USER, RECEIVE_ADDRESS } from '../actionTypes';
 
-import { firestore } from '../../plugins/firebase';
+import { firestore, messaging } from '../../plugins/firebase';
 
 export function receiveUser(payload) {
   return {
@@ -58,7 +58,11 @@ export function fetchUser(id) {
 export function signOut() {
   return async dispatch => {
     await firestore.auth().signOut();
-
+    try {
+      await messaging.deleteToken(await messaging.getToken());
+    } catch (err) {
+      //
+    }
     dispatch(receiveUser(null));
   };
 }
