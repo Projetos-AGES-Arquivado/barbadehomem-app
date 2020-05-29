@@ -24,8 +24,6 @@ export default function Home() {
 
   }
 
-  function handleCutEvaluate() {}
-
   function handleSolicitations(e) {
     e.preventDefault();
 
@@ -54,7 +52,6 @@ export default function Home() {
       <nav className="home-menu">
         <Button onClick={handleCutRequest}>Solicitar Serviço</Button>
         <Button onClick={handleSolicitations}>Minhas Solicitações</Button>
-        <Button onClick={handleCutEvaluate}>Avaliar Corte</Button>
         <Button onClick={handleProfile}>Perfil</Button>
         <Button onClick={handleLogout}>Logout</Button>
       </nav>
