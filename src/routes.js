@@ -43,6 +43,7 @@ export default function routes() {
         <UnauthRoute path="/register" exact component={Register} />
         <PrivateRoute path="/home" exact component={Home} />
         <PrivateRoute path="/home/profile" component={Profile} />
+        <PrivateRoute path="/home/dealsandinfo" component={DealsAndInfo} />
         <PrivateRoute path="/home/solicitations" component={Appointments} />
         <PrivateRoute path="/home/cutrequest" exact component={CutRequest} />
         <PrivateRoute

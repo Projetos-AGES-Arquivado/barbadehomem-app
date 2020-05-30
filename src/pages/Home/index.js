@@ -41,6 +41,10 @@ export default function Home() {
     history.push('/home/profile');
   }
 
+  function handleDealsAndInfo() {
+    history.push('/home/dealsandinfo');
+  }
+
   return (
     <div className="home-container">
       <header>
@@ -51,6 +55,7 @@ export default function Home() {
       <nav className="home-menu">
         <Button onClick={handleCutRequest}>Solicitar Serviço</Button>
         <Button onClick={handleSolicitations}>Minhas Solicitações</Button>
+        <Button onClick={handleDealsAndInfo}>Promoções e Funcionamento</Button>
         <Button onClick={handleProfile}>Perfil</Button>
         <Button onClick={handleLogout}>Logout</Button>
       </nav>
