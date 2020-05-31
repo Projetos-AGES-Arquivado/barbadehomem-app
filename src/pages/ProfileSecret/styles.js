@@ -38,3 +38,14 @@ export const Header = styled.header`
     margin-left: 10px;
   }
 `;
+
+export const LoaderContainer = styled.div`
+  margin-top: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  & svg {
+    width: 30px;
+    height: 30px;
+  }
+`;

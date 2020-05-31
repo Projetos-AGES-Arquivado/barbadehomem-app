@@ -1,4 +1,5 @@
 import { RECEIVE_USER, RECEIVE_ADDRESS } from '../actionTypes';
+import { store } from '../';
 
 import { firestore } from '../../plugins/firebase';
 
@@ -17,9 +18,10 @@ export function receiveAddress(payload) {
 }
 
 export function fetchUser(id) {
+  const { uid } = firestore.auth().currentUser;
   return async dispatch => {
     const response = (
-      await firestore.firestore().collection('users').doc(id).get()
+      await firestore.firestore().collection('users').doc(uid).get()
     ).data();
 
     const user = {
@@ -150,14 +152,17 @@ export function signinWithGoogle() {
     const { displayName: name, email, uid } = res.user;
 
     const user = await firestore.firestore().collection('users').doc(uid).get();
+
     if (user.exists) {
-      await dispatch(fetchUser(uid));
+      await dispatch(receiveUser(user));
     } else {
       const publicData = {
         email,
         name,
       };
+
       await firestore.firestore().collection('users').doc(uid).set(publicData);
+      await dispatch(receiveUser(publicData));
     }
   };
 }
@@ -198,4 +203,52 @@ export function signInWithFacebook() {
       await firestore.firestore().collection(users).doc(uid).set(publicData);
     }
   };
+}
+
+export function updateUser(payload) {
+  return async dispatch => {
+    const { id, ...user } = payload;
+
+    await firestore.firestore().collection('users').doc(id).set(user);
+
+    await dispatch(fetchUser(id));
+  };
+}
+
+export function updateAddress(payload) {
+  return async dispatch => {
+    const addressId = store.getState().auth.user.address?.id;
+
+    const userId = firestore.auth().currentUser.uid;
+
+    const publicData = {
+      ...payload,
+      userId,
+    };
+
+    if (addressId) {
+      await firestore
+        .firestore()
+        .collection('users_addresses')
+        .doc(addressId)
+        .set(publicData);
+    } else {
+      await firestore
+        .firestore()
+        .collection('users_addresses')
+        .doc()
+        .set(publicData);
+    }
+
+    await dispatch(fetchUser(userId));
+  };
+}
+
+export async function updatePassword(payload) {
+  const { email } = firestore.auth().currentUser;
+  const { currentPassword } = payload;
+
+  console.log(currentPassword);
+
+  await firestore.auth().signInWithEmailAndPassword(email, currentPassword);
 }
