@@ -16,11 +16,7 @@ export default function authReducer(state = INITIAL_STATE, action) {
         ...state,
         user: {
           ...state.user,
-<<<<<<< HEAD
           address: action.payload,
-=======
-          addresses: [...(state.user.address || []), action.payload],
->>>>>>> 869bc61b809d1d5fe89c0084ee5f560e49f72768
         },
       };
 
