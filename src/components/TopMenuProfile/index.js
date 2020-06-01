@@ -8,6 +8,10 @@ import { MdLock } from 'react-icons/md';
 import { TopMenu } from './styles';
 
 const TopMenuProfile = () => {
+  const signInWithEmailAndPassword = localStorage.getItem(
+    'signInWithEmailAndPassword'
+  );
+
   return (
     <>
       <TopMenu>
@@ -19,9 +23,11 @@ const TopMenuProfile = () => {
           <FaMapMarkerAlt size={30} />
         </NavLink>
 
-        <NavLink to="/home/profile/secret">
-          <MdLock size={30} />
-        </NavLink>
+        {signInWithEmailAndPassword && (
+          <NavLink to="/home/profile/secret">
+            <MdLock size={30} />
+          </NavLink>
+        )}
       </TopMenu>
     </>
   );

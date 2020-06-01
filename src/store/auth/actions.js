@@ -134,17 +134,21 @@ export function resetPassword(payload) {
  */
 export function authenticateUser(payload) {
   const { email, password } = payload;
+  localStorage.clear();
+  localStorage.setItem('signInWithEmailAndPassword', true);
 
   return async dispatch => {
     const response = await firestore
       .auth()
       .signInWithEmailAndPassword(email, password);
+
     dispatch(fetchUser(response.user.uid));
   };
 }
 
 export function signinWithGoogle() {
   const provider = new firestore.auth.GoogleAuthProvider();
+  localStorage.clear();
 
   return async dispatch => {
     const res = await firestore.auth().signInWithPopup(provider);
@@ -170,6 +174,7 @@ export function signinWithGoogle() {
 export function signInWithFacebook() {
   const users = 'users';
   const provider = new firestore.auth.FacebookAuthProvider();
+  localStorage.clear();
 
   provider.addScope('user_birthday');
   provider.addScope('public_profile');
@@ -247,8 +252,6 @@ export function updateAddress(payload) {
 export async function updatePassword(payload) {
   const { email } = firestore.auth().currentUser;
   const { currentPassword } = payload;
-
-  console.log(currentPassword);
 
   await firestore.auth().signInWithEmailAndPassword(email, currentPassword);
 }

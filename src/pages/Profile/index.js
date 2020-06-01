@@ -13,7 +13,7 @@ import Input from '../../components/Input';
 import TopMenuProfile from '../../components/TopMenuProfile';
 
 import { Header, Container, LoaderContainer } from './styles';
-import { birthdayParser, phoneParser } from '../../utils';
+import { phoneParser } from '../../utils';
 
 import './styles.js';
 export default function Profile() {
@@ -46,7 +46,7 @@ export default function Profile() {
 
     const schema = Yup.object().shape({
       phone: Yup.string().length(15, 'Digite um telefone válido.'),
-      birthday: Yup.string().length(10, 'Digite uma data válida.'),
+      birthday: Yup.string().required('Digite uma data válida.'),
 
       name: Yup.string().required('Nome obrigatório.'),
     });

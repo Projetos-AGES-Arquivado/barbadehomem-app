@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import * as Yup from 'yup';
 import { updatePassword } from '../../store/auth/actions';
@@ -16,8 +15,6 @@ import { Header, Container, LoaderContainer } from './styles';
 import './styles.js';
 export default function Profile() {
   const history = useHistory();
-  const dispatch = useDispatch();
-  const user = useSelector(store => store.auth.user);
 
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
