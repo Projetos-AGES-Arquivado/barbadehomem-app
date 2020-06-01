@@ -55,3 +55,19 @@ export const fetchAppointments = () => {
     dispatch(receiveAppointments(appointments));
   };
 };
+
+export const registerAppointment = appointment => {
+  return async dispatch => {
+    const { date, time, ...rest } = appointment;
+    const parsedDate = new Date(date + ' ' + time);
+
+    const newAppointment = {
+      ...rest,
+      date: parsedDate,
+    };
+
+    await firestore.firestore().collection('appointments').add(newAppointment);
+
+    await dispatch(fetchAppointments());
+  };
+};

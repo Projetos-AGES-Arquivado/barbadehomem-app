@@ -42,7 +42,9 @@ export default function routes() {
       <Switch>
         <UnauthRoute path="/" exact component={Login} />
         <UnauthRoute path="/forgotmypass" component={ForgotMyPass} />
+
         <UnauthRoute path="/register" exact component={Register} />
+        <Route path="/register/address" component={RegisterAddress} />
 
         <PrivateRoute path="/home" exact component={Home} />
         <PrivateRoute path="/home/solicitations" component={Appointments} />
@@ -50,12 +52,12 @@ export default function routes() {
         <PrivateRoute path="/home/profile" exact component={Profile} />
         <PrivateRoute path="/home/profile/address" component={ProfileAddress} />
         <PrivateRoute path="/home/profile/secret" component={ProfileSecret} />
+
+        <PrivateRoute path="/home/cutrequest" exact component={CutRequest} />
         <PrivateRoute
           path="/home/cutrequest/pickbarber"
           component={CutRequestPickBarber}
         />
-        <PrivateRoute path="/home/cutrequest" component={CutRequest} />
-        <Route path="/register/address" component={RegisterAddress} />
       </Switch>
     </BrowserRouter>
   );
