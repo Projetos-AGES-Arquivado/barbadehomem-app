@@ -20,38 +20,43 @@ export function receiveAddress(payload) {
 export function fetchUser(id) {
   const { uid } = firestore.auth().currentUser;
   return async dispatch => {
-    const response = (
-      await firestore.firestore().collection('users').doc(uid).get()
-    ).data();
-
-    const user = {
-      id,
-      name: response?.name,
-      email: response?.email,
-      birthday: response?.birthday,
-      phone: response?.phone,
-    };
-
-    dispatch(receiveUser(user));
-
-    await firestore
+    firestore
       .firestore()
-      .collection('users_addresses')
-      .where('userId', '==', id)
-      .get()
-      .then(snapshop => {
-        snapshop.docs.forEach(doc => {
-          const address = {
-            id: doc.id,
-            city: doc.data().city,
-            complement: doc.data().complement,
-            district: doc.data().district,
-            num: doc.data().num,
-            street: doc.data().street,
-            uf: doc.data().uf,
+      .collection('users')
+      .doc(uid)
+      .onSnapshot(doc => {
+        if (doc.exists) {
+          const response = doc.data();
+          const user = {
+            id,
+            name: response?.name,
+            email: response?.email,
+            birthday: response?.birthday,
+            phone: response?.phone,
           };
-          dispatch(receiveAddress(address));
-        });
+
+          dispatch(receiveUser(user));
+
+          firestore
+            .firestore()
+            .collection('users_addresses')
+            .where('userId', '==', id)
+            .get()
+            .then(snapshop => {
+              snapshop.docs.forEach(doc => {
+                const address = {
+                  id: doc.id,
+                  city: doc.data().city,
+                  complement: doc.data().complement,
+                  district: doc.data().district,
+                  num: doc.data().num,
+                  street: doc.data().street,
+                  uf: doc.data().uf,
+                };
+                dispatch(receiveAddress(address));
+              });
+            });
+        }
       });
   };
 }
