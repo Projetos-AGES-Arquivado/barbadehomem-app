@@ -4,7 +4,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 import { FiCornerDownLeft } from 'react-icons/fi';
 import * as Yup from 'yup';
 
-import {dateParser, timeParser} from '../../utils';
+import { dateParser, timeParser } from '../../utils';
 
 import { registerAppointment } from '../../store/appointment/actions';
 
@@ -66,6 +66,8 @@ export default function CutRequestPickBarber() {
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
         setErrMessage(err.message);
+      } else {
+        setErrMessage(err.message);
       }
     }
   };
@@ -99,19 +101,17 @@ export default function CutRequestPickBarber() {
       <div className="divinput">
         <span>Sugira uma data e um horário de sua escolha</span>
         <Input
-          type='date' min={`${new Date().getFullYear()}-0${new Date().getMonth()}-05`} max='2020-12-31'
-          
+          type="date"
           value={date}
           onChange={e => setDate(e.target.value)}
         />
-        
+
         <Input
           placeholder="hora"
-          type="text"
+          type="time"
           value={time}
-          onChange={e => setTime(timeParser(e.target.value))}
+          onChange={e => setTime(e.target.value)}
         />
-
       </div>
 
       <div className="divbutton">
