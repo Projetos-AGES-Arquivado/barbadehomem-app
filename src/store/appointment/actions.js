@@ -30,6 +30,8 @@ export const fetchAppointments = () => {
         services,
         status,
         wasRated,
+        userId,
+
       } = appointment.data();
 
       let existingProvider = findProviderById(barberId);
@@ -49,6 +51,7 @@ export const fetchAppointments = () => {
         provider: existingProvider,
         services,
         wasRated,
+        userId,
       });
     });
 
@@ -70,4 +73,17 @@ export const registerAppointment = appointment => {
 
     await dispatch(fetchAppointments());
   };
+};
+
+
+export const cancelAppointment = async appointment => {
+  const{provider,...updatedAppointment} = appointment;
+  
+  const publicData = {
+    ...updatedAppointment,
+    barberId: provider.id,
+    status: "canceled",
+  }
+  console.log(publicData);
+  await firestore.firestore().collection("appointments").doc(appointment.id).update(publicData);
 };
