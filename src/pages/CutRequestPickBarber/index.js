@@ -82,6 +82,7 @@ export default function CutRequestPickBarber() {
       <span className="err-message">{errMessage}</span>
 
       {providers.map(provider => (
+        provider.isAvailable &&
         <div className="divradio" key={provider.id}>
           <input
             type="radio"
