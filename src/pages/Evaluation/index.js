@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory,useLocation} from 'react-router-dom';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
@@ -13,39 +13,63 @@ import './styles.css';
 export default function Evaluation() {
     const dispatch = useDispatch();
     const history = useHistory();
+    const location = useLocation();
+
+    const[numStars,setStars] = useState('');
+    const[comment,setComment] = useState('');
+    const[err,setErr] = useState('');
+
+    const names = location.state.names;
+    
 
     const handleGoBack = e=>{
         history.goBack();
         e.preventDefault();
     }
+    const handleSubmit = e=>{
+        if(numStars!=''){
+            console.log(numStars)
+            console.log(comment)
+        }else{
+            setErr('Para prosseguir avalie o barbeiro');
+        }
+    }
 
     return (
         <div className="Evaluation-container">
-          <header className="header-register">
+          <header className="header-Evaluation">
             <FiCornerDownLeft size={25} onClick={handleGoBack} />
-            <h1>Avalie sua experiencia</h1>
+            <h1>Avalie sua experiência</h1>
           </header>
+
+          <span className = 'err-message'>{err}</span>
             
-            <div class = "rating">
-                <input type = "radio" name ="star" id ="star1" /><label for = "star1">
+          <span className = 'nome'>{names}</span>
+            <div className = "rating">
+                <input type = "radio"  id ="star1" value = {5} onClick ={e=> setStars(e.target.value)} /><label htmlFor = "star1">
                 </label>
-                <input type = "radio" name ="star" id ="star2" /><label for = "star2">
+                <input type = "radio"  id ="star2" value = {4} onClick ={e=> setStars(e.target.value)} /><label htmlFor = "star2">
                 </label>
-                <input type = "radio" name ="star" id ="star3" /><label for = "star3">
+                <input type = "radio"  id ="star3" value = {3} onClick ={e=> setStars(e.target.value)}/><label htmlFor = "star3">
                 </label>
-                <input type = "radio" name ="star" id ="star4" /><label for = "star4">
+                <input type = "radio"  id ="star4" value ={2}  onClick ={e=> setStars(e.target.value)} /><label htmlFor = "star4">
                 </label>
-                <input type = "radio" name ="star" id ="star5" /><label for = "star5">
+                <input type = "radio"  id ="star5" value ={1}  onClick ={e=> setStars(e.target.value)}/><label htmlFor = "star5">
                 </label>
             </div>
 
+          <span>Comente como foi sua experiência.</span>
           <div className="div_input">
-            <span>Comente ou sugira algo que possamos melhorar</span>
-            <Input type = 'text'/>
+            
+            <Input type = 'text'  onChange ={e=> setComment(e.target.value)}/>
+         
+
+
+
           </div>
 
           <div className="divbutton">
-             <Button>Submeter Avaliação</Button>
+             <Button onClick ={handleSubmit}>Submeter Avaliação</Button>
           </div>
 
         </div>  

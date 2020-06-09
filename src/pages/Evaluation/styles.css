@@ -7,7 +7,7 @@
     justify-content: center;
   }
   
-  .header-CutRequest {
+  .header-Evaluation {
     width: 100%;
     height: 131px;
   
@@ -33,9 +33,20 @@
     color: #fff;
     font-size: 22px;
   }
+  .Evaluation-container h2{
+    margin-top: 40px;
+    font-size: 22px;
+  }
+  .nome{
+    margin-top: 20%;
+    font-size: 30px;
+    font-weight: 500;
+  }
+
+
   .div_input{
-  
-    padding-top: 30%;
+    width: 90%;
+    margin-top: 5%;
   }
   .divbutton {
     width: 80%;
@@ -46,11 +57,13 @@
     align-items: center;
   }
   
+  
 
   .rating{
-    margin-top:50%;
+    margin-top:20%;
     transform: translate(-50%,-50%) rotateY(180deg);
-    margin-left: 65%;
+    margin-left: 63%;
+    margin-bottom: 20%;
     display: flex;
   
   }
@@ -78,7 +91,7 @@
     position: absolute;
     display: block;
     font-size: 50px;
-    color: 	#FFD700;
+    color: 	orange;
     top: 0;
     opacity: 0;
     transition: .5s;
