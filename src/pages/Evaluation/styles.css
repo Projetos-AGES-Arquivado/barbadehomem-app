@@ -1,3 +1,5 @@
+@import 'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css';
+
 .Evaluation-container {
     display: flex;
     flex-direction: column;
@@ -30,6 +32,62 @@
     margin: auto;
     color: #fff;
     font-size: 22px;
+  }
+  .div_input{
+  
+    padding-top: 30%;
+  }
+  .divbutton {
+    width: 80%;
+    margin-top: 80px;
+    display: block;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+
+  .rating{
+    margin-top:50%;
+    transform: translate(-50%,-50%) rotateY(180deg);
+    margin-left: 65%;
+    display: flex;
+  
+  }
+  .rating input{
+    display: none;
+  }
+  .rating label{
+    display: block;
+    cursor: pointer;
+    width: 50px;
+   
+  }
+  .rating label::before{
+    content: '\f005';
+    font-family: 'fontAwesome',serif;
+    position: relative;
+    display: block;
+    font-size: 50px;
+    color: #fff;
+  }
+
+  .rating label::after{
+    content: '\f005';
+    font-family: 'fontAwesome',serif;
+    position: absolute;
+    display: block;
+    font-size: 50px;
+    color: 	#FFD700;
+    top: 0;
+    opacity: 0;
+    transition: .5s;
+    text-shadow: 0 2px 5px rgba(0,0,0,.5);
+  }
+  .rating label:hover::after,
+  .rating label:hover~label::after,
+  .rating input:checked ~label::after{
+    opacity: 1;
   }
   @media (min-width: 600px) {
     .Evaluation-container header {

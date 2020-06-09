@@ -52,15 +52,15 @@
 .divinput{
   margin-top: 20px;
 }
-input[type=radio] + label {
+.PickBarber-container input[type=radio] + label {
   display: block;
   margin: 4px;
   cursor: pointer;
 }
-input[type=radio]{
+.PickBarber-container input[type=radio]{
   display: contents;
 }
-input[type=radio] + label:before {
+.PickBarber-container input[type=radio] + label:before {
   content: "\2714";
   border: 1px solid #fff;
   border-radius: 5px;
@@ -74,10 +74,10 @@ input[type=radio] + label:before {
   color: transparent;
   transition:.2s;
 }
-input[type=radio] + label:active:before {
+.PickBarber-container input[type=radio] + label:active:before {
   transform: scale(0);
 }
-input[type=radio]:checked + label:before {
+.PickBarber-container input[type=radio]:checked + label:before {
   background-color: #fff;
   color: #02025e;
 }
