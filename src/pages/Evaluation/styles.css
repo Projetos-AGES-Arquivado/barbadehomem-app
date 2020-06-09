@@ -1,0 +1,54 @@
+.Evaluation-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .header-CutRequest {
+    width: 100%;
+    height: 131px;
+  
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+  
+    border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+  }
+  
+  .Evaluation-container p {
+    margin-top: 5px;
+  }
+  
+  .Evaluation-container header svg {
+    margin-left: -15px;
+    color: #fff;
+  }
+  
+  .Evaluation-container h1 {
+    margin: auto;
+    color: #fff;
+    font-size: 22px;
+  }
+  @media (min-width: 600px) {
+    .Evaluation-container header {
+      width: 100vw;
+      padding: 0 100px;
+    }
+  
+    .Evaluation-container h1 {
+      margin: auto;
+    }
+  }
+  
+  @media (min-width: 1000px) {
+    .Evaluation-container header {
+      width: 100vw;
+      padding: 0 100px;
+    }
+  
+    .Evaluation-container h1 {
+      margin: auto;
+    }
+  }

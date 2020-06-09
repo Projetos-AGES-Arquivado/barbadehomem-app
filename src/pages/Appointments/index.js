@@ -21,6 +21,10 @@ const Solicitations = () => {
     history.goBack();
     e.preventDefault();
   };
+  const handleEvaluation = e =>{
+    history.push('/home/evaluation')
+    e.preventDefault()
+  }
 
   return (
     <>
