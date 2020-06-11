@@ -1,9 +1,11 @@
 import { firestore } from '../../plugins/firebase';
 import { RECEIVE_APPOINTMENTS } from './actionTypes';
 
+import { store } from '../';
+
 import { findProviderById } from '../provider/actions';
 
-const receiveAppointments = payload => {
+export const receiveAppointments = payload => {
   return {
     type: RECEIVE_APPOINTMENTS,
     payload,
@@ -31,7 +33,6 @@ export const fetchAppointments = () => {
         status,
         wasRated,
         userId,
-
       } = appointment.data();
 
       let existingProvider = findProviderById(barberId);
@@ -75,15 +76,23 @@ export const registerAppointment = appointment => {
   };
 };
 
+export const cancelAppointment = appointmentId => {
+  return async dispatch => {
+    const newStatus = 'cancelled';
 
-export const cancelAppointment = async appointment => {
-  const{provider,...updatedAppointment} = appointment;
-  
-  const publicData = {
-    ...updatedAppointment,
-    barberId: provider.id,
-    status: "canceled",
-  }
-  console.log(publicData);
-  await firestore.firestore().collection("appointments").doc(appointment.id).update(publicData);
+    await firestore
+      .firestore()
+      .collection('appointments')
+      .doc(appointmentId)
+      .update({ status: newStatus });
+
+    const appointments = store.getState().appointment.appointments;
+
+    const findIndex = appointments.findIndex(item => item.id === appointmentId);
+
+    const updatedAppointments = appointments;
+    updatedAppointments[findIndex].status = newStatus;
+
+    await dispatch(receiveAppointments(updatedAppointments));
+  };
 };

@@ -77,7 +77,7 @@ export const Solicitation = styled.ul`
         `}
 
         ${props =>
-          props.status === 'canceled' &&
+          props.status === 'cancelled' &&
           css`
             border-color: #b22222;
             background-color: #b22222;
@@ -95,8 +95,6 @@ export const Solicitation = styled.ul`
     border-radius: 3px;
     border-style: none;
     background-color: #b22222;
-
-    
-      font-size: 15px;
+    font-size: 15px;
   }
 `;

@@ -47,7 +47,6 @@ export default function CutRequestPickBarber() {
       userId: user.id,
       wasRated: false,
     };
-
     try {
       const schema = Yup.object().shape({
         time: Yup.string().required('Informe um horário válido!'),
