@@ -15,6 +15,7 @@ export default function CutRequestPickBarber() {
   const providers = useSelector(store => store.provider.providers);
   const user = useSelector(store => store.auth.user);
   const address = useSelector(store => store.auth.user.addresses[0]);
+  const payments = useSelector(store => store.payments.payments)
 
   const [errMessage, setErrMessage] = useState('');
   const [date, setDate] = useState('');
@@ -107,6 +108,17 @@ export default function CutRequestPickBarber() {
           value={time}
           onChange={e => setTime(e.target.value)}
         />
+      </div>
+
+      <label htmlFor="payment_method">Escolha um metodo de pagamento</label>
+      <div>
+        <select id="payment_method">
+          {
+            payments.map(payment => (
+              <option key={payment.id} >{payment.method}</option>
+            ))
+          }
+        </select>
       </div>
 
       <div className="divbutton">
