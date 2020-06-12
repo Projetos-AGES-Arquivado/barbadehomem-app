@@ -13,11 +13,12 @@ export const fetchProviders = () => {
 
     providersRef.forEach(provider => {
       const { id } = provider;
-      const { name } = provider.data();
+      const { name, isAvailable } = provider.data();
 
       providers.push({
         id,
         name,
+        isAvailable
       });
     });
 
