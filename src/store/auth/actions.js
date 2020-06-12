@@ -1,4 +1,5 @@
 import { RECEIVE_USER, RECEIVE_ADDRESS } from '../actionTypes';
+import { store } from '../';
 
 import { firestore, messaging } from '../../plugins/firebase';
 
@@ -17,40 +18,45 @@ export function receiveAddress(payload) {
 }
 
 export function fetchUser(id) {
+  const { uid } = firestore.auth().currentUser;
   return async dispatch => {
-    const response = (
-      await firestore.firestore().collection('users').doc(id).get()
-    ).data();
-
-    const user = {
-      id,
-      name: response?.name,
-      email: response?.email,
-      birthday: response?.birthday,
-      phone: response?.phone,
-    };
-
-    dispatch(receiveUser(user));
-
-    await firestore
+    firestore
       .firestore()
-      .collection('users_addresses')
-      .where('userId', '==', id)
-      .get()
-      .then(snapshop => {
-        snapshop.docs.forEach(doc => {
-          const address = {
-            id: doc.id,
-            city: doc.data().city,
-            complement: doc.data().complement,
-            district: doc.data().district,
-            num: doc.data().num,
-            street: doc.data().street,
-            uf: doc.data().uf,
+      .collection('users')
+      .doc(uid)
+      .onSnapshot(doc => {
+        if (doc.exists) {
+          const response = doc.data();
+          const user = {
+            id,
+            name: response?.name,
+            email: response?.email,
+            birthday: response?.birthday,
+            phone: response?.phone,
           };
 
-          dispatch(receiveAddress(address));
-        });
+          dispatch(receiveUser(user));
+
+          firestore
+            .firestore()
+            .collection('users_addresses')
+            .where('userId', '==', id)
+            .get()
+            .then(snapshop => {
+              snapshop.docs.forEach(doc => {
+                const address = {
+                  id: doc.id,
+                  city: doc.data().city,
+                  complement: doc.data().complement,
+                  district: doc.data().district,
+                  num: doc.data().num,
+                  street: doc.data().street,
+                  uf: doc.data().uf,
+                };
+                dispatch(receiveAddress(address));
+              });
+            });
+        }
       });
   };
 }
@@ -137,17 +143,21 @@ export function resetPassword(payload) {
  */
 export function authenticateUser(payload) {
   const { email, password } = payload;
+  localStorage.clear();
+  localStorage.setItem('signInWithEmailAndPassword', true);
 
   return async dispatch => {
     const response = await firestore
       .auth()
       .signInWithEmailAndPassword(email, password);
+
     dispatch(fetchUser(response.user.uid));
   };
 }
 
 export function signinWithGoogle() {
   const provider = new firestore.auth.GoogleAuthProvider();
+  localStorage.clear();
 
   return async dispatch => {
     const res = await firestore.auth().signInWithPopup(provider);
@@ -155,13 +165,15 @@ export function signinWithGoogle() {
     const { displayName: name, email, uid } = res.user;
 
     const user = await firestore.firestore().collection('users').doc(uid).get();
+
     if (user.exists) {
-      await dispatch(fetchUser(uid));
+      await dispatch(receiveUser(user));
     } else {
       const publicData = {
         email,
         name,
       };
+
       await firestore.firestore().collection('users').doc(uid).set(publicData);
       await dispatch(receiveUser(publicData));
     }
@@ -171,6 +183,7 @@ export function signinWithGoogle() {
 export function signInWithFacebook() {
   const users = 'users';
   const provider = new firestore.auth.FacebookAuthProvider();
+  localStorage.clear();
 
   provider.addScope('user_birthday');
   provider.addScope('public_profile');
@@ -204,4 +217,50 @@ export function signInWithFacebook() {
       await dispatch(receiveUser(publicData));
     }
   };
+}
+
+export function updateUser(payload) {
+  return async dispatch => {
+    const { id, ...user } = payload;
+
+    await firestore.firestore().collection('users').doc(id).set(user);
+
+    await dispatch(fetchUser(id));
+  };
+}
+
+export function updateAddress(payload) {
+  return async dispatch => {
+    const addressId = store.getState().auth.user.address?.id;
+
+    const userId = firestore.auth().currentUser.uid;
+
+    const publicData = {
+      ...payload,
+      userId,
+    };
+
+    if (addressId) {
+      await firestore
+        .firestore()
+        .collection('users_addresses')
+        .doc(addressId)
+        .set(publicData);
+    } else {
+      await firestore
+        .firestore()
+        .collection('users_addresses')
+        .doc()
+        .set(publicData);
+    }
+
+    await dispatch(fetchUser(userId));
+  };
+}
+
+export async function updatePassword(payload) {
+  const { email } = firestore.auth().currentUser;
+  const { currentPassword } = payload;
+
+  await firestore.auth().signInWithEmailAndPassword(email, currentPassword);
 }

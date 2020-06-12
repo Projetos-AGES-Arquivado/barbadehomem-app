@@ -52,6 +52,7 @@ export default function LoginPage() {
     }
     setLoading(false);
   }
+
   async function handleSignInWithGoogle() {
     await dispatch(signinWithGoogle());
   }

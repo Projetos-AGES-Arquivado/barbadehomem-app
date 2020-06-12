@@ -79,5 +79,3 @@ export const formattedStatus = value => {
       return null;
   }
 };
-
-
