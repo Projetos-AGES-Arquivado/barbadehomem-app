@@ -1,7 +1,9 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, Link } from 'react-router-dom';
 import { FiCornerDownLeft } from 'react-icons/fi';
+import { differenceInHours } from 'date-fns';
+import { cancelAppointment } from '../../store/appointment/actions';
 
 import {
   formattedDate,
@@ -17,10 +19,18 @@ const Solicitations = () => {
   const history = useHistory();
   const appointments = useSelector(store => store.appointment.appointments);
 
+  const dispatch = useDispatch();
+
   const handleGoBack = e => {
     history.goBack();
     e.preventDefault();
   };
+
+  async function handleCancelAppointment(appointmentId) {
+    await dispatch(cancelAppointment(appointmentId));
+
+    alert('Agendamento cancelado!');
+  }
 
   return (
     <>
@@ -45,8 +55,34 @@ const Solicitations = () => {
             </li>
             <li>
               <label>Serviços: {formattedServices(appointment.services)}</label>
-              {appointment?.wasRated === false && appointment.status ==='done' && <Link to="">Avaliar</Link>}
-              {appointment?.wasRated === true && <span>Avaliado</span>}
+              {appointment.status === 'pending' &&
+              differenceInHours(
+                new Date(appointment.date.toDate()),
+                Date.now()
+              ) > 24 ? (
+                <button
+                  onClick={() => {
+                    if (
+                      window.confirm(
+                        'Tem certeza que deseja cancelar essa solicitação?'
+                      )
+                    ) {
+                      handleCancelAppointment(appointment.id);
+                    }
+                  }}
+                >
+                  Cancelar
+                </button>
+              ) : (
+                <>
+                  {appointment.status === 'done' && !appointment.wasRated && (
+                    <Link to="">Avaliar</Link>
+                  )}
+                  {appointment.status === 'done' && appointment.wasRated && (
+                    <span>Avaliado</span>
+                  )}
+                </>
+              )}
             </li>
           </Solicitation>
         ))}
