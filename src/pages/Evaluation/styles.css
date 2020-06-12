@@ -16,7 +16,7 @@
     justify-content: space-between;
     padding: 0 40px;
   
-    border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+  
   }
   
   .Evaluation-container p {
@@ -39,13 +39,13 @@
   }
   .nome{
     margin-top: 20%;
-    font-size: 30px;
+    font-size: 27px;
     font-weight: 500;
   }
 
 
   .div_input{
-    width: 90%;
+    width: 320px;
     margin-top: 5%;
   }
   .divbutton {
@@ -62,7 +62,7 @@
   .rating{
     margin-top:20%;
     transform: translate(-50%,-50%) rotateY(180deg);
-    margin-left: 63%;
+    margin-left: 62%;
     margin-bottom: 20%;
     display: flex;
   

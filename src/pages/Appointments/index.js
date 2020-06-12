@@ -40,7 +40,7 @@ const Solicitations = () => {
     <>
       <Container>
         <Header>
-          <FiCornerDownLeft size={25} onClick={handleEvaluation} />
+          <FiCornerDownLeft size={25} onClick={handleGoBack} />
           <h1>Minhas solicitações</h1>
         </Header>
         <span>{name}</span>
