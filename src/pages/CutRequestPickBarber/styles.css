@@ -82,9 +82,30 @@ input[type=radio]:checked + label:before {
   color: #02025e;
 }
 
+.select-payment{
+  width: 80%;
+  background-color: transparent;
+  padding: 10px 3px;
+  font-size: 20px;
+  border-radius: 10px;
+  border: 1px solid;
+}
 
+.label-payment{
+  margin-top: 15px;
+  margin-left: 0 !important;
+  width: 80%;
+}
 
- @media (min-width: 600px) {
+select{
+  background: transparent;
+}
+
+option{
+  background: #000000;
+}
+
+@media (min-width: 600px) {
   .PickBarber-container header {
     width: 100vw;
     padding: 0 100px;

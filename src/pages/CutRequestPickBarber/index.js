@@ -110,17 +110,18 @@ export default function CutRequestPickBarber() {
         />
       </div>
 
-      <label htmlFor="payment_method">Escolha um metodo de pagamento</label>
-      <div>
-        <select id="payment_method">
-          {
-            payments.map(payment => (
-              <option key={payment.id} >{payment.method}</option>
-            ))
-          }
-        </select>
-      </div>
-
+      <label htmlFor="payment_method" className="label-payment">Metodo de pagamento</label>
+      <select id="payment_method" className="select-payment" defaultValue={0}>
+        <option value="" hidden>Escolha um meio de pagamento</option>
+        {
+          payments.map(payment => (
+            <option key={payment.id} className="option-payment">{payment.method}</option>
+          ))
+        }
+      </select>
+        {/* 
+          TROCAR POR DROPDOWN 
+        */}
       <div className="divbutton">
         <Button onClick={handleRegisterAppointment}>Enviar Solicitação</Button>
       </div>
