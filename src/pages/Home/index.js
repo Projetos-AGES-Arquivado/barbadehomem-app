@@ -2,6 +2,8 @@ import React from 'react';
 import Button from '../../components/Button';
 import Silhueta from '../../img/silhueta.png';
 
+import Swal from 'sweetalert2';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { signOut } from '../../store/auth/actions';
@@ -15,9 +17,12 @@ export default function Home() {
   const user = useSelector(store => store.auth.user);
 
   function handleCutRequest() {
-    //Caso não exista endereço cadastrado, destina a página de cadastro de endereço
-    if (!user.addresses) {
-      history.push('/register/address');
+    if (!user.address) {
+      Swal.fire('Complete seu cadastro!');
+      history.push('/home/profile/address');
+    } else if (!user.phone) {
+      Swal.fire('Complete seu cadastro!');
+      history.push('/home/profile');
     } else {
       history.push('home/cutrequest');
     }

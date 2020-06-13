@@ -26,6 +26,7 @@
     "redux-thunk": "^2.3.0",
     "start": "^5.1.0",
     "styled-components": "^5.1.0",
+    "sweetalert2": "^9.14.4",
     "yarn": "^1.22.4",
     "yup": "^0.29.0"
   },

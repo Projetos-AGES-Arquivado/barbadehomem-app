@@ -31,3 +31,18 @@
     margin-top: 0;
   }
 }
+
+.swal2-popup {
+  background: #fe6600;
+  color: #fff;
+}
+
+.swal2-popup h2 {
+  color: #fff;
+}
+
+.swal2-styled.swal2-confirm {
+  background: #fff;
+  color: black;
+  font-weight: bold;
+}
