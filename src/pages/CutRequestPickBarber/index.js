@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
-import { FiCornerDownLeft } from 'react-icons/fi';
+import { FiCornerDownLeft, FiStar } from 'react-icons/fi';
 import * as Yup from 'yup';
 
 import { registerAppointment } from '../../store/appointment/actions';
@@ -15,6 +15,7 @@ export default function CutRequestPickBarber() {
   const providers = useSelector(store => store.provider.providers);
   const user = useSelector(store => store.auth.user);
   const address = useSelector(store => store.auth.user.addresses[0]);
+  console.log(providers);
 
   const [errMessage, setErrMessage] = useState('');
   const [date, setDate] = useState('');
@@ -83,14 +84,19 @@ export default function CutRequestPickBarber() {
 
       {providers.map(provider => (
         <div className="divradio" key={provider.id}>
-          <input
-            type="radio"
-            id={provider.name}
-            name="provider"
-            value={provider.name}
-            onClick={() => handleSelecProvider(provider.id)}
-          />
-          <label htmlFor={provider.name}> {provider.name}</label>
+          <div> 
+            <input
+              type="radio"
+              id={provider.name}
+              name="provider"
+              value={provider.name}
+              onClick={() => handleSelecProvider(provider.id)}
+            />
+            <label htmlFor={provider.name}> {provider.name}</label>
+          </div>
+          {provider.rate && (          <label htmlFor={provider?.rate.ratesAverage}> <FiStar /> 
+            {provider?.rate.ratesAverage}
+          </label>)}
         </div>
       ))}
 

@@ -27,13 +27,25 @@
   font-size: 22px;
 }
 .divradio{
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   margin-top: 20px;
   border-radius:10px;
   border: 1px solid;
   width: 80%;
   padding: 20px 10px;
+  padding-right: 20px;
+}
+
+.divradio label + label{
+  float: right;
+  margin: auto 0;
   
+}
+
+.divradio svg{
+  margin-right: 5px;
 }
 
 .divbutton {

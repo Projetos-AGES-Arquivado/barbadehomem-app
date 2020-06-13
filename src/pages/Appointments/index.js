@@ -18,19 +18,17 @@ const Solicitations = () => {
   const history = useHistory();
   const appointments = useSelector(store => store.appointment.appointments);
 
-  const[name,setNome]= useState('')
-
   const handleGoBack = e => {
     history.goBack();
     e.preventDefault();
   };
-  const handleEvaluation = e =>{
-    if(name !=''){
-      history.push({
-       pathname:'/home/evaluation',
-        state:{names:name},
-      })}
+  function handleEvaluation(provider){
+    console.log(provider);
+      // history.push({
+      //  pathname:'/home/evaluation',
+      //   state:{names:name, barberId:barberId},
   }
+  // )};
 
   return (
     <>
@@ -40,7 +38,7 @@ const Solicitations = () => {
           <h1>Minhas solicitações</h1>
         </Header>
         {appointments.map(appointment => (
-          <Solicitation onClick= { e => setNome(appointment.provider.name)} key={appointment.id} status={appointment.status}>
+          <Solicitation key={appointment.id} status={appointment.status}>
             <li>
               <label>Agendado: {formattedDate(appointment.date)}</label>
               <strong>{formattedValue(appointment.cost)}</strong>
@@ -54,7 +52,7 @@ const Solicitations = () => {
             </li>
             <li>
               <label>Serviços: {formattedServices(appointment.services)}</label>
-              {appointment?.wasRated === false && appointment.status ==='done' && <label onClick={handleEvaluation}>Avaliar</label>}
+              {appointment?.wasRated === false && appointment.status ==='done' && <label onClick={handleEvaluation(appointment.provider)}>Avaliar</label>}
               {appointment?.wasRated === true && <span>Avaliado</span>}
             </li>
           </Solicitation>
