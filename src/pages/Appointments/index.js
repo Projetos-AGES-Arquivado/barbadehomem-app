@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React, { useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory, Link } from 'react-router-dom';
 import { FiCornerDownLeft } from 'react-icons/fi';
@@ -20,15 +20,11 @@ const Solicitations = () => {
 
   const handleGoBack = e => {
     history.goBack();
-    e.preventDefault();
   };
-  function handleEvaluation(provider){
-    console.log(provider);
-      // history.push({
-      //  pathname:'/home/evaluation',
-      //   state:{names:name, barberId:barberId},
-  }
-  // )};
+
+  const handleEvaluation = provider => {
+    history.push('/home/evaluation', { provider });
+  };
 
   return (
     <>
@@ -48,11 +44,16 @@ const Solicitations = () => {
               <p>{formattedStatus(appointment.status)}</p>
             </li>
             <li>
-              <label >Prestador: {appointment.provider.name}</label>
+              <label>Prestador: {appointment.provider.name}</label>
             </li>
             <li>
               <label>Serviços: {formattedServices(appointment.services)}</label>
-              {appointment?.wasRated === false && appointment.status ==='done' && <label onClick={handleEvaluation(appointment.provider)}>Avaliar</label>}
+              {appointment?.wasRated === false &&
+                appointment.status === 'done' && (
+                  <label onClick={() => handleEvaluation(appointment.provider)}>
+                    Avaliar
+                  </label>
+                )}
               {appointment?.wasRated === true && <span>Avaliado</span>}
             </li>
           </Solicitation>
