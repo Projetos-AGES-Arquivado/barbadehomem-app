@@ -29,11 +29,7 @@ const Solicitations = () => {
       history.push({
        pathname:'/home/evaluation',
         state:{names:name},
-      })
-    e.preventDefault()
-    }else{
-      console.log('deu problema');
-    }
+      })}
   }
 
   return (
@@ -43,9 +39,8 @@ const Solicitations = () => {
           <FiCornerDownLeft size={25} onClick={handleGoBack} />
           <h1>Minhas solicitações</h1>
         </Header>
-        <span>{name}</span>
         {appointments.map(appointment => (
-          <Solicitation onClick ={ e=> setNome(appointment.provider.name)}  key={appointment.id} status={appointment.status}>
+          <Solicitation onClick= { e => setNome(appointment.provider.name)} key={appointment.id} status={appointment.status}>
             <li>
               <label>Agendado: {formattedDate(appointment.date)}</label>
               <strong>{formattedValue(appointment.cost)}</strong>
@@ -59,7 +54,7 @@ const Solicitations = () => {
             </li>
             <li>
               <label>Serviços: {formattedServices(appointment.services)}</label>
-              {appointment?.wasRated === false && appointment.status ==='done' && <Link to="">Avaliar</Link>}
+              {appointment?.wasRated === false && appointment.status ==='done' && <label onClick={handleEvaluation}>Avaliar</label>}
               {appointment?.wasRated === true && <span>Avaliado</span>}
             </li>
           </Solicitation>
