@@ -18,9 +18,9 @@ export default function Evaluation() {
 
   const [comment, setComment] = useState('');
 
-  const provider = location.state.provider;
+  const { provider } = location.state;
 
-  const handleGoBack = e => {
+  const handleGoBack = () => {
     history.goBack();
   };
   const handleSubmit = () => {
