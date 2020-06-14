@@ -35,10 +35,15 @@
 .swal2-popup {
   background: #fe6600;
   color: #fff;
+  width: 70%;
 }
 
 .swal2-popup h2 {
   color: #fff;
+}
+
+.swal2-title {
+  font-size: 25px;
 }
 
 .swal2-styled.swal2-confirm {

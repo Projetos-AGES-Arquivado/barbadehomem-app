@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 
 import Loader from 'react-loader-spinner';
 import { FiCornerDownLeft } from 'react-icons/fi';
@@ -19,6 +19,10 @@ import './styles.js';
 export default function Profile() {
   const history = useHistory();
   const dispatch = useDispatch();
+  const location = useLocation();
+
+  const isScheduling = location.state?.isScheduling;
+
   const user = useSelector(store => store.auth.user);
 
   const [name, setName] = useState(user.name);
@@ -61,6 +65,10 @@ export default function Profile() {
       setIsSaving(true);
 
       await dispatch(updateUser(updatedUser));
+
+      if (isScheduling) {
+        history.push('/home/profile/address', { isScheduling });
+      }
 
       setIsSaving(false);
     } catch (err) {

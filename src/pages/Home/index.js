@@ -17,12 +17,12 @@ export default function Home() {
   const user = useSelector(store => store.auth.user);
 
   function handleCutRequest() {
-    if (!user.address) {
+    if (!user.phone) {
       Swal.fire('Complete seu cadastro!');
-      history.push('/home/profile/address');
-    } else if (!user.phone) {
+      history.push('/home/profile', { isScheduling: true });
+    } else if (!user.address) {
       Swal.fire('Complete seu cadastro!');
-      history.push('/home/profile');
+      history.push('/home/profile/address', { isScheduling: true });
     } else {
       history.push('home/cutrequest');
     }
