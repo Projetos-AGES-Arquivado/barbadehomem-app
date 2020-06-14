@@ -8,6 +8,7 @@ import { registerAppointment } from '../../store/appointment/actions';
 
 import Button from '../../components/Button';
 import Input from '../../components/Input/index';
+import DropDown from '../../components/Dropdown'
 
 import './styles.css';
 
@@ -21,6 +22,7 @@ export default function CutRequestPickBarber() {
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
   const [selectedProviderId, setSelectedProviderId] = useState('');
+  const [selectedMethodPayment, setSelectedMethodPayment] = useState('')
 
   const history = useHistory();
   const location = useLocation();
@@ -47,21 +49,22 @@ export default function CutRequestPickBarber() {
       status: 'pending',
       userId: user.id,
       wasRated: false,
+      payment_method: selectedMethodPayment
     };
-
     try {
       const schema = Yup.object().shape({
         time: Yup.string().required('Informe um horário válido!'),
         date: Yup.string().required('Informe uma data válida!'),
         barberId: Yup.string().required('Selecione um barbeiro!'),
+        payment_method: Yup.string().required('Selecione um meio de pagamento')
       });
 
       await schema.validate(appointment, {
         abortEarly: true,
       });
 
-      await dispatch(registerAppointment(appointment));
-      history.push('/home');
+      // await dispatch(registerAppointment(appointment));
+      // history.push('/home');
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
         setErrMessage(err.message);
@@ -71,6 +74,10 @@ export default function CutRequestPickBarber() {
 
   function handleSelecProvider(id) {
     setSelectedProviderId(id);
+  }
+
+  function handleItem(method) {
+    setSelectedMethodPayment(method)
   }
 
   return (
@@ -111,17 +118,16 @@ export default function CutRequestPickBarber() {
       </div>
 
       <label htmlFor="payment_method" className="label-payment">Metodo de pagamento</label>
-      <select id="payment_method" className="select-payment" defaultValue={0}>
+      {/* <select id="payment_method" className="select-payment" defaultValue={0}>
         <option value="" hidden>Escolha um meio de pagamento</option>
         {
           payments.map(payment => (
             <option key={payment.id} className="option-payment">{payment.method}</option>
           ))
         }
-      </select>
-        {/* 
-          TROCAR POR DROPDOWN 
-        */}
+      </select> */}
+
+      <DropDown options={payments} onClick={handleItem} selected={selectedMethodPayment}/>
       <div className="divbutton">
         <Button onClick={handleRegisterAppointment}>Enviar Solicitação</Button>
       </div>
