@@ -63,8 +63,8 @@ export default function CutRequestPickBarber() {
         abortEarly: true,
       });
 
-      // await dispatch(registerAppointment(appointment));
-      // history.push('/home');
+      await dispatch(registerAppointment(appointment));
+      history.push('/home');
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
         setErrMessage(err.message);

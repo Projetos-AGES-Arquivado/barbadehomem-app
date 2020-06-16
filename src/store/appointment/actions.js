@@ -30,6 +30,7 @@ export const fetchAppointments = () => {
         services,
         status,
         wasRated,
+        payment_method,
       } = appointment.data();
 
       let existingProvider = findProviderById(barberId);
@@ -49,6 +50,7 @@ export const fetchAppointments = () => {
         provider: existingProvider,
         services,
         wasRated,
+        payment_method,
       });
     });
 
