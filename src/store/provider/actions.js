@@ -53,6 +53,25 @@ export const findProviderById = id => {
   return provider;
 };
 
+export const updateRate = (id, rate, stars) => {
+  const provider = findProviderById(id);
+
+  const providerRate = firestore
+    .firestore()
+    .collection('rates')
+    .doc(provider.rate.id);
+    
+  const updatedAppointments = parseInt(rate.totalAppointments) + 1;
+  const updatedStars = parseInt(rate.totalStars) + parseInt(stars);
+  const updatedAverage = updatedStars / updatedAppointments;
+
+  providerRate.update({
+    ratesAverage : updatedAverage,
+    totalAppointments : updatedAppointments,
+    totalStars : updatedStars
+  });
+}
+
 const receiveProviders = payload => {
   return {
     type: RECEIVE_PROVIDERS,

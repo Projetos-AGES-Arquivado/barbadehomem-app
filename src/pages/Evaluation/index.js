@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { FiCornerDownLeft } from 'react-icons/fi';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
+import { updateRate } from '../../store/provider/actions';
 
 import './styles.css';
 
@@ -28,7 +29,9 @@ export default function Evaluation() {
       setErr('Selecione pelo menos uma estrela.');
       return;
     } else {
-      //DEVE CRIAR UM MÉTODO NAS ACTIONS DO PROVIDER PARA ATUALIZAR A AVALIAÇÃO MÉDIA
+      updateRate(provider.id, provider.rate, stars);
+      
+      history.push('/home/solicitations');
     }
   };
 
