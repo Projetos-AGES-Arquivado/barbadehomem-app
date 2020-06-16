@@ -38,7 +38,7 @@
 
 .divbutton {
   width: 80%;
-  margin-top: 80px;
+  margin-top: 40px;
   display: block;
   flex: 1;
   flex-direction: column;
@@ -89,6 +89,10 @@ input[type=radio]:checked + label:before {
   font-size: 20px;
   border-radius: 10px;
   border: 1px solid;
+}
+
+.dropdown:hover + .divbutton{
+  display: none;
 }
 
 .label-payment{

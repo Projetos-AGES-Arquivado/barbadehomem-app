@@ -8,7 +8,6 @@
     display: none;
     z-index: 1;
     width: 100%;
-    position: absolute; /*comentar para arrastar o botao de enviar solicitacao para baixo*/
 }
 
 .dropdown:hover .dropdown-content {
