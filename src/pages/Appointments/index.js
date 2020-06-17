@@ -19,7 +19,7 @@ const Solicitations = () => {
   const appointments = useSelector(store => store.appointment.appointments);
 
   const handleGoBack = e => {
-    history.goBack();
+    history.push("/home");
   };
 
   const handleEvaluation = appointment => {
