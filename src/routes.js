@@ -11,6 +11,7 @@ import Appointments from './pages/Appointments';
 import Home from './pages/Home';
 import CutRequest from './pages/CutRequest';
 import CutRequestPickBarber from './pages/CutRequestPickBarber';
+import DealsAndInfo from './pages/DealsAndInfo';
 
 function PrivateRoute({ component: Component, ...rest }) {
   const user = useSelector(state => state.auth.user);

@@ -1,7 +1,10 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from 'react-router-dom';
+import { FiCornerDownLeft } from 'react-icons/fi';
+import { Header } from './styles';
 
-export default function Profile() {
+
+export default function DealsAndInfo() {
   const history = useHistory();
 
   function handleGoBack() {
@@ -10,8 +13,10 @@ export default function Profile() {
 
   return (
     <div>
-      <h1>Promoções e Funcionamento</h1>
-      <button onClick={handleGoBack}>Voltar</button>
+      <Header>
+          <FiCornerDownLeft size={25} onClick={handleGoBack} />
+          <h1>Funcionamento e Promoções</h1>
+        </Header>
     </div>
   );
 }

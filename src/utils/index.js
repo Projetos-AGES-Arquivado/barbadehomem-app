@@ -80,4 +80,22 @@ export const formattedStatus = value => {
   }
 };
 
+export const functioning = 
+    '<br><br><h4>Como trabalhamos:</h4>' +
+    '<p>Você solicita um serviço com 24hrs de antecedência e a gente encontra o melhor horário pra você. </p>' +
+    '<p>A partir daí enviamos um barbeiro até sua residência onde ele fará um atendimento com máscara e luvas.</p>' +
+    '<p>Levamos todos os materiais (máquinas, toalhas, espelhos, etc) e um aspirador de pó pra higienizar o local após o serviço.</p>' +
+    '<p>Após o agendamento do serviço você só precisa passar pela etapa de confirmação.</p>' +
+    '<p>Você vai receber uma mensagem ou uma ligação confirmando o agendamento, previnindo assim um possível imprevisto por parte do cliente.</p>' +
+    '<p>Caso não seja confirmado até 30 minutos antes do horário, o serviço será cancelado automaticamente. Mas normalmente não acontece, tudo bem?</p>'
+;
+
+export const deals = 
+    '<br><br><h4>Serviços e Promoções: </h4>'+
+    '<p>Promoção: (box para escrita e precificação)</p>'+
+    '<p>Cabelo: R$35,00</p>'+
+    '<p>Barba: R$30,00</p>'+
+    '<p>Combo: (cabelo e barba) R$50,00</p>'+
+    '<p>Mensal: 20% de desconto (personalizar)</p>'
+;
 
