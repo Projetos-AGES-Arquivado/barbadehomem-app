@@ -30,7 +30,7 @@ export default function Evaluation() {
       setErr('Selecione pelo menos uma estrela.');
       return;
     } else {
-      updateRate(appointment.provider.id, appointment.provider.rate, stars);
+      updateRate(appointment.provider.id, stars);
       appointmentWasRated(appointment.id);
       history.push('/home/solicitations');
     }
