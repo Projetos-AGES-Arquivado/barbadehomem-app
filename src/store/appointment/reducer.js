@@ -14,7 +14,7 @@ export default function appointmentReducer(state = INITIAL_STATE, action) {
     case RECEIVE_APPOINTMENTS:
       return {
         ...state,
-        appointments: action.payload,
+        appointments: [...action.payload],
       };
     default:
       return state;

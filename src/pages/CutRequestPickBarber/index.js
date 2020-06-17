@@ -47,7 +47,6 @@ export default function CutRequestPickBarber() {
       userId: user.id,
       wasRated: false,
     };
-
     try {
       const schema = Yup.object().shape({
         time: Yup.string().required('Informe um horário válido!'),
@@ -82,6 +81,7 @@ export default function CutRequestPickBarber() {
       <span className="err-message">{errMessage}</span>
 
       {providers.map(provider => (
+        provider.isAvailable &&
         <div className="divradio" key={provider.id}>
           <input
             type="radio"
