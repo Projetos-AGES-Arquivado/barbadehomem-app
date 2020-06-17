@@ -7,6 +7,7 @@ import { FiCornerDownLeft } from 'react-icons/fi';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
 import { updateRate } from '../../store/provider/actions';
+import { appointmentWasRated} from '../../store/appointment/actions';
 
 import './styles.css';
 
@@ -19,7 +20,7 @@ export default function Evaluation() {
 
   const [comment, setComment] = useState('');
 
-  const { provider } = location.state;
+  const { appointment } = location.state;
 
   const handleGoBack = () => {
     history.goBack();
@@ -29,8 +30,8 @@ export default function Evaluation() {
       setErr('Selecione pelo menos uma estrela.');
       return;
     } else {
-      updateRate(provider.id, provider.rate, stars);
-      
+      updateRate(appointment.provider.id, appointment.provider.rate, stars);
+      appointmentWasRated(appointment.id);
       history.push('/home/solicitations');
     }
   };
@@ -42,7 +43,7 @@ export default function Evaluation() {
       </header>
       <span className="err-message">{err}</span>
       <span>Como foi sua expêriencia com</span>
-      <span className="nome"> {provider.name}</span>
+      <span className="nome"> {appointment.provider.name}</span>
       <div className="rating">
         <input
           type="radio"

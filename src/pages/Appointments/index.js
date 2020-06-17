@@ -22,8 +22,8 @@ const Solicitations = () => {
     history.goBack();
   };
 
-  const handleEvaluation = provider => {
-    history.push('/home/evaluation', { provider });
+  const handleEvaluation = appointment => {
+      history.push('/home/evaluation', { appointment });
   };
 
   return (
@@ -50,7 +50,7 @@ const Solicitations = () => {
               <label>Serviços: {formattedServices(appointment.services)}</label>
               {appointment?.wasRated === false &&
                 appointment.status === 'done' && (
-                  <label onClick={() => handleEvaluation(appointment.provider)}>
+                  <label onClick={() => handleEvaluation(appointment)}>
                     Avaliar
                   </label>
                 )}

@@ -71,3 +71,16 @@ export const registerAppointment = appointment => {
     await dispatch(fetchAppointments());
   };
 };
+
+export const appointmentWasRated = id => {
+
+  const appointment = firestore
+    .firestore()
+    .collection('appointments')
+    .doc(id);
+
+  appointment.update({
+    wasRated: true
+  })
+
+}
