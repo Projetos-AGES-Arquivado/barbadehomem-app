@@ -97,7 +97,7 @@ export default function CutRequestPickBarber() {
             <label htmlFor={provider?.rate.ratesAverage}>
               {' '}
               <FiStar />
-              {provider?.rate.ratesAverage}
+              {provider?.rate.ratesAverage.toFixed(1)}
             </label>
           )}
         </div>
