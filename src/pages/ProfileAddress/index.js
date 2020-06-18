@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import * as Yup from 'yup';
 
 import { updateAddress } from '../../store/auth/actions';
@@ -18,7 +18,11 @@ import './styles.js';
 export default function Profile() {
   const history = useHistory();
   const dispatch = useDispatch();
+  const location = useLocation();
+
   const address = useSelector(store => store.auth.user.address);
+
+  const isScheduling = location.state?.isScheduling;
 
   const [street, setStreet] = useState(address?.street || '');
   const [num, setNum] = useState(address?.num || '');
@@ -60,6 +64,10 @@ export default function Profile() {
       setIsSaving(true);
 
       await dispatch(updateAddress(updatedAddress));
+
+      if (isScheduling) {
+        history.push('/home/cutrequest');
+      }
 
       setIsSaving(false);
     } catch (err) {

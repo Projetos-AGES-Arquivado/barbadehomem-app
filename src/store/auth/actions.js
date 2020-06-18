@@ -160,23 +160,35 @@ export function signinWithGoogle() {
   localStorage.clear();
 
   return async dispatch => {
-    const res = await firestore.auth().signInWithPopup(provider);
+    await firestore
+      .auth()
+      .signInWithPopup(provider)
+      .then(async response => {
+        const { displayName: name, email, uid } = response.user;
 
-    const { displayName: name, email, uid } = res.user;
+        const user = await firestore
+          .firestore()
+          .collection('users')
+          .doc(uid)
+          .get();
 
-    const user = await firestore.firestore().collection('users').doc(uid).get();
+        if (user.exists) {
+          await dispatch(receiveUser(user));
+        } else {
+          const publicData = {
+            email,
+            name,
+          };
 
-    if (user.exists) {
-      await dispatch(receiveUser(user));
-    } else {
-      const publicData = {
-        email,
-        name,
-      };
+          await firestore
+            .firestore()
+            .collection('users')
+            .doc(uid)
+            .set(publicData);
 
-      await firestore.firestore().collection('users').doc(uid).set(publicData);
-      await dispatch(receiveUser(publicData));
-    }
+          await dispatch(receiveUser(publicData));
+        }
+      });
   };
 }
 
