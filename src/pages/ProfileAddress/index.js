@@ -1,19 +1,18 @@
 import React, { useState } from 'react';
-import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
+import * as Yup from 'yup';
 
-import Loader from 'react-loader-spinner';
+import { updateAddress } from '../../store/auth/actions';
+
 import { FiCornerDownLeft } from 'react-icons/fi';
-
-import { updateUser } from '../../store/auth/actions';
+import Loader from 'react-loader-spinner';
 
 import Button from '../../components/Button';
 import Input from '../../components/Input';
 import TopMenuProfile from '../../components/TopMenuProfile';
 
 import { Header, Container, LoaderContainer } from './styles';
-import { phoneParser } from '../../utils';
 
 import './styles.js';
 export default function Profile() {
@@ -21,42 +20,42 @@ export default function Profile() {
   const dispatch = useDispatch();
   const location = useLocation();
 
+  const address = useSelector(store => store.auth.user.address);
+
   const isScheduling = location.state?.isScheduling;
 
-  const user = useSelector(store => store.auth.user);
+  const [street, setStreet] = useState(address?.street || '');
+  const [num, setNum] = useState(address?.num || '');
+  const [complement, setComplement] = useState(address?.complement || '');
+  const [district, setDistrict] = useState(address?.district || '');
 
-  const [name, setName] = useState(user.name);
-  const email = user.email;
-  const [birthday, setBirthday] = useState(user.birthday || '');
-  const [phone, setPhone] = useState(user.phone || '');
   const [isSaving, setIsSaving] = useState(false);
   const [errMessage, setErrMessage] = useState('');
 
   const handleGoBack = e => {
-    history.push('/');
     e.preventDefault();
+    history.push('/');
   };
 
-  const handleUserUpdate = async e => {
+  async function handleAddressUpdate(e) {
     e.preventDefault();
 
-    const updatedUser = {
-      id: user.id,
-      name,
-      email,
-      birthday,
-      phone,
+    const updatedAddress = {
+      street,
+      num,
+      complement,
+      district,
     };
 
     const schema = Yup.object().shape({
-      phone: Yup.string().length(15, 'Digite um telefone válido.'),
-      birthday: Yup.string().required('Digite uma data válida.'),
-
-      name: Yup.string().required('Nome obrigatório.'),
+      district: Yup.string().required('Informe o bairro.'),
+      complement: Yup.string().optional(),
+      num: Yup.string().required('Informe o número.'),
+      street: Yup.string().required('Informe a rua.'),
     });
 
     try {
-      await schema.validate(updatedUser, {
+      await schema.validate(updatedAddress, {
         abortEarly: true,
       });
 
@@ -64,10 +63,10 @@ export default function Profile() {
 
       setIsSaving(true);
 
-      await dispatch(updateUser(updatedUser));
+      await dispatch(updateAddress(updatedAddress));
 
       if (isScheduling) {
-        history.push('/home/profile/address', { isScheduling });
+        history.push('/home/cutrequest');
       }
 
       setIsSaving(false);
@@ -77,7 +76,7 @@ export default function Profile() {
         return;
       }
     }
-  };
+  }
 
   return (
     <Container>
@@ -94,29 +93,31 @@ export default function Profile() {
         </>
       )}
 
-      <form onSubmit={handleUserUpdate}>
+      <form onSubmit={handleAddressUpdate}>
         <Input
           type="text"
-          value={name}
-          onChange={e => setName(e.target.value)}
-          placeholder="Nome"
-          name="name"
+          value={street}
+          onChange={e => setStreet(e.target.value)}
+          placeholder="Rua"
         />
         <Input
           type="text"
-          value={phoneParser(phone)}
-          onChange={e => setPhone(e.target.value)}
-          name="phone"
-          placeholder="Telefone"
+          value={num}
+          onChange={e => setNum(e.target.value)}
+          placeholder="Nº"
         />
         <Input
-          type="date"
-          value={birthday}
-          onChange={e => setBirthday(e.target.value)}
-          name="birthday"
-          placeholder="Nascimento"
+          type="text"
+          value={complement}
+          onChange={e => setComplement(e.target.value)}
+          placeholder="Complemento"
         />
-        <Input id="email" type="text" value={email} readOnly />
+        <Input
+          type="text"
+          value={district}
+          onChange={e => setDistrict(e.target.value)}
+          placeholder="Bairro"
+        />
 
         {isSaving ? (
           <LoaderContainer>

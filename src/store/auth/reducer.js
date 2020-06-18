@@ -1,6 +1,5 @@
 import { RECEIVE_USER, RECEIVE_ADDRESS } from '../actionTypes';
 
-//ESTADO INICIAL DO COMPONENTE
 const INITIAL_STATE = {
   user: null,
 };
@@ -17,7 +16,7 @@ export default function authReducer(state = INITIAL_STATE, action) {
         ...state,
         user: {
           ...state.user,
-          addresses: [...(state.user.address || []), action.payload],
+          address: action.payload,
         },
       };
 

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
 import { FiCornerDownLeft } from 'react-icons/fi';
 import * as Yup from 'yup';
+import { store } from '../../store';
 
 import { registerAppointment } from '../../store/appointment/actions';
 
@@ -13,10 +14,13 @@ import DropDown from '../../components/Dropdown'
 import './styles.css';
 
 export default function CutRequestPickBarber() {
-  const providers = useSelector(store => store.provider.providers);
-  const user = useSelector(store => store.auth.user);
-  const address = useSelector(store => store.auth.user.addresses[0]);
-  const payments = useSelector(store => store.payments.payments)
+  // const providers = useSelector(store => store.provider.providers);
+  // const user = useSelector(store => store.auth.user);
+  // const address = useSelector(store => store.auth.user.addresses[0]);
+  // const payments = useSelector(store => store.payments.payments)
+  const { payments } = store.getState().payments
+  const { providers } = store.getState().provider;
+  const { user } = store.getState().auth;
 
   const [errMessage, setErrMessage] = useState('');
   const [date, setDate] = useState('');
@@ -40,7 +44,7 @@ export default function CutRequestPickBarber() {
     e.preventDefault();
 
     const appointment = {
-      addressId: address.id,
+      addressId: user.address.id,
       barberId: selectedProviderId,
       cost: costTotal,
       date,
@@ -64,6 +68,7 @@ export default function CutRequestPickBarber() {
       });
 
       await dispatch(registerAppointment(appointment));
+
       history.push('/home');
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
@@ -89,18 +94,21 @@ export default function CutRequestPickBarber() {
 
       <span className="err-message">{errMessage}</span>
 
-      {providers.map(provider => (
-        <div className="divradio" key={provider.id}>
-          <input
-            type="radio"
-            id={provider.name}
-            name="provider"
-            value={provider.name}
-            onClick={() => handleSelecProvider(provider.id)}
-          />
-          <label htmlFor={provider.name}> {provider.name}</label>
-        </div>
-      ))}
+      {providers.map(
+        provider =>
+          provider.isAvailable && (
+            <div className="divradio" key={provider.id}>
+              <input
+                type="radio"
+                id={provider.name}
+                name="provider"
+                value={provider.name}
+                onClick={() => handleSelecProvider(provider.id)}
+              />
+              <label htmlFor={provider.name}> {provider.name}</label>
+            </div>
+          )
+      )}
 
       <div className="divinput">
         <span>Sugira uma data e um horário de sua escolha</span>
