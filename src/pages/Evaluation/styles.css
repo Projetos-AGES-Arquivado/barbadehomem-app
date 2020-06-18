@@ -102,6 +102,16 @@
   .rating input:checked ~label::after{
     opacity: 1;
   }
+  @media(max-width: 380px){
+    .rating{
+      margin-left: 68%;
+    }
+  }
+    @media(max-width: 350px){
+      .rating{
+        margin-left: 76%;
+      }
+    }
   @media (min-width: 600px) {
     .Evaluation-container header {
       width: 100vw;
