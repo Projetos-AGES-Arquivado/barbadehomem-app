@@ -92,10 +92,8 @@ export const functioning =
 
 export const deals = 
     '<br><br><h4>Serviços e Promoções: </h4>'+
-    '<p>Promoção: (box para escrita e precificação)</p>'+
     '<p>Cabelo: R$35,00</p>'+
     '<p>Barba: R$30,00</p>'+
-    '<p>Combo: (cabelo e barba) R$50,00</p>'+
-    '<p>Mensal: 20% de desconto (personalizar)</p>'
+    '<p>Combo: (cabelo e barba) R$50,00</p>'
 ;
 
