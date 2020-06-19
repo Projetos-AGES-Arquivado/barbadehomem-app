@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import { FiCornerDownLeft } from 'react-icons/fi';
 import * as Yup from 'yup';
 import { store } from '../../store';
@@ -60,6 +61,8 @@ export default function CutRequestPickBarber() {
 
       await dispatch(registerAppointment(appointment));
 
+      Swal.fire('Seu horário foi solicitado com sucesso. Aguarde a confirmação!');
+  
       history.push('/home');
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
