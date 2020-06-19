@@ -1,9 +1,11 @@
 import { firestore } from '../../plugins/firebase';
 import { RECEIVE_APPOINTMENTS } from './actionTypes';
 
+import { store } from '../';
+
 import { findProviderById } from '../provider/actions';
 
-const receiveAppointments = payload => {
+export const receiveAppointments = payload => {
   return {
     type: RECEIVE_APPOINTMENTS,
     payload,
@@ -13,46 +15,49 @@ const receiveAppointments = payload => {
 export const fetchAppointments = () => {
   return async dispatch => {
     const { uid } = firestore.auth().currentUser;
-    let appointments = [];
 
-    const appointmentsRef = await firestore
+    firestore
       .firestore()
       .collection('appointments')
       .where('userId', '==', uid)
-      .get();
+      .onSnapshot(appointmentsRef => {
+        let appointments = [];
 
-    appointmentsRef.forEach(appointment => {
-      const { id } = appointment;
-      const {
-        barberId,
-        cost,
-        date,
-        services,
-        status,
-        wasRated,
-      } = appointment.data();
+        appointmentsRef.forEach(appointment => {
+          const { id } = appointment;
+          const {
+            barberId,
+            cost,
+            date,
+            services,
+            status,
+            wasRated,
+            userId,
+          } = appointment.data();
 
-      let existingProvider = findProviderById(barberId);
+          let existingProvider = findProviderById(barberId);
 
-      if (!existingProvider) {
-        existingProvider = {
-          barberId,
-          name: 'Desconhecido',
-        };
-      }
+          if (!existingProvider) {
+            existingProvider = {
+              barberId,
+              name: 'Desconhecido',
+            };
+          }
 
-      appointments.push({
-        id,
-        date,
-        cost,
-        status,
-        provider: existingProvider,
-        services,
-        wasRated,
+          appointments.push({
+            id,
+            date,
+            cost,
+            status,
+            provider: existingProvider,
+            services,
+            wasRated,
+            userId,
+          });
+        });
+
+        dispatch(receiveAppointments(appointments));
       });
-    });
-
-    dispatch(receiveAppointments(appointments));
   };
 };
 
@@ -84,3 +89,23 @@ export const appointmentWasRated = id => {
   })
 
 }
+export const cancelAppointment = appointmentId => {
+  return async dispatch => {
+    const newStatus = 'cancelled';
+
+    await firestore
+      .firestore()
+      .collection('appointments')
+      .doc(appointmentId)
+      .update({ status: newStatus });
+
+    const appointments = store.getState().appointment.appointments;
+
+    const findIndex = appointments.findIndex(item => item.id === appointmentId);
+
+    const updatedAppointments = appointments;
+    updatedAppointments[findIndex].status = newStatus;
+
+    await dispatch(receiveAppointments(updatedAppointments));
+  };
+};

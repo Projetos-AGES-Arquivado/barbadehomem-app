@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import { FiCornerDownLeft, FiStar } from 'react-icons/fi';
 import * as Yup from 'yup';
+import { store } from '../../store';
 
 import { registerAppointment } from '../../store/appointment/actions';
 
@@ -12,9 +14,8 @@ import Input from '../../components/Input/index';
 import './styles.css';
 
 export default function CutRequestPickBarber() {
-  const providers = useSelector(store => store.provider.providers);
-  const user = useSelector(store => store.auth.user);
-  const address = useSelector(store => store.auth.user.addresses[0]);
+  const { providers } = store.getState().provider;
+  const { user } = store.getState().auth;
 
   const [errMessage, setErrMessage] = useState('');
   const [date, setDate] = useState('');
@@ -37,7 +38,7 @@ export default function CutRequestPickBarber() {
     e.preventDefault();
 
     const appointment = {
-      addressId: address.id,
+      addressId: user.address.id,
       barberId: selectedProviderId,
       cost: costTotal,
       date,
@@ -47,7 +48,6 @@ export default function CutRequestPickBarber() {
       userId: user.id,
       wasRated: false,
     };
-
     try {
       const schema = Yup.object().shape({
         time: Yup.string().required('Informe um horário válido!'),
@@ -60,6 +60,9 @@ export default function CutRequestPickBarber() {
       });
 
       await dispatch(registerAppointment(appointment));
+
+      Swal.fire('Seu horário foi solicitado com sucesso. Aguarde a confirmação!');
+  
       history.push('/home');
     } catch (err) {
       if (err instanceof Yup.ValidationError) {

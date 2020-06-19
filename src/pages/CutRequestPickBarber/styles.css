@@ -31,7 +31,7 @@
   align-items: center;
   justify-content: space-between;
   margin-top: 20px;
-  border-radius:10px;
+  border-radius: 10px;
   border: 1px solid;
   width: 80%;
   padding: 20px 10px;
@@ -56,12 +56,11 @@
   flex-direction: column;
   align-items: center;
 }
-.PickBarber-container label{
+.PickBarber-container label {
   margin-left: 30px;
   font-size: 20px;
-  
 }
-.divinput{
+.divinput {
   margin-top: 20px;
 }
 .PickBarber-container input[type=radio] + label {
@@ -84,7 +83,7 @@
   margin-right: 8px;
   vertical-align: bottom;
   color: transparent;
-  transition:.2s;
+  transition: 0.2s;
 }
 .PickBarber-container input[type=radio] + label:active:before {
   transform: scale(0);
@@ -94,9 +93,7 @@
   color: #02025e;
 }
 
-
-
- @media (min-width: 600px) {
+@media (min-width: 600px) {
   .PickBarber-container header {
     width: 100vw;
     padding: 0 100px;
@@ -105,8 +102,7 @@
   .PickBarber-container h1 {
     margin: auto;
   }
-
- }
+}
 
 @media (min-width: 1000px) {
   .PickBarber-container header {
