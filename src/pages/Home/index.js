@@ -1,7 +1,6 @@
 import React from 'react';
 import Button from '../../components/Button';
 import Silhueta from '../../img/silhueta.png';
-import Swal from 'sweetalert2'
 
 import Swal from 'sweetalert2';
 

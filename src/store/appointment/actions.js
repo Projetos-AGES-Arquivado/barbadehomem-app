@@ -84,6 +84,18 @@ export const registerAppointment = appointment => {
   };
 };
 
+export const appointmentWasRated = id => {
+
+  const appointment = firestore
+    .firestore()
+    .collection('appointments')
+    .doc(id);
+
+  appointment.update({
+    wasRated: true
+  })
+
+}
 export const cancelAppointment = appointmentId => {
   return async dispatch => {
     const newStatus = 'cancelled';

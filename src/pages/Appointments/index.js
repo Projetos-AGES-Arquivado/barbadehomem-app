@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, Link } from 'react-router-dom';
 import { FiCornerDownLeft } from 'react-icons/fi';
@@ -14,6 +14,7 @@ import {
 } from '../../utils';
 
 import { Header, Solicitation, Container } from './styles';
+import Button from '../../components/Button';
 
 const Solicitations = () => {
   const history = useHistory();
@@ -22,8 +23,11 @@ const Solicitations = () => {
   const dispatch = useDispatch();
 
   const handleGoBack = e => {
-    history.goBack();
-    e.preventDefault();
+    history.push("/home");
+  };
+
+  const handleEvaluation = appointment => {
+      history.push('/home/evaluation', { appointment });
   };
 
   async function handleCancelAppointment(appointmentId) {
@@ -39,7 +43,6 @@ const Solicitations = () => {
           <FiCornerDownLeft size={25} onClick={handleGoBack} />
           <h1>Minhas solicitações</h1>
         </Header>
-
         {appointments.map(appointment => (
           <Solicitation key={appointment.id} status={appointment.status}>
             <li>
@@ -76,7 +79,9 @@ const Solicitations = () => {
               ) : (
                 <>
                   {appointment.status === 'done' && !appointment.wasRated && (
-                    <Link to="">Avaliar</Link>
+                    <label onClick={() => handleEvaluation(appointment)}>
+                    Avaliar
+                    </label>
                   )}
                   {appointment.status === 'done' && appointment.wasRated && (
                     <span>Avaliado</span>

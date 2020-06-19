@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import { FiCornerDownLeft } from 'react-icons/fi';
+import { FiCornerDownLeft, FiStar } from 'react-icons/fi';
 import * as Yup from 'yup';
 import { store } from '../../store';
 
@@ -88,21 +88,27 @@ export default function CutRequestPickBarber() {
 
       <span className="err-message">{errMessage}</span>
 
-      {providers.map(
-        provider =>
-          provider.isAvailable && (
-            <div className="divradio" key={provider.id}>
-              <input
-                type="radio"
-                id={provider.name}
-                name="provider"
-                value={provider.name}
-                onClick={() => handleSelecProvider(provider.id)}
-              />
-              <label htmlFor={provider.name}> {provider.name}</label>
-            </div>
-          )
-      )}
+      {providers.map(provider => (
+        <div className="divradio" key={provider.id}>
+          <div>
+            <input
+              type="radio"
+              id={provider.name}
+              name="provider"
+              value={provider.name}
+              onClick={() => handleSelecProvider(provider.id)}
+            />
+            <label htmlFor={provider.name}> {provider.name}</label>
+          </div>
+          {provider.rate && (
+            <label htmlFor={provider?.rate.ratesAverage}>
+              {' '}
+              <FiStar />
+              {provider?.rate.ratesAverage.toFixed(1)}
+            </label>
+          )}
+        </div>
+      ))}
 
       <div className="divinput">
         <span>Sugira uma data e um horário de sua escolha</span>

@@ -1,0 +1,135 @@
+@import 'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css';
+
+.Evaluation-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .header-Evaluation {
+    width: 100%;
+    height: 131px;
+  
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+  
+  
+  }
+  
+  .Evaluation-container p {
+    margin-top: 5px;
+  }
+  
+  .Evaluation-container header svg {
+    margin-left: -15px;
+    color: #fff;
+  }
+  
+  .Evaluation-container h1 {
+    margin: auto;
+    color: #fff;
+    font-size: 22px;
+  }
+  .Evaluation-container h2{
+    margin-top: 40px;
+    font-size: 22px;
+  }
+  .nome{
+    margin-top: 20%;
+    font-size: 27px;
+    font-weight: 500;
+  }
+
+
+  .div_input{
+    width: 320px;
+    margin-top: 5%;
+  }
+  .divbutton {
+    width: 80%;
+    margin-top: 80px;
+    display: block;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  
+
+  .rating{
+    margin-top:20%;
+    transform: translate(-50%,-50%) rotateY(180deg);
+    margin-left: 62%;
+    margin-bottom: 20%;
+    display: flex;
+  
+  }
+  .rating input{
+    display: none;
+  }
+  .rating label{
+    display: block;
+    cursor: pointer;
+    width: 50px;
+   
+  }
+  .rating label::before{
+    content: '\f005';
+    font-family: 'fontAwesome',serif;
+    position: relative;
+    display: block;
+    font-size: 50px;
+    color: #fff;
+  }
+
+  .rating label::after{
+    content: '\f005';
+    font-family: 'fontAwesome',serif;
+    position: absolute;
+    display: block;
+    font-size: 50px;
+    color: 	orange;
+    top: 0;
+    opacity: 0;
+    transition: .5s;
+    text-shadow: 0 2px 5px rgba(0,0,0,.5);
+  }
+  .rating label:hover::after,
+  .rating label:hover~label::after,
+  .rating input:checked ~label::after{
+    opacity: 1;
+  }
+  @media(max-width: 380px){
+    .rating{
+      margin-left: 68%;
+    }
+  }
+    @media(max-width: 350px){
+      .rating{
+        margin-left: 76%;
+      }
+    }
+  @media (min-width: 600px) {
+    .Evaluation-container header {
+      width: 100vw;
+      padding: 0 100px;
+    }
+  
+    .Evaluation-container h1 {
+      margin: auto;
+    }
+  }
+  
+  @media (min-width: 1000px) {
+    .Evaluation-container header {
+      width: 100vw;
+      padding: 0 100px;
+    }
+  
+    .Evaluation-container h1 {
+      margin: auto;
+    }
+  }
