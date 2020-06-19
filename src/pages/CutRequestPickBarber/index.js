@@ -6,6 +6,8 @@ import { FiCornerDownLeft } from 'react-icons/fi';
 import * as Yup from 'yup';
 import { store } from '../../store';
 
+import { dateParser, timeParser } from '../../utils';
+
 import { registerAppointment } from '../../store/appointment/actions';
 
 import Button from '../../components/Button';
@@ -67,6 +69,8 @@ export default function CutRequestPickBarber() {
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
         setErrMessage(err.message);
+      } else {
+        setErrMessage(err.message);
       }
     }
   };
@@ -103,12 +107,13 @@ export default function CutRequestPickBarber() {
       <div className="divinput">
         <span>Sugira uma data e um horário de sua escolha</span>
         <Input
-          placeholder="(dd/mm/aaaa)"
           type="date"
           value={date}
           onChange={e => setDate(e.target.value)}
         />
+
         <Input
+          placeholder="hora"
           type="time"
           value={time}
           onChange={e => setTime(e.target.value)}

@@ -1,3 +1,4 @@
+import { isBefore } from 'date-fns';
 import { firestore } from '../../plugins/firebase';
 import { RECEIVE_APPOINTMENTS } from './actionTypes';
 
@@ -65,6 +66,12 @@ export const registerAppointment = appointment => {
   return async dispatch => {
     const { date, time, ...rest } = appointment;
     const parsedDate = new Date(date + ' ' + time);
+
+    if (isBefore(parsedDate, Date.now())) {
+      throw new Error(
+        'Você não pode criar um atendimento com uma data passada.'
+      );
+    }
 
     const newAppointment = {
       ...rest,

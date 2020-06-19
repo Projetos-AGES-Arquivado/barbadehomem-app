@@ -25,6 +25,35 @@ export const birthdayParser = v => {
 
   return maskedValue;
 };
+
+export const timeParser = v => {
+  !(v instanceof String) || isNaN(v);
+
+  const masked = IMask.createMask({
+    mask: '00:00',
+    lazy: true,
+  });
+
+  const maskedValue = masked.resolve(v);
+
+  return maskedValue;
+};
+
+export const dateParser = v => {
+  !(v instanceof String) || isNaN(v);
+
+  const masked = IMask.createMask({
+    mask: '00/00/0000',
+    lazy: true,
+  });
+
+  const maskedValue = masked.resolve(v);
+
+  return maskedValue;
+};
+
+
+
 export const formattedDate = value => {
   const date = new Date(value.toDate());
   const newDate = date.toLocaleDateString('pt-BR');
