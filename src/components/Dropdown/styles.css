@@ -1,0 +1,37 @@
+.dropdown {
+    position: relative;
+    width: 80%;
+    text-align: center;
+}
+  
+.dropdown-content {
+    display: none;
+    z-index: 1;
+    width: 100%;
+}
+
+.dropdown:hover .dropdown-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.item{
+    border: 1px solid #FFF;
+    margin: 2px 0;
+    padding: 5px 0;
+    border-radius: 10px;
+    font-size: 20px;
+    background: transparent;
+    width: inherit
+    
+}
+
+.span-dropdown{
+    display: flex;
+    border: 1px solid #FFF;
+    padding: 10px 3px;
+    border-radius: 10px;
+    font-size: 20px;
+    text-align: center;
+    justify-content: center;
+}

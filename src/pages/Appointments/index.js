@@ -56,7 +56,7 @@ const Solicitations = () => {
             <li>
               <label>Prestador: {appointment.provider.name}</label>
             </li>
-            <li>
+            <li>  
               <label>Serviços: {formattedServices(appointment.services)}</label>
               {appointment.status === 'pending' &&
               differenceInHours(
@@ -88,6 +88,9 @@ const Solicitations = () => {
                   )}
                 </>
               )}
+            </li>
+            <li>
+              <label>Meio de pagamento: {appointment.payment_method}</label>
             </li>
           </Solicitation>
         ))}

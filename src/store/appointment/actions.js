@@ -33,6 +33,7 @@ export const fetchAppointments = () => {
             services,
             status,
             wasRated,
+            payment_method,
             userId,
           } = appointment.data();
 
@@ -53,6 +54,7 @@ export const fetchAppointments = () => {
             provider: existingProvider,
             services,
             wasRated,
+            payment_method,
             userId,
           });
         });
