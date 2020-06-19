@@ -1,3 +1,4 @@
+import { isBefore } from 'date-fns';
 import { firestore } from '../../plugins/firebase';
 import { RECEIVE_APPOINTMENTS } from './actionTypes';
 
@@ -15,50 +16,51 @@ export const receiveAppointments = payload => {
 export const fetchAppointments = () => {
   return async dispatch => {
     const { uid } = firestore.auth().currentUser;
-    let appointments = [];
 
-    const appointmentsRef = await firestore
+    firestore
       .firestore()
       .collection('appointments')
       .where('userId', '==', uid)
-      .get();
+      .onSnapshot(appointmentsRef => {
+        let appointments = [];
 
-    appointmentsRef.forEach(appointment => {
-      const { id } = appointment;
-      const {
-        barberId,
-        cost,
-        date,
-        services,
-        status,
-        wasRated,
-        payment_method,
-        userId,
-      } = appointment.data();
+        appointmentsRef.forEach(appointment => {
+          const { id } = appointment;
+          const {
+            barberId,
+            cost,
+            date,
+            services,
+            status,
+            wasRated,
+            payment_method,
+            userId,
+          } = appointment.data();
 
-      let existingProvider = findProviderById(barberId);
+          let existingProvider = findProviderById(barberId);
 
-      if (!existingProvider) {
-        existingProvider = {
-          barberId,
-          name: 'Desconhecido',
-        };
-      }
+          if (!existingProvider) {
+            existingProvider = {
+              barberId,
+              name: 'Desconhecido',
+            };
+          }
 
-      appointments.push({
-        id,
-        date,
-        cost,
-        status,
-        provider: existingProvider,
-        services,
-        wasRated,
-        payment_method,
-        userId,
+          appointments.push({
+            id,
+            date,
+            cost,
+            status,
+            provider: existingProvider,
+            services,
+            wasRated,
+            payment_method,
+            userId,
+          });
+        });
+
+        dispatch(receiveAppointments(appointments));
       });
-    });
-
-    dispatch(receiveAppointments(appointments));
   };
 };
 
@@ -66,6 +68,12 @@ export const registerAppointment = appointment => {
   return async dispatch => {
     const { date, time, ...rest } = appointment;
     const parsedDate = new Date(date + ' ' + time);
+
+    if (isBefore(parsedDate, Date.now())) {
+      throw new Error(
+        'Você não pode criar um atendimento com uma data passada.'
+      );
+    }
 
     const newAppointment = {
       ...rest,
@@ -78,6 +86,18 @@ export const registerAppointment = appointment => {
   };
 };
 
+export const appointmentWasRated = id => {
+
+  const appointment = firestore
+    .firestore()
+    .collection('appointments')
+    .doc(id);
+
+  appointment.update({
+    wasRated: true
+  })
+
+}
 export const cancelAppointment = appointmentId => {
   return async dispatch => {
     const newStatus = 'cancelled';

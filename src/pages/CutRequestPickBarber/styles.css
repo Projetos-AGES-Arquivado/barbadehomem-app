@@ -26,13 +26,26 @@
   color: #fff;
   font-size: 22px;
 }
-.divradio {
-  display: block;
+.divradio{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   margin-top: 20px;
   border-radius: 10px;
   border: 1px solid;
   width: 80%;
   padding: 20px 10px;
+  padding-right: 20px;
+}
+
+.divradio label + label{
+  float: right;
+  margin: auto 0;
+  
+}
+
+.divradio svg{
+  margin-right: 5px;
 }
 
 .divbutton {
@@ -50,16 +63,16 @@
 .divinput {
   margin-top: 20px;
 }
-input[type='radio'] + label {
+.PickBarber-container input[type=radio] + label {
   display: block;
   margin: 4px;
   cursor: pointer;
 }
-input[type='radio'] {
+.PickBarber-container input[type=radio]{
   display: contents;
 }
-input[type='radio'] + label:before {
-  content: '\2714';
+.PickBarber-container input[type=radio] + label:before {
+  content: "\2714";
   border: 1px solid #fff;
   border-radius: 5px;
   display: inline-block;
@@ -72,10 +85,10 @@ input[type='radio'] + label:before {
   color: transparent;
   transition: 0.2s;
 }
-input[type='radio'] + label:active:before {
+.PickBarber-container input[type=radio] + label:active:before {
   transform: scale(0);
 }
-input[type='radio']:checked + label:before {
+.PickBarber-container input[type=radio]:checked + label:before {
   background-color: #fff;
   color: #02025e;
 }
