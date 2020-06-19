@@ -14,10 +14,6 @@ import DropDown from '../../components/Dropdown'
 import './styles.css';
 
 export default function CutRequestPickBarber() {
-  // const providers = useSelector(store => store.provider.providers);
-  // const user = useSelector(store => store.auth.user);
-  // const address = useSelector(store => store.auth.user.addresses[0]);
-  // const payments = useSelector(store => store.payments.payments)
   const { payments } = store.getState().payments
   const { providers } = store.getState().provider;
   const { user } = store.getState().auth;
