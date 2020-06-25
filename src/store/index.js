@@ -6,15 +6,15 @@ import generalReducer from './general/reducer';
 import appointmentReducer from './appointment/reducer';
 import providerReducer from './provider/reducer';
 import serviceReducer from './services/reducer';
-import paymentReducer from './payment/reducer'
+import paymentReducer from './payment/reducer';
 
 import { auth, messaging, firestore } from '../plugins/firebase';
 import { setLoading } from './general/actions';
 import { fetchUser } from './auth/actions';
 import { fetchAppointments } from './appointment/actions';
 import { fetchProviders } from './provider/actions';
-import { fetchServices } from './services/actions';
-import {fetchPayment} from './payment/actions'
+import { fetchServices, fetchPromotions } from './services/actions';
+import { fetchPayment } from './payment/actions';
 
 export const store = createStore(
   combineReducers({
@@ -23,7 +23,7 @@ export const store = createStore(
     appointment: appointmentReducer,
     provider: providerReducer,
     service: serviceReducer,
-    payments: paymentReducer
+    payments: paymentReducer,
   }),
   applyMiddleware(thunk)
 );
@@ -50,7 +50,8 @@ auth.onAuthStateChanged(async user => {
     await store.dispatch(fetchProviders());
     await store.dispatch(fetchAppointments());
     await store.dispatch(fetchServices());
-    await store.dispatch(fetchPayment())
+    await store.dispatch(fetchPayment());
+    await store.dispatch(fetchPromotions());
   }
   store.dispatch(setLoading(false));
 });

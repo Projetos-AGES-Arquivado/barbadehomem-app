@@ -78,9 +78,7 @@ const CutRequest = () => {
             />
             <label htmlFor={service.titleService}>{service.titleService}</label>
           </div>
-          <div className="div-text-cutRequest">
-            Duração: {service.duration} min
-          </div>
+          <div className="div-text-cutRequest">Duração: {service.duration}</div>
           <div className="div-text-cutRequest">
             Descrição: {service.description}{' '}
           </div>

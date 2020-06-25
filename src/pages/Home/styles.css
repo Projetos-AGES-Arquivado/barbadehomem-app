@@ -33,9 +33,9 @@
 }
 
 .swal2-popup {
-  background: #fe6600;
+  background: #df6603;
   color: #fff;
-  width: 70%;
+  width: 100vw;
 }
 
 .swal2-popup h2 {
@@ -47,7 +47,7 @@
 }
 
 .swal2-styled.swal2-confirm {
-  background: #fff;
-  color: black;
+  background: rgb(218, 216, 216);
+  color: rgb(29, 29, 29);
   font-weight: bold;
 }
