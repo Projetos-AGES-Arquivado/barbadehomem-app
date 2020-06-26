@@ -1,8 +1,9 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory, Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { FiCornerDownLeft } from 'react-icons/fi';
 import { differenceInHours } from 'date-fns';
+import Swal from 'sweetalert2';
 import { cancelAppointment } from '../../store/appointment/actions';
 
 import {
@@ -14,7 +15,6 @@ import {
 } from '../../utils';
 
 import { Header, Solicitation, Container } from './styles';
-import Button from '../../components/Button';
 
 const Solicitations = () => {
   const history = useHistory();
@@ -23,17 +23,16 @@ const Solicitations = () => {
   const dispatch = useDispatch();
 
   const handleGoBack = e => {
-    history.push("/home");
+    history.push('/home');
   };
 
   const handleEvaluation = appointment => {
-      history.push('/home/evaluation', { appointment });
+    history.push('/home/evaluation', { appointment });
   };
 
   async function handleCancelAppointment(appointmentId) {
     await dispatch(cancelAppointment(appointmentId));
-
-    alert('Agendamento cancelado!');
+    Swal.fire('Agendamento cancelado com sucesso!');
   }
 
   return (
@@ -56,7 +55,7 @@ const Solicitations = () => {
             <li>
               <label>Prestador: {appointment.provider.name}</label>
             </li>
-            <li>  
+            <li>
               <label>Serviços: {formattedServices(appointment.services)}</label>
               {appointment.status === 'pending' &&
               differenceInHours(
@@ -80,7 +79,7 @@ const Solicitations = () => {
                 <>
                   {appointment.status === 'done' && !appointment.wasRated && (
                     <label onClick={() => handleEvaluation(appointment)}>
-                    Avaliar
+                      Avaliar
                     </label>
                   )}
                   {appointment.status === 'done' && appointment.wasRated && (
