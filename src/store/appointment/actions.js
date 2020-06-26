@@ -21,6 +21,7 @@ export const fetchAppointments = () => {
       .firestore()
       .collection('appointments')
       .where('userId', '==', uid)
+      .orderBy('date', 'desc')
       .onSnapshot(appointmentsRef => {
         let appointments = [];
 
