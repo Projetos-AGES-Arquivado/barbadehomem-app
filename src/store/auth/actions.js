@@ -179,6 +179,7 @@ export function signinWithGoogle() {
           const publicData = {
             email,
             name,
+            isAdmin: false,
           };
 
           await firestore
@@ -224,6 +225,7 @@ export function signInWithFacebook() {
         email,
         name,
         birthday,
+        isAdmin: false,
       };
 
       await firestore.firestore().collection(users).doc(uid).set(publicData);
