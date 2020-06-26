@@ -21,6 +21,10 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
 
+### `npm deploy`
+
+Deploy the app to the firebase hosting, user should be logged in on firebase and be a member project running this command in the master branch.
+
 ### `npm test`
 
 Launches the test runner in the interactive watch mode.<br />
