@@ -33,13 +33,13 @@
 }
 
 .swal2-popup {
-  background: #fe6600;
-  color: #fff;
-  width: 70%;
+  background: #fe6600 !important;
+  color: #fff !important;
+  width: 70% !important;
 }
 
 .swal2-popup h2 {
-  color: #fff;
+  color: #fff !important;
 }
 
 .swal2-title {
