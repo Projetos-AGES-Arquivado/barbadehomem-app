@@ -87,6 +87,7 @@ export function registerUser(payload) {
       .auth()
       .createUserWithEmailAndPassword(payload.email, payload.password);
 
+    payload.isAdmin = false;
     const { password, ...publicData } = payload;
 
     await firestore
